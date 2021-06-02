@@ -1,12 +1,12 @@
 <h2 mat-dialog-title>
-  {{ "ContactManager.NewContactDialog.Title" | translate }}
+  {{ 'ContactManager.NewContactDialog.Title' | translate }}
 </h2>
 <mat-dialog-content>
   <form [formGroup]="formGroup">
     <div class="example-container">
       <mat-form-field appearance="fill">
         <mat-label>
-          {{ "ContactManager.NewContactDialog.AvatarField.Label" | translate }}
+          {{ 'ContactManager.NewContactDialog.AvatarField.Label' | translate }}
         </mat-label>
         <mat-select formControlName="avatar" required>
           <mat-select-trigger>
@@ -20,26 +20,26 @@
         </mat-select>
         <mat-error *ngIf="formGroup.controls.avatar.invalid">
           {{
-            "ContactManager.NewContactDialog.AvatarField.Errors.Required"
+            'ContactManager.NewContactDialog.AvatarField.Errors.Required'
               | translate
           }}
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>
-          {{ "ContactManager.NewContactDialog.NameField.Label" | translate }}
+          {{ 'ContactManager.NewContactDialog.NameField.Label' | translate }}
         </mat-label>
         <input matInput formControlName="name" required />
         <mat-error *ngIf="formGroup.controls.name.errors as errors">
           <ng-container *ngIf="errors['required']">
             {{
-              "ContactManager.NewContactDialog.NameField.Errors.Required"
+              'ContactManager.NewContactDialog.NameField.Errors.Required'
                 | translate
             }}
           </ng-container>
           <ng-container *ngIf="errors['maxlength'] as maxLength">
             {{
-              "ContactManager.NewContactDialog.NameField.Errors.MaxLength"
+              'ContactManager.NewContactDialog.NameField.Errors.MaxLength'
                 | translate
                   : { value: maxLength.actualLength - maxLength.requiredLength }
             }}
@@ -48,7 +48,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>
-          {{ "ContactManager.NewContactDialog.BornField.Label" | translate }}
+          {{ 'ContactManager.NewContactDialog.BornField.Label' | translate }}
         </mat-label>
         <input
           matInput
@@ -60,14 +60,14 @@
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="formGroup.controls.birthDate.invalid">
           {{
-            "ContactManager.NewContactDialog.BornField.Errors.Required"
+            'ContactManager.NewContactDialog.BornField.Errors.Required'
               | translate
           }}
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>
-          {{ "ContactManager.NewContactDialog.BioField.Label" | translate }}
+          {{ 'ContactManager.NewContactDialog.BioField.Label' | translate }}
         </mat-label>
         <textarea matInput formControlName="bio" rows="10" cols="30">
           <!-- [maxlength]="bioMaxLength">!--> <!-- NOTE: Doesn't allow newlines!-->
@@ -75,7 +75,7 @@
         <mat-error *ngIf="formGroup.controls.bio.errors as errors">
           <ng-container *ngIf="errors['maxlength'] as maxLength">
             {{
-              "ContactManager.NewContactDialog.BioField.Errors.MaxLength"
+              'ContactManager.NewContactDialog.BioField.Errors.MaxLength'
                 | translate
                   : { value: maxLength.actualLength - maxLength.requiredLength }
             }}
@@ -93,10 +93,10 @@
     [disabled]="!formGroup.valid"
   >
     <mat-icon>save</mat-icon>
-    {{ "ContactManager.NewContactDialog.Save" | translate }}
+    {{ 'ContactManager.NewContactDialog.Save' | translate }}
   </button>
   <button mat-button color="primary" (click)="dismiss()">
     <mat-icon>cancel</mat-icon>
-    {{ "ContactManager.NewContactDialog.Cancel" | translate }}
+    {{ 'ContactManager.NewContactDialog.Cancel' | translate }}
   </button>
 </mat-dialog-actions>

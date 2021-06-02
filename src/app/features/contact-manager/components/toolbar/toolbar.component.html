@@ -3,7 +3,7 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-  <span>{{ "ContactManager.Toolbar.Title" | translate }}</span>
+  <span>{{ 'ContactManager.Toolbar.Title' | translate }}</span>
 
   <span class="example-spacer"></span>
 
@@ -12,13 +12,13 @@
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="openAddContactDialog()">
-      {{ "ContactManager.Toolbar.Menu.NewContact" | translate }}
+      {{ 'ContactManager.Toolbar.Menu.NewContact' | translate }}
     </button>
     <button mat-menu-item (click)="toggleTheme.emit()">
-      {{ "ContactManager.Toolbar.Menu.ToggleTheme" | translate }}
+      {{ 'ContactManager.Toolbar.Menu.ToggleTheme' | translate }}
     </button>
     <button mat-menu-item (click)="toggleDir.emit()">
-      {{ "ContactManager.Toolbar.Menu.ToggleDir" | translate }}
+      {{ 'ContactManager.Toolbar.Menu.ToggleDir' | translate }}
     </button>
   </mat-menu>
 </mat-toolbar>

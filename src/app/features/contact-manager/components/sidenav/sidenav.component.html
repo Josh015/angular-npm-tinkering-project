@@ -10,7 +10,7 @@
     [mode]="isScreenSmall ? 'over' : 'side'"
   >
     <mat-toolbar color="primary">
-      {{ "ContactManager.Sidenav.Title" | translate }}
+      {{ 'ContactManager.Sidenav.Title' | translate }}
     </mat-toolbar>
     <ng-container *ngIf="usersLoading$ | async; else usersLoaded">
       <mat-spinner style="margin: 0 auto"></mat-spinner>

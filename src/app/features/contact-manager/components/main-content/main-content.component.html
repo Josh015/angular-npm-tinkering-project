@@ -5,13 +5,13 @@
       <mat-card-title>{{ user.name }}</mat-card-title>
       <mat-card-subtitle>
         {{
-          "ContactManager.MainContent.Birthday.Label"
+          'ContactManager.MainContent.Birthday.Label'
             | translate
               : {
                   value:
                     (user.birthDate
                     | date
-                      : ("ContactManager.MainContent.Birthday.DateFormat"
+                      : ('ContactManager.MainContent.Birthday.DateFormat'
                           | translate))
                 }
         }}
