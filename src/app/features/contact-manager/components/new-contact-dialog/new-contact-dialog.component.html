@@ -1,0 +1,75 @@
+<h2 mat-dialog-title>Add new contact</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroup">
+    <div class="example-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Avatar</mat-label>
+        <mat-select formControlName="avatar" required>
+          <mat-select-trigger>
+            <mat-icon [svgIcon]="formGroup.value.avatar"></mat-icon>
+            {{ formGroup.value.avatar }}
+          </mat-select-trigger>
+          <mat-option *ngFor="let avatar of avatars" [value]="avatar">
+            <mat-icon [svgIcon]="avatar"></mat-icon>
+            {{ avatar }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formGroup.controls.avatar.invalid">
+          You must select an avatar
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required />
+        <mat-error *ngIf="formGroup.controls.name.errors as errors">
+          <ng-container *ngIf="errors['required']">
+            You must enter a name
+          </ng-container>
+          <ng-container *ngIf="errors['maxlength'] as maxLength">
+            Max length exceeded by
+            {{ maxLength.actualLength - maxLength.requiredLength }} characters
+          </ng-container>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Born</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="birthDate"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="formGroup.controls.birthDate.invalid">
+          You must select a birth date
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Bio</mat-label>
+        <textarea matInput formControlName="bio" rows="10" cols="30">
+          <!-- [maxlength]="bioMaxLength">!--> <!-- NOTE: Doesn't allow newlines!-->
+        </textarea>
+        <mat-error *ngIf="formGroup.controls.bio.errors as errors">
+          <ng-container *ngIf="errors['maxlength'] as maxLength">
+            Max length exceeded by
+            {{ maxLength.actualLength - maxLength.requiredLength }} characters
+          </ng-container>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    mat-button
+    color="primary"
+    (click)="save()"
+    [disabled]="!formGroup.valid"
+  >
+    <mat-icon>save</mat-icon> Save
+  </button>
+  <button mat-button color="primary" (click)="dismiss()">
+    <mat-icon>cancel</mat-icon> Cancel
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,24 @@
+{
+  "App": {},
+  "Features": {
+    "ContactManager": {
+      "Notes": {
+        "Filter": "Filter",
+        "NumberColumnTitle": "No.",
+        "TitleColumnTitle": "Title",
+        "DateColumnTitle": "Date",
+        "DateColumnFormat": "yyyy-MM-dd",
+        "NoMatchingData": "No data matching the filter \"{{ value }}\""
+      },
+      "Sidenav": {
+        "Title": "Contacts"
+      },
+      "Toolbar": {
+        "Title": "Contact Manager",
+        "NewContact": "New Contact",
+        "ToggleTheme": "Toggle theme",
+        "ToggleDir": "Toggle dir"
+      }
+    }
+  }
+}
