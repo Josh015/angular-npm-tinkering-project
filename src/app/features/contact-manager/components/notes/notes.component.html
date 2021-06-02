@@ -4,7 +4,7 @@
       {{ 'ContactManager.Notes.Filter' | translate }}
     </mat-label>
     <input
-      #input
+      #filter
       matInput
       (keyup)="applyFilter($event)"
       [placeholder]="'ContactManager.Notes.Filter' | translate"
@@ -45,8 +45,8 @@
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">
         {{
-          'ContactManager.Notes.NoMatchingData'
-            | translate: { value: input.value }
+          'ContactManager.Notes.NoMatchingDataForFilter'
+            | translate: { filterValue: filter.value }
         }}
       </td>
     </tr>

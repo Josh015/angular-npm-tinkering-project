@@ -4,7 +4,7 @@
     "MainContent": {
       "Bio": "Bio",
       "Birthday": {
-        "Label": "Birthday {{ value }}",
+        "Label": "Birthday {{ birthDay }}",
         "DateFormat": "d LLLL"
       },
       "Notes": "Notes"
@@ -21,7 +21,7 @@
         "Label": "Name",
         "Errors": {
           "Required": "You must select a name",
-          "MaxLength": "Max length exceeded by {{ value }} characters"
+          "MaxLength": "Max length exceeded by {{ difference }} characters"
         }
       },
       "BornField": {
@@ -33,7 +33,7 @@
       "BioField": {
         "Label": "Bio",
         "Errors": {
-          "MaxLength": "Max length exceeded by {{ value }} characters"
+          "MaxLength": "Max length exceeded by {{ difference }} characters"
         }
       },
       "Save": "Save",
@@ -47,7 +47,7 @@
         "Title": "Date",
         "DateFormat": "yyyy-MM-dd"
       },
-      "NoMatchingData": "No data matching the filter \"{{ value }}\""
+      "NoMatchingDataForFilter": "No data matching the filter \"{{ filterValue }}\""
     },
     "Sidenav": {
       "Title": "Contacts"
