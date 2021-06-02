@@ -1,23 +1,67 @@
 {
   "App": {},
-  "Features": {
-    "ContactManager": {
-      "Notes": {
-        "Filter": "Filter",
-        "NumberColumnTitle": "No.",
-        "TitleColumnTitle": "Title",
-        "DateColumnTitle": "Date",
-        "DateColumnFormat": "yyyy-MM-dd",
-        "NoMatchingData": "No data matching the filter \"{{ value }}\""
+  "ContactManager": {
+    "MainContent": {
+      "Bio": "Bio",
+      "Birthday": {
+        "Label": "Birthday {{ value }}",
+        "DateFormat": "d LLLL"
       },
-      "Sidenav": {
-        "Title": "Contacts"
+      "Notes": "Notes"
+    },
+    "NewContactDialog": {
+      "Title": "Add new contact",
+      "AvatarField": {
+        "Label": "Avatar",
+        "Errors": {
+          "Required": "You must select an avatar"
+        }
       },
-      "Toolbar": {
-        "Title": "Contact Manager",
+      "NameField": {
+        "Label": "Name",
+        "Errors": {
+          "Required": "You must select a name",
+          "MaxLength": "Max length exceeded by {{ value }} characters"
+        }
+      },
+      "BornField": {
+        "Label": "Born",
+        "Errors": {
+          "Required": "You must select a birth date"
+        }
+      },
+      "BioField": {
+        "Label": "Bio",
+        "Errors": {
+          "MaxLength": "Max length exceeded by {{ value }} characters"
+        }
+      },
+      "Save": "Save",
+      "Cancel": "Cancel"
+    },
+    "Notes": {
+      "Filter": "Filter",
+      "NumberColumn": "No.",
+      "TitleColumn": "Title",
+      "DateColumn": {
+        "Title": "Date",
+        "DateFormat": "yyyy-MM-dd"
+      },
+      "NoMatchingData": "No data matching the filter \"{{ value }}\""
+    },
+    "Sidenav": {
+      "Title": "Contacts"
+    },
+    "Toolbar": {
+      "Title": "Contact Manager",
+      "Menu": {
         "NewContact": "New Contact",
         "ToggleTheme": "Toggle theme",
         "ToggleDir": "Toggle dir"
+      },
+      "SnackBar": {
+        "Message": "Contact added",
+        "Action": "Navigate"
       }
     }
   }

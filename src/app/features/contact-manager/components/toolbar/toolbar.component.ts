@@ -1,11 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import {
-  MatSnackBar,
-  MatSnackBarRef,
-  SimpleSnackBar,
-} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
 
@@ -22,7 +19,8 @@ export class ToolbarComponent {
   constructor(
     private readonly dialog: MatDialog,
     private readonly snackBar: MatSnackBar,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly translate: TranslateService
   ) {}
 
   openAddContactDialog() {
@@ -32,10 +30,20 @@ export class ToolbarComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.openSnackBar('Contact added', 'Navigate')
-          .onAction()
-          .subscribe(() => {
-            this.router.navigate(['/contact-manager', result.id]);
+        this.translate
+          .get([
+            'ContactManager.Toolbar.SnackBar.Message',
+            'ContactManager.Toolbar.SnackBar.Action',
+          ])
+          .subscribe((values) => {
+            this.openSnackBar(
+              values['ContactManager.Toolbar.SnackBar.Message'],
+              values['ContactManager.Toolbar.SnackBar.Action']
+            )
+              .onAction()
+              .subscribe(() => {
+                this.router.navigate(['/contact-manager', result.id]);
+              });
           });
       }
     });
