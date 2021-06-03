@@ -2,7 +2,16 @@
   <mat-card>
     <mat-card-header>
       <mat-icon mat-card-avatar [svgIcon]="user.avatar"></mat-icon>
-      <mat-card-title>{{ user.name }}</mat-card-title>
+      <mat-card-title>
+        {{ user.name }}
+        {{
+          'ContactManager.MainContent.Gender'
+            | translate
+              : {
+                  gender: user.gender?.toLowerCase()
+                }
+        }}
+      </mat-card-title>
       <mat-card-subtitle>
         {{
           'ContactManager.MainContent.Birthday.Label'

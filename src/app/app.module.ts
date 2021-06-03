@@ -1,3 +1,7 @@
+import {
+    MESSAGE_FORMAT_CONFIG, TranslateMessageFormatCompiler
+} from 'ngx-translate-messageformat-compiler';
+
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,7 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateCompiler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { environment } from '../environments/environment';
@@ -38,6 +42,10 @@ export function createTranslateLoader(http: HttpClient) {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
         deps: [HttpClient],
+      },
+      compiler: {
+        provide: TranslateCompiler,
+        useClass: TranslateMessageFormatCompiler,
       },
     }),
     AppRoutingModule,

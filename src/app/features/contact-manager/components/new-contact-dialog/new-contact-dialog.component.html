@@ -27,6 +27,37 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>
+          {{ 'ContactManager.NewContactDialog.GenderField.Label' | translate }}
+        </mat-label>
+        <mat-select formControlName="gender" required>
+          <mat-option value="male">
+            {{
+              'ContactManager.NewContactDialog.GenderField.Options.Male'
+                | translate
+            }}
+          </mat-option>
+          <mat-option value="female">
+            {{
+              'ContactManager.NewContactDialog.GenderField.Options.Female'
+                | translate
+            }}
+          </mat-option>
+          <mat-option value="other">
+            {{
+              'ContactManager.NewContactDialog.GenderField.Options.Other'
+                | translate
+            }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formGroup.controls.gender.invalid">
+          {{
+            'ContactManager.NewContactDialog.GenderField.Errors.Required'
+              | translate
+          }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>
           {{ 'ContactManager.NewContactDialog.NameField.Label' | translate }}
         </mat-label>
         <input matInput formControlName="name" required />

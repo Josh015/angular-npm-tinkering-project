@@ -6,6 +6,7 @@ export interface User {
   name: string;
   avatar: string;
   bio: string;
+  gender: string;
 
   notes: Note[];
 }

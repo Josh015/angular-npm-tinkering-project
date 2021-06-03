@@ -3,8 +3,9 @@
   "ContactManager": {
     "MainContent": {
       "Bio": "Bio",
+      "Gender": "{gender, select, male{♂} female{♀} other{⚥}}",
       "Birthday": {
-        "Label": "Birthday {{ birthDay }}",
+        "Label": "Birthday {birthDay}",
         "DateFormat": "d LLLL"
       },
       "Notes": "Notes"
@@ -17,11 +18,22 @@
           "Required": "You must select an avatar"
         }
       },
+      "GenderField": {
+        "Label": "Gender",
+        "Options": {
+          "Male": "Male",
+          "Female": "Female",
+          "Other": "Other"
+        },
+        "Errors": {
+          "Required": "You must select a gender"
+        }
+      },
       "NameField": {
         "Label": "Name",
         "Errors": {
           "Required": "You must select a name",
-          "MaxLength": "Max length exceeded by {{ excessCount }} characters"
+          "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two} other{{excessCount}}} {excessCount, plural, =1{character} other{characters}}"
         }
       },
       "BornField": {
@@ -33,7 +45,7 @@
       "BioField": {
         "Label": "Bio",
         "Errors": {
-          "MaxLength": "Max length exceeded by {{ excessCount }} characters"
+          "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two}  other{{excessCount}}} {excessCount, plural, =1{character} other{characters}}"
         }
       },
       "Save": "Save",
@@ -47,7 +59,7 @@
         "Title": "Date",
         "DateFormat": "yyyy-MM-dd"
       },
-      "NoMatchingDataForFilter": "No data matching the filter \"{{ filterValue }}\""
+      "NoMatchingDataForFilter": "No data matching the filter \"{filterValue}\""
     },
     "Sidenav": {
       "Title": "Contacts"

@@ -23,6 +23,7 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
   readonly formGroup = this.fb.group(<Keys<User>>{
     id: [null],
     birthDate: [null, [Validators.required]],
+    gender: [null, [Validators.required]],
     name: [
       '',
       [
