@@ -11,7 +11,7 @@ import { User } from '../../models/users.model';
 import { createUser, createUserSuccess, State } from '../../state';
 
 export class CustomValidators {
-  static y2kValidator(control: FormControl): any {
+  static y2k(control: FormControl): any {
     const date: Date | null = control.value;
 
     if (
@@ -28,7 +28,7 @@ export class CustomValidators {
     };
   }
 
-  static year2012Validator(control: FormControl): any {
+  static year2012(control: FormControl): any {
     const date: Date | null = control.value;
 
     if (
@@ -62,11 +62,7 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
     id: [null],
     birthDate: [
       null,
-      [
-        Validators.required,
-        CustomValidators.y2kValidator,
-        CustomValidators.year2012Validator,
-      ],
+      [Validators.required, CustomValidators.y2k, CustomValidators.year2012],
     ],
     gender: [null, [Validators.required]],
     name: [
