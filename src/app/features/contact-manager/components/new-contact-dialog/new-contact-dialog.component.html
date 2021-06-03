@@ -67,9 +67,11 @@
           {{ 'ContactManager.NewContactDialog.BornField.Label' | translate }}
         </mat-label>
         <input
+          formControlName="birthDate"
           matInput
           [matDatepicker]="picker"
-          formControlName="birthDate"
+          [min]="minBirthDate"
+          [max]="maxBirthDate"
           required
         />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
