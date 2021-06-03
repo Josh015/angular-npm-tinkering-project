@@ -27,7 +27,11 @@
         }
       },
       "BornField": {
-        "Label": "Born"
+        "Label": "Born",
+        "Errors": {
+          "Y2K": "Invalid birthday since your PC is about to explode!",
+          "Year2012": "Invalid birthday since the world ended!"
+        }
       },
       "BioField": {
         "Label": "Bio",

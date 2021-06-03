@@ -2,13 +2,49 @@ import { Subscription } from 'rxjs';
 import { Keys } from 'src/app/shared';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 import { User } from '../../models/users.model';
 import { createUser, createUserSuccess, State } from '../../state';
+
+export class CustomValidators {
+  static y2kValidator(control: FormControl): any {
+    const date: Date | null = control.value;
+
+    if (
+      !date ||
+      date.getFullYear() !== 2000 ||
+      date.getMonth() !== 0 ||
+      date.getDate() !== 1
+    ) {
+      return null;
+    }
+
+    return {
+      y2k: true,
+    };
+  }
+
+  static year2012Validator(control: FormControl): any {
+    const date: Date | null = control.value;
+
+    if (
+      !date ||
+      date.getFullYear() !== 2012 ||
+      date.getMonth() !== 11 ||
+      date.getDate() !== 21
+    ) {
+      return null;
+    }
+
+    return {
+      year2012: true,
+    };
+  }
+}
 
 @Component({
   selector: 'app-new-contact-dialog',
@@ -24,7 +60,14 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
   readonly avatars = ['svg-1', 'svg-2', 'svg-3', 'svg-4'];
   readonly formGroup = this.fb.group(<Keys<User>>{
     id: [null],
-    birthDate: [null, [Validators.required]],
+    birthDate: [
+      null,
+      [
+        Validators.required,
+        CustomValidators.y2kValidator,
+        CustomValidators.year2012Validator,
+      ],
+    ],
     gender: [null, [Validators.required]],
     name: [
       '',
