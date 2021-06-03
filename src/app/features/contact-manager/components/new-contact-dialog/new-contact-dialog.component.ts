@@ -55,9 +55,9 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
   static readonly nameMaxLength = 20;
   static readonly bioMaxLength = 30;
 
+  readonly avatars = ['svg-1', 'svg-2', 'svg-3', 'svg-4'];
   readonly minBirthDate = new Date('1970-01-01Z00:00:00:000');
   readonly maxBirthDate = new Date();
-  readonly avatars = ['svg-1', 'svg-2', 'svg-3', 'svg-4'];
   readonly formGroup = this.fb.group(<Keys<User>>{
     id: [null],
     birthDate: [
