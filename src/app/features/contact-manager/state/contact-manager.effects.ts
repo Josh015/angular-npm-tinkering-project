@@ -33,7 +33,7 @@ export class ContactManagerEffects {
       ofType(createUser),
       concatMap(({ user }) =>
         this.contactManagerService.addUser(user).pipe(
-          map((user) => createUserSuccess({ user })),
+          map((newUser) => createUserSuccess({ user: newUser })),
           catchError((error) => of(createUserError({ error })))
         )
       )

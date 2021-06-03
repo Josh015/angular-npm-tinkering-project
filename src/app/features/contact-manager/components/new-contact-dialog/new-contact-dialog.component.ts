@@ -22,7 +22,7 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
   readonly avatars = ['svg-1', 'svg-2', 'svg-3', 'svg-4'];
   readonly minBirthDate = new Date('1970-01-01Z00:00:00:000');
   readonly maxBirthDate = new Date();
-  readonly formGroup = this.fb.group(<Keys<User>>{
+  readonly formGroup = this.fb.group({
     id: [null],
     birthDate: [
       null,
@@ -39,7 +39,7 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
     avatar: [null, [Validators.required]],
     bio: ['', [Validators.maxLength(NewContactDialogComponent.bioMaxLength)]],
     notes: [[]],
-  });
+  } as Keys<User>);
 
   private readonly subscription = new Subscription();
 
@@ -50,7 +50,7 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
     private readonly fb: FormBuilder
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription.add(
       this.actions$
         .pipe(ofType(createUserSuccess))
@@ -58,17 +58,17 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  save() {
+  save(): void {
     if (this.formGroup.valid) {
       this.store.dispatch(createUser({ user: this.formGroup.value }));
     }
   }
 
-  dismiss() {
+  dismiss(): void {
     this.dialogRef.close(null);
   }
 }

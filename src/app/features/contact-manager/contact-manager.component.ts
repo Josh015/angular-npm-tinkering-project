@@ -17,7 +17,7 @@ export class ContactManagerComponent implements OnInit {
     private readonly store: Store<State>
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.iconRegistry.addSvgIconSet(
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg')
     );

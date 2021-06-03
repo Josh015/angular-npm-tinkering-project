@@ -36,7 +36,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     private readonly store: Store<State>
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.subscription.add(
       this.breakpointObserver
         .observe([`(max-width: ${SidenavComponent.smallWidthBreakpoint}px)`])
@@ -54,15 +54,15 @@ export class SidenavComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  toggleTheme() {
+  toggleTheme(): void {
     this.store.dispatch(toggleDarkTheme());
   }
 
-  toggleDir() {
+  toggleDir(): void {
     this.store.dispatch(toggleTextDirection());
   }
 }

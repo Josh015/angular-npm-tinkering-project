@@ -23,8 +23,8 @@ export class ToolbarComponent {
     private readonly translate: TranslateService
   ) {}
 
-  openAddContactDialog() {
-    let dialogRef = this.dialog.open(NewContactDialogComponent, {
+  openAddContactDialog(): void {
+    const dialogRef = this.dialog.open(NewContactDialogComponent, {
       width: '450px',
     });
 
