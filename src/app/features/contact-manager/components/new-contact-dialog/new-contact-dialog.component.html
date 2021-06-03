@@ -18,12 +18,6 @@
             {{ avatar }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="formGroup.controls.avatar.invalid">
-          {{
-            'ContactManager.NewContactDialog.AvatarField.Errors.Required'
-              | translate
-          }}
-        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>
@@ -49,12 +43,6 @@
             }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="formGroup.controls.gender.invalid">
-          {{
-            'ContactManager.NewContactDialog.GenderField.Errors.Required'
-              | translate
-          }}
-        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>
@@ -62,12 +50,6 @@
         </mat-label>
         <input matInput formControlName="name" required />
         <mat-error *ngIf="formGroup.controls.name.errors as errors">
-          <ng-container *ngIf="errors['required']">
-            {{
-              'ContactManager.NewContactDialog.NameField.Errors.Required'
-                | translate
-            }}
-          </ng-container>
           <ng-container *ngIf="errors['maxlength'] as maxLength">
             {{
               'ContactManager.NewContactDialog.NameField.Errors.MaxLength'
@@ -92,12 +74,6 @@
         />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="formGroup.controls.birthDate.invalid">
-          {{
-            'ContactManager.NewContactDialog.BornField.Errors.Required'
-              | translate
-          }}
-        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>

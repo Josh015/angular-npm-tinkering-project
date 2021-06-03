@@ -10,10 +10,7 @@
     "NewContactDialog": {
       "Title": "Add new contact",
       "AvatarField": {
-        "Label": "Avatar",
-        "Errors": {
-          "Required": "You must select an avatar"
-        }
+        "Label": "Avatar"
       },
       "GenderField": {
         "Label": "Gender",
@@ -21,23 +18,16 @@
           "Male": "Male",
           "Female": "Female",
           "Other": "Other"
-        },
-        "Errors": {
-          "Required": "You must select a gender"
         }
       },
       "NameField": {
         "Label": "Name",
         "Errors": {
-          "Required": "You must select a name",
           "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two} other{{excessCount}}} {excessCount, plural, =1{character} other{characters}}"
         }
       },
       "BornField": {
-        "Label": "Born",
-        "Errors": {
-          "Required": "You must select a birth date"
-        }
+        "Label": "Born"
       },
       "BioField": {
         "Label": "Bio",
