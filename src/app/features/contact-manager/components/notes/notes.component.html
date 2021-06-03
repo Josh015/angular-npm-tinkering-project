@@ -32,8 +32,8 @@
       </th>
       <td mat-cell *matCellDef="let note">
         {{
-          note.date
-            | date: ('ContactManager.Notes.DateColumn.DateFormat' | translate)
+          'ContactManager.Notes.DateColumn.DateFormat'
+            | translate: { value: note.date }
         }}
       </td>
     </ng-container>

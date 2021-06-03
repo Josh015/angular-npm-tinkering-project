@@ -4,10 +4,7 @@
     "MainContent": {
       "Bio": "Bio",
       "Gender": "{gender, select, male{♂} female{♀} other{⚥}}",
-      "Birthday": {
-        "Label": "Birthday {birthDay}",
-        "DateFormat": "d LLLL"
-      },
+      "Birthday": "Birthday {birthDate, date, long}",
       "Notes": "Notes"
     },
     "NewContactDialog": {
@@ -57,7 +54,7 @@
       "TitleColumn": "Title",
       "DateColumn": {
         "Title": "Date",
-        "DateFormat": "yyyy-MM-dd"
+        "DateFormat": "{value, date, short}"
       },
       "NoMatchingDataForFilter": "No data matching the filter \"{filterValue}\""
     },

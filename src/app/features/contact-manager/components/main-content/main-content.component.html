@@ -14,14 +14,10 @@
       </mat-card-title>
       <mat-card-subtitle>
         {{
-          'ContactManager.MainContent.Birthday.Label'
+          'ContactManager.MainContent.Birthday'
             | translate
               : {
-                  birthDay:
-                    (user.birthDate
-                    | date
-                      : ('ContactManager.MainContent.Birthday.DateFormat'
-                          | translate))
+                  birthDate: user.birthDate
                 }
         }}
       </mat-card-subtitle>
