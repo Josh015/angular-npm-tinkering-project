@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
@@ -9,6 +9,7 @@ import { loadUsers, State } from './state';
   selector: 'app-contact-manager-app',
   template: '<app-sidenav></app-sidenav>',
   styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactManagerComponent implements OnInit {
   constructor(

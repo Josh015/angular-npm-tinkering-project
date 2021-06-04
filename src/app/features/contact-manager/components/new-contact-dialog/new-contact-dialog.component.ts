@@ -1,7 +1,12 @@
 import { Subscription } from 'rxjs';
 import { CustomValidators, Keys } from 'src/app/shared';
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -14,6 +19,7 @@ import { createUser, createUserSuccess, State } from '../../state';
   selector: 'app-new-contact-dialog',
   templateUrl: './new-contact-dialog.component.html',
   styleUrls: ['./new-contact-dialog.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewContactDialogComponent implements OnInit, OnDestroy {
   static readonly nameMaxLength = 20;
@@ -52,9 +58,9 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.actions$
-        .pipe(ofType(createUserSuccess))
-        .subscribe(({ user }) => this.dialogRef.close(user))
+      this.actions$.pipe(ofType(createUserSuccess)).subscribe(({ user }) => {
+        this.dialogRef.close(user);
+      })
     );
   }
 
@@ -64,7 +70,7 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
 
   save(): void {
     if (this.formGroup.valid) {
-      this.store.dispatch(createUser({ user: this.formGroup.value }));
+      this.store.dispatch(createUser({ user: this.formGroup.value as User }));
     }
   }
 

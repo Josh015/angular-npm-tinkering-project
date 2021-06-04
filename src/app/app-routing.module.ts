@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'contact-manager',
-    loadChildren: () =>
+    loadChildren: async () =>
       import('./features/contact-manager/contact-manager.module').then(
         (m) => m.ContactManagerModule
       ),

@@ -20,17 +20,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { appReducer } from './state';
 
-// eslint-disable-next-line
-export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
+export const createTranslateLoader = (
+  http: HttpClient
+): TranslateHttpLoader => {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+};
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    BrowserModule,
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot({ app: appReducer, router: routerReducer }),
@@ -51,7 +52,7 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
         useClass: TranslateMessageFormatCompiler,
       },
     }),
-    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

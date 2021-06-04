@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
   MatSnackBar,
@@ -15,6 +20,7 @@ import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dia
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {
   @Output() readonly toggleSidenav = new EventEmitter<void>();
@@ -47,7 +53,9 @@ export class ToolbarComponent {
             )
               .onAction()
               .subscribe(() => {
-                this.router.navigate(['/contact-manager', result.id]);
+                this.router
+                  .navigate(['/contact-manager', result.id])
+                  .catch(() => {});
               });
           });
       }

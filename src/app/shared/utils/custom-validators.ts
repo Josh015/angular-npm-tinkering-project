@@ -1,8 +1,8 @@
 import { FormControl } from '@angular/forms';
 
 export class CustomValidators {
-  static y2k(control: FormControl): any {
-    const date: Date | null = control.value;
+  static y2k(control: FormControl): unknown {
+    const date = control.value as Date | null;
 
     if (
       !date ||
@@ -18,8 +18,8 @@ export class CustomValidators {
     };
   }
 
-  static year2012(control: FormControl): any {
-    const date: Date | null = control.value;
+  static year2012(control: FormControl): unknown {
+    const date = control.value as Date | null;
 
     if (
       !date ||

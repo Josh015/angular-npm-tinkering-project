@@ -14,7 +14,9 @@ import {
   loadUsersSuccess,
 } from './contact-manager.actions';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ContactManagerEffects {
   constructor(
     private readonly actions$: Actions,
@@ -27,7 +29,7 @@ export class ContactManagerEffects {
       mergeMap(() =>
         this.contactManagerService.loadAllUsers().pipe(
           map((users) => loadUsersSuccess({ users })),
-          catchError((error) => of(loadUsersError({ error })))
+          catchError((error: string) => of(loadUsersError({ error })))
         )
       )
     )
@@ -39,7 +41,7 @@ export class ContactManagerEffects {
       concatMap(({ user }) =>
         this.contactManagerService.addUser(user).pipe(
           map((newUser) => createUserSuccess({ user: newUser })),
-          catchError((error) => of(createUserError({ error })))
+          catchError((error: string) => of(createUserError({ error })))
         )
       )
     )

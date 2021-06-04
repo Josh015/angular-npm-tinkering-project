@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { getCurrentUser, State } from '../../state';
@@ -7,6 +7,7 @@ import { getCurrentUser, State } from '../../state';
   selector: 'app-main-content',
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainContentComponent {
   readonly user$ = this.store.select(getCurrentUser);

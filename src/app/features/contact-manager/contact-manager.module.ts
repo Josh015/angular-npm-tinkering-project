@@ -20,24 +20,24 @@ import { ContactManagerEffects, contactManagerReducer } from './state';
 
 @NgModule({
   imports: [
-    HttpClientModule,
+    ContactManagerRoutingModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule,
+    HttpClientModule,
     StoreModule.forFeature('contact-manager', contactManagerReducer),
     EffectsModule.forFeature([ContactManagerEffects]),
     TranslateModule.forChild({ extend: true }),
-    ContactManagerRoutingModule,
+    ReactiveFormsModule,
     SharedModule,
   ],
   providers: [UsersService],
   declarations: [
     ContactManagerComponent,
-    ToolbarComponent,
     MainContentComponent,
-    SidenavComponent,
-    NotesComponent,
     NewContactDialogComponent,
+    NotesComponent,
+    SidenavComponent,
+    ToolbarComponent,
   ],
 })
 export class ContactManagerModule {}
