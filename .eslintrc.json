@@ -27,6 +27,20 @@
       "rules": {
         // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules
 
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "camelCase"
+          }
+        ],
         "@typescript-eslint/class-literal-property-style": ["error", "fields"],
         "@typescript-eslint/consistent-indexed-object-style": [
           "error",
