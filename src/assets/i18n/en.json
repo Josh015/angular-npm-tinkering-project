@@ -3,7 +3,7 @@
   "ContactManager": {
     "MainContent": {
       "Bio": "Bio",
-      "Gender": "{gender, select, male{♂} female{♀} other{⚥}}",
+      "Gender": "{gender, select, male{♂} female{♀} enby{⚥} other{?}}",
       "Birthday": "Birthday {birthDate, date, long}",
       "Notes": "Notes"
     },
@@ -17,7 +17,7 @@
         "Options": {
           "Male": "Male",
           "Female": "Female",
-          "Other": "Other"
+          "NonBinary": "Non-Binary"
         }
       },
       "NameField": {
