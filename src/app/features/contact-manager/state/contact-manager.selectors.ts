@@ -4,8 +4,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { adapter, ContactManagerState } from './contact-manager.state';
 
-const { selectIds, selectEntities, selectAll, selectTotal } =
-  adapter.getSelectors();
+const { selectEntities, selectAll } = adapter.getSelectors();
 
 const getContactManagerFeatureState =
   createFeatureSelector<ContactManagerState>('contact-manager');
@@ -23,7 +22,7 @@ export const getUsers = createSelector(
 export const getCurrentUser = createSelector(
   getUserEntities,
   selectRouteParams,
-  (entities, { userId }) => entities[userId] ?? null
+  (entities, { userId }) => entities[userId as string] ?? null
 );
 
 export const getUsersLoading = createSelector(

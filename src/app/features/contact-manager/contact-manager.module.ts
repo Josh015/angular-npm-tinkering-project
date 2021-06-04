@@ -9,9 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { MainContentComponent } from './components/main-content/main-content.component';
-import {
-    NewContactDialogComponent
-} from './components/new-contact-dialog/new-contact-dialog.component';
+import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';
 import { NotesComponent } from './components/notes/notes.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';

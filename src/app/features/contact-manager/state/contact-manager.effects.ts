@@ -6,7 +6,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { UsersService } from '../services/users.service';
 import {
-    createUser, createUserError, createUserSuccess, loadUsers, loadUsersError, loadUsersSuccess
+  createUser,
+  createUserError,
+  createUserSuccess,
+  loadUsers,
+  loadUsersError,
+  loadUsersSuccess,
 } from './contact-manager.actions';
 
 @Injectable()
@@ -16,8 +21,8 @@ export class ContactManagerEffects {
     private readonly contactManagerService: UsersService
   ) {}
 
-  readonly loadUsers$ = createEffect(() => {
-    return this.actions$.pipe(
+  readonly loadUsers$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(loadUsers),
       mergeMap(() =>
         this.contactManagerService.loadAllUsers().pipe(
@@ -25,11 +30,11 @@ export class ContactManagerEffects {
           catchError((error) => of(loadUsersError({ error })))
         )
       )
-    );
-  });
+    )
+  );
 
-  readonly createUser$ = createEffect(() => {
-    return this.actions$.pipe(
+  readonly createUser$ = createEffect(() =>
+    this.actions$.pipe(
       ofType(createUser),
       concatMap(({ user }) =>
         this.contactManagerService.addUser(user).pipe(
@@ -37,6 +42,6 @@ export class ContactManagerEffects {
           catchError((error) => of(createUserError({ error })))
         )
       )
-    );
-  });
+    )
+  );
 }

@@ -1,6 +1,9 @@
 import { Subscription } from 'rxjs';
 import {
-    getIsDarkTheme, getTextDirection, toggleDarkTheme, toggleTextDirection
+  getIsDarkTheme,
+  getTextDirection,
+  toggleDarkTheme,
+  toggleTextDirection,
 } from 'src/app/state';
 
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';

@@ -1,9 +1,14 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
+import {
+  MatSnackBar,
+  MatSnackBarRef,
+  SimpleSnackBar,
+} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
+import { User } from '../../models/users.model';
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
 
 @Component({
@@ -28,14 +33,14 @@ export class ToolbarComponent {
       width: '450px',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result: User | null) => {
       if (result) {
         this.translate
           .get([
             'ContactManager.Toolbar.SnackBar.Message',
             'ContactManager.Toolbar.SnackBar.Action',
           ])
-          .subscribe((values) => {
+          .subscribe((values: { [id: string]: string }) => {
             this.openSnackBar(
               values['ContactManager.Toolbar.SnackBar.Message'],
               values['ContactManager.Toolbar.SnackBar.Action']
