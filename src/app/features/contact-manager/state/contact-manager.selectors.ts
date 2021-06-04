@@ -23,7 +23,7 @@ export const getUsers = createSelector(
 export const getCurrentUser = createSelector(
   getUserEntities,
   selectRouteParams,
-  (entities, { userId }) => entities[userId] || null
+  (entities, { userId }) => entities[userId] ?? null
 );
 
 export const getUsersLoading = createSelector(

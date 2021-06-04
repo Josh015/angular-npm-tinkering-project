@@ -31,7 +31,7 @@ export class UsersService {
     return this.http.get<User[]>(UsersService.usersUrl).pipe(
       delay(600), // Delay to show loading spinner
       tap((users) => {
-        this.ids = users.map((user) => user.id || 0).filter((id) => id);
+        this.ids = users.map((user) => user.id ?? 0).filter((id) => id);
       }),
       catchError(this.handleError)
     );

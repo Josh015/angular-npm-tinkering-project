@@ -15,16 +15,16 @@ export class NotesComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['id', 'title', 'date'];
 
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort?: MatSort;
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
 
   @Input() set notes(value: Note[]) {
     this.dataSource.data = value;
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort ?? null;
+    this.dataSource.paginator = this.paginator ?? null;
   }
 
   applyFilter(event: Event): void {

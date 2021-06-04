@@ -1,17 +1,11 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json"
-        ],
+        "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [
@@ -19,6 +13,7 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        // Angular
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -34,16 +29,123 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+
+        // Typescript
+        // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules
+        "@typescript-eslint/array-type": [
+          "error",
+          {
+            "default": "array",
+            "readonly": "array"
+          }
+        ],
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            "types": {
+              // add a custom message, AND tell the plugin how to fix it
+              "String": {
+                "message": "Use `string` instead",
+                "fixWith": "string"
+              },
+              "Number": {
+                "message": "Use `number` instead",
+                "fixWith": "number"
+              },
+              "Boolean": {
+                "message": "Use `boolean` instead",
+                "fixWith": "boolean"
+              },
+              "Symbol ": {
+                "message": "Use `symbol ` instead",
+                "fixWith": "symbol"
+              },
+              "Object": {
+                "message": "Use `object` instead",
+                "fixWith": "object"
+              },
+              "Function": {
+                "message": "Use `() => {}` instead",
+                "fixWith": "() => {}"
+              },
+              "{}": {
+                "message": "Use `object` instead",
+                "fixWith": "object"
+              }
+            }
+          }
+        ],
+        "@typescript-eslint/class-literal-property-style": ["error", "fields"],
+        "@typescript-eslint/consistent-indexed-object-style": [
+          "error",
+          "index-signature"
+        ],
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true,
+            "allowTypedFunctionExpressions": true,
+            // allowHigherOrderFunctions?: boolean;
+            "allowDirectConstAssertionInArrowFunctions": true
+            // allowConciseArrowFunctionExpressionsStartingWithVoid?: boolean;
+          }
+        ],
+        "@typescript-eslint/explicit-module-boundary-types": "error",
+        // @typescript-eslint/member-ordering // TODO: Revisit.
+        "@typescript-eslint/method-signature-style": ["error", "method"],
+        // @typescript-eslint/naming-convention // TODO: Revisit.
+        "@typescript-eslint/no-confusing-non-null-assertion": "error",
+        // "@typescript-eslint/no-confusing-void-expression": "error",
+        // "@typescript-eslint/no-explicit-any": [
+        //   "error",
+        //   {
+        //     "fixToUnknown": true
+        //   }
+        // ]
+        "@typescript-eslint/no-extra-non-null-assertion": "error",
+        // no-floating-promises // TODO: Revisit.
+        "@typescript-eslint/no-implicit-any-catch": "error",
+        "@typescript-eslint/no-implied-eval": "error",
+        // no-inferrable-types // TODO: Revisit.
+        "@typescript-eslint/no-invalid-void-type": "error",
+        // no-magic-numbers // TODO: Revisit.
+        "@typescript-eslint/no-misused-new": "error",
+        // no-misused-promises // TODO: Revisit.
+        "@typescript-eslint/no-namespace": "error",
+        "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
+        "@typescript-eslint/no-non-null-assertion": "error",
+        "@typescript-eslint/no-require-imports": "error",
+        "@typescript-eslint/no-this-alias": [
+          "error",
+          {
+            "allowDestructuring": false, // Disallow `const { props, state } = this`; true by default
+            "allowedNames": ["self"] // Allow `const self = this`; `[]` by default
+          }
+        ],
+        "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
+        "@typescript-eslint/no-unnecessary-condition": "error",
+        "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/prefer-as-const": "error",
+        "@typescript-eslint/prefer-for-of": "error",
+        "@typescript-eslint/prefer-function-type": "error",
+        "@typescript-eslint/prefer-includes": "error",
+        "@typescript-eslint/prefer-nullish-coalescing": "error",
+        "@typescript-eslint/prefer-optional-chain": "error",
+        "@typescript-eslint/prefer-readonly": "error",
+        "@typescript-eslint/prefer-string-starts-ends-with": "error",
+        // promise-function-async // TODO: Revisit.
+        "@typescript-eslint/sort-type-union-intersection-members": "error",
+        // strict-boolean-expressions // TODO: Revisit.
+        "@typescript-eslint/switch-exhaustiveness-check": "error",
+        // type-annotation-spacing // TODO: Revisit.
+        // typedef // TODO: Revisit.
+        "@typescript-eslint/unified-signatures": "error"
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     }
   ]
