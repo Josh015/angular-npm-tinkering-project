@@ -30,6 +30,7 @@
         "@angular-eslint/component-selector": [
           "error",
           {
+            "type": "element",
             "prefix": "app",
             "style": "kebab-case"
           }
@@ -37,6 +38,7 @@
         "@angular-eslint/directive-selector": [
           "error",
           {
+            "type": "attribute",
             "prefix": "app",
             "style": "camelCase"
           }
@@ -63,11 +65,11 @@
         "@typescript-eslint/no-require-imports": "error",
         "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
         "@typescript-eslint/no-unnecessary-condition": "error",
-        "@typescript-eslint/prefer-includes": "warn",
+        "@typescript-eslint/prefer-includes": "error",
         "@typescript-eslint/prefer-nullish-coalescing": "error",
         "@typescript-eslint/prefer-optional-chain": "error",
         "@typescript-eslint/prefer-readonly": "error",
-        "@typescript-eslint/prefer-string-starts-ends-with": "warn",
+        "@typescript-eslint/prefer-string-starts-ends-with": "error",
         "@typescript-eslint/promise-function-async": "error",
         "@typescript-eslint/sort-type-union-intersection-members": "error",
         "@typescript-eslint/switch-exhaustiveness-check": "error",
