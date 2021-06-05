@@ -73,6 +73,9 @@
         "@typescript-eslint/promise-function-async": "error",
         "@typescript-eslint/sort-type-union-intersection-members": "error",
         "@typescript-eslint/switch-exhaustiveness-check": "error",
+
+        // TODO: Remove this once Angular's validators are converted to static
+        // arrow functions.
         "@typescript-eslint/unbound-method": "off"
       }
     },

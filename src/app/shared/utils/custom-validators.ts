@@ -1,7 +1,7 @@
 import { FormControl } from '@angular/forms';
 
 export class CustomValidators {
-  static y2k(control: FormControl): unknown {
+  static readonly y2k = (control: FormControl): unknown => {
     const date = control.value as Date | null;
 
     if (
@@ -16,9 +16,9 @@ export class CustomValidators {
     return {
       y2k: true,
     };
-  }
+  };
 
-  static year2012(control: FormControl): unknown {
+  static readonly year2012 = (control: FormControl): unknown => {
     const date = control.value as Date | null;
 
     if (
@@ -33,5 +33,5 @@ export class CustomValidators {
     return {
       year2012: true,
     };
-  }
+  };
 }
