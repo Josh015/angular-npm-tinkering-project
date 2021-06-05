@@ -1,8 +1,6 @@
 <div class="mat-elevation-z8">
   <mat-form-field>
-    <mat-label>
-      {{ 'ContactManager.Notes.Filter' | translate }}
-    </mat-label>
+    <mat-label> {{ 'ContactManager.Notes.Filter' | translate }} </mat-label>
     <input
       #filter
       matInput
@@ -46,7 +44,10 @@
       <td class="mat-cell" colspan="4">
         {{
           'ContactManager.Notes.NoMatchingDataForFilter'
-            | translate: { filterValue: filter.value }
+            | translate
+              : {
+                  filterValue: filter.value
+                }
         }}
       </td>
     </tr>

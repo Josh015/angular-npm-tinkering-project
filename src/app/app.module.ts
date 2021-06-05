@@ -20,11 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { appReducer } from './state';
 
-export const createTranslateLoader = (
-  http: HttpClient
-): TranslateHttpLoader => {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-};
+export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
+  new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({
   declarations: [AppComponent],

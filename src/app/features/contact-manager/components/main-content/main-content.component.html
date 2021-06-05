@@ -15,19 +15,14 @@
       <mat-card-subtitle>
         {{
           'ContactManager.MainContent.Birthday'
-            | translate
-              : {
-                  birthDate: user.birthDate
-                }
+            | translate: { birthDate: user.birthDate }
         }}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <mat-tab-group>
         <mat-tab [label]="'ContactManager.MainContent.Bio' | translate">
-          <p>
-            {{ user.bio }}
-          </p>
+          <p>{{ user.bio }}</p>
         </mat-tab>
         <mat-tab [label]="'ContactManager.MainContent.Notes' | translate">
           <app-notes [notes]="user.notes"></app-notes>
