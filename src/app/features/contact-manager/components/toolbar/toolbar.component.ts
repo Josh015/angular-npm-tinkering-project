@@ -53,9 +53,7 @@ export class ToolbarComponent {
             )
               .onAction()
               .subscribe(() => {
-                this.router
-                  .navigate(['/contact-manager', result.id])
-                  .catch(() => {});
+                void this.router.navigate(['/contact-manager', result.id]);
               });
           });
       }
