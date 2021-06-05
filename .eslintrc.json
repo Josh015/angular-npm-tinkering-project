@@ -8,12 +8,16 @@
         "project": ["tsconfig.json", "e2e/tsconfig.json"],
         "createDefaultProgram": true
       },
+      "plugins": ["import"],
       "extends": [
+        // https://github.com/lydell/eslint-plugin-simple-import-sort/#sort-order
         // https://github.com/eslint/eslint/blob/master/conf/eslint-recommended.js
         // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/src/configs
         // https://github.com/angular-eslint/angular-eslint/tree/master/packages/eslint-plugin/src/configs
         // https://github.com/prettier/eslint-config-prettier
-
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript",
         "plugin:@angular-eslint/all",
         "plugin:@angular-eslint/ng-cli-compat",
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
@@ -25,8 +29,26 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
-        // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules
+        // https://github.com/lydell/eslint-plugin-simple-import-sort/#sort-order
+        // https://emilyxiong.medium.com/add-eslint-rules-to-sort-imports-and-audit-accessibility-7cde89308686
+        "import/no-unresolved": "off",
+        "import/named": "warn",
+        "import/namespace": "warn",
+        "import/no-named-as-default": "off",
+        "import/export": "warn",
+        "import/order": [
+          "error",
+          {
+            "groups": ["builtin", "external", "parent", "sibling", "index"],
+            "newlines-between": "always",
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            }
+          }
+        ],
 
+        // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules
         "@typescript-eslint/class-literal-property-style": ["error", "fields"],
         "@typescript-eslint/consistent-indexed-object-style": [
           "error",

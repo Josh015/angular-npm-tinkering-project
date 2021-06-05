@@ -1,5 +1,3 @@
-import { SharedModule } from 'src/app/shared';
-
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -7,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from 'src/app/shared';
 
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';

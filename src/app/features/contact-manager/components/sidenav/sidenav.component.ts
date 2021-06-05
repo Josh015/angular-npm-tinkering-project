@@ -1,11 +1,3 @@
-import { Subscription } from 'rxjs';
-import {
-  getIsDarkTheme,
-  getTextDirection,
-  toggleDarkTheme,
-  toggleTextDirection,
-} from 'src/app/state';
-
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import {
   ChangeDetectionStrategy,
@@ -17,6 +9,13 @@ import {
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import {
+  getIsDarkTheme,
+  getTextDirection,
+  toggleDarkTheme,
+  toggleTextDirection,
+} from 'src/app/state';
 
 import { getUsers, getUsersLoading, State } from '../../state';
 

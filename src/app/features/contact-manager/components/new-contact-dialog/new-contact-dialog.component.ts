@@ -1,6 +1,3 @@
-import { Subscription } from 'rxjs';
-import { CustomValidators, Keys } from 'src/app/shared';
-
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,6 +8,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { CustomValidators, Keys } from 'src/app/shared';
 
 import { User } from '../../models/users.model';
 import { createUser, createUserSuccess, State } from '../../state';
