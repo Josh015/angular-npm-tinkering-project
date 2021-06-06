@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
+
 import { SharedModule } from 'src/app/shared';
 
 import { MainContentComponent } from './components/main-content/main-content.component';

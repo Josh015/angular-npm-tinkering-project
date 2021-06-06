@@ -4,7 +4,6 @@ import { of } from 'rxjs';
 import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
 
 import { UsersService } from '../services/users.service';
-
 import {
   createUser,
   createUserError,

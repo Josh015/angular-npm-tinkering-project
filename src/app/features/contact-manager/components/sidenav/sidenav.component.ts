@@ -10,6 +10,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+
 import {
   getIsDarkTheme,
   getTextDirection,
