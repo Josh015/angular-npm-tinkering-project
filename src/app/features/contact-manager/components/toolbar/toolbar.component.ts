@@ -41,21 +41,18 @@ export class ToolbarComponent {
 
     dialogRef.afterClosed().subscribe((result: User | null) => {
       if (result) {
-        this.translate
-          .get([
-            'ContactManager.Toolbar.SnackBar.Message',
-            'ContactManager.Toolbar.SnackBar.Action',
-          ])
-          .subscribe((values: Record<string, string>) => {
-            this.openSnackBar(
-              values['ContactManager.Toolbar.SnackBar.Message'],
-              values['ContactManager.Toolbar.SnackBar.Action']
-            )
-              .onAction()
-              .subscribe(() => {
-                void this.router.navigate(['/contact-manager', result.id]);
-              });
-          });
+        const keys = [
+          'ContactManager.Toolbar.SnackBar.Message',
+          'ContactManager.Toolbar.SnackBar.Action',
+        ];
+
+        this.translate.get(keys).subscribe((values: Record<string, string>) => {
+          this.openSnackBar(values[keys[0]], values[keys[1]])
+            .onAction()
+            .subscribe(() => {
+              void this.router.navigate(['/contact-manager', result.id]);
+            });
+        });
       }
     });
   }
