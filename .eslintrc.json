@@ -31,10 +31,6 @@
         // https://github.com/benmosher/eslint-plugin-import
         // https://emilyxiong.medium.com/add-eslint-rules-to-sort-imports-and-audit-accessibility-7cde89308686
         "import/no-unresolved": "off",
-        "import/named": "warn",
-        "import/namespace": "warn",
-        "import/no-named-as-default": "off",
-        "import/export": "warn",
         "import/order": [
           "error",
           {
