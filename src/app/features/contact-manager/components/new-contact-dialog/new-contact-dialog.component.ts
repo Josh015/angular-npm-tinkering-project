@@ -10,10 +10,9 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { CustomValidators, Keys } from 'src/app/shared';
-
 import { User } from '../../models/users.model';
 import { createUser, createUserSuccess, State } from '../../state';
+import { CustomValidators, Keys } from 'src/app/shared';
 
 @Component({
   selector: 'app-new-contact-dialog',

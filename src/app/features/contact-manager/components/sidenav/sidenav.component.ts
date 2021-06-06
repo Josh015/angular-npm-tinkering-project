@@ -11,14 +11,13 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
+import { getUsers, getUsersLoading, State } from '../../state';
 import {
   getIsDarkTheme,
   getTextDirection,
   toggleDarkTheme,
   toggleTextDirection,
 } from 'src/app/state';
-
-import { getUsers, getUsersLoading, State } from '../../state';
 
 @Component({
   selector: 'app-sidenav',

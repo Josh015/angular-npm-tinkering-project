@@ -9,6 +9,9 @@
         "createDefaultProgram": true
       },
       "plugins": ["import"],
+      "settings": {
+        "import/internal-regex": "^src/"
+      },
       "extends": [
         // https://github.com/benmosher/eslint-plugin-import
         // https://github.com/eslint/eslint/blob/master/conf/eslint-recommended.js
@@ -34,15 +37,10 @@
         "import/order": [
           "error",
           {
-            "pathGroups": [
-              {
-                "pattern": "src/**",
-                "group": "parent",
-                "position": "before"
-              }
+            "groups": [
+              ["builtin", "external"], // System
+              ["parent", "index", "sibling", "internal"] // Project
             ],
-            "pathGroupsExcludedImportTypes": ["builtin"],
-            "groups": ["builtin", "external", ["parent", "sibling"], "index"],
             "newlines-between": "always",
             "alphabetize": {
               "order": "asc",
@@ -83,7 +81,7 @@
         "@typescript-eslint/sort-type-union-intersection-members": "error",
         "@typescript-eslint/switch-exhaustiveness-check": "error",
 
-        // TODO: Remove this once Angular's validators are converted to static
+        // TODO: Remove this once Angular"s validators are converted to static
         // arrow functions.
         "@typescript-eslint/unbound-method": "off"
       }
