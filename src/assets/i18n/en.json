@@ -2,10 +2,10 @@
   "App": {},
   "ContactManager": {
     "MainContent": {
-      "Bio": "Bio",
-      "Gender": "{gender, select, male{♂} female{♀} enby{⚥} other{?}}",
-      "Birthday": "Birthday {birthDate, date, long}",
-      "Notes": "Notes"
+      "NameAndGenderTitle": "{name} {gender, select, male{♂} female{♀} enby{⚥} other{?}}",
+      "BirthdaySubTitle": "Birthday {birthDate, date, long}",
+      "BioTab": "Bio",
+      "NotesTab": "Notes"
     },
     "NewContactDialog": {
       "Title": "Add new contact",

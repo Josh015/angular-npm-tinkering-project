@@ -3,28 +3,28 @@
     <mat-card-header>
       <mat-icon mat-card-avatar [svgIcon]="user.avatar"></mat-icon>
       <mat-card-title>
-        {{ user.name }}
         {{
-          'ContactManager.MainContent.Gender'
+          'ContactManager.MainContent.NameAndGenderTitle'
             | translate
               : {
-                  gender: user.gender?.toLowerCase()
+                  name: user.name,
+                  gender: user.gender
                 }
         }}
       </mat-card-title>
       <mat-card-subtitle>
         {{
-          'ContactManager.MainContent.Birthday'
+          'ContactManager.MainContent.BirthdaySubTitle'
             | translate: { birthDate: user.birthDate }
         }}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <mat-tab-group>
-        <mat-tab [label]="'ContactManager.MainContent.Bio' | translate">
+        <mat-tab [label]="'ContactManager.MainContent.BioTab' | translate">
           <p>{{ user.bio }}</p>
         </mat-tab>
-        <mat-tab [label]="'ContactManager.MainContent.Notes' | translate">
+        <mat-tab [label]="'ContactManager.MainContent.NotesTab' | translate">
           <app-notes [notes]="user.notes"></app-notes>
         </mat-tab>
       </mat-tab-group>
