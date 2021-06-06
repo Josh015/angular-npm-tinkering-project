@@ -10,14 +10,12 @@
       },
       "plugins": ["import"],
       "settings": {
+        // Manually add "src/" directory to import plugin's "internal" group
         "import/internal-regex": "^src/"
       },
+
+      // These plugins are in this specific order to maximize rule coverage
       "extends": [
-        // https://github.com/benmosher/eslint-plugin-import
-        // https://github.com/eslint/eslint/blob/master/conf/eslint-recommended.js
-        // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/src/configs
-        // https://github.com/angular-eslint/angular-eslint/tree/master/packages/eslint-plugin/src/configs
-        // https://github.com/prettier/eslint-config-prettier
         "plugin:@angular-eslint/all",
         "plugin:@angular-eslint/ng-cli-compat",
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
@@ -30,16 +28,19 @@
         "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:prettier/recommended"
       ],
+
+      // Adds missing rules and/or turns off unwanted ones from plugin presets
       "rules": {
-        // https://github.com/benmosher/eslint-plugin-import
-        // https://emilyxiong.medium.com/add-eslint-rules-to-sort-imports-and-audit-accessibility-7cde89308686
         "import/no-unresolved": "off",
         "import/order": [
           "error",
           {
             "groups": [
-              ["builtin", "external"], // System
-              ["parent", "index", "sibling", "internal"] // Project
+              // Global imports
+              ["builtin", "external"],
+
+              // Project-specific imports
+              ["parent", "index", "sibling", "internal"]
             ],
             "newlines-between": "always",
             "alphabetize": {
@@ -48,8 +49,6 @@
             }
           }
         ],
-
-        // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin/docs/rules
         "@typescript-eslint/class-literal-property-style": ["error", "fields"],
         "@typescript-eslint/consistent-indexed-object-style": [
           "error",
@@ -81,8 +80,7 @@
         "@typescript-eslint/sort-type-union-intersection-members": "error",
         "@typescript-eslint/switch-exhaustiveness-check": "error",
 
-        // TODO: Remove this once Angular"s validators are converted to static
-        // arrow functions.
+        // TODO: Remove this override once Angular's validators are fixed
         "@typescript-eslint/unbound-method": "off"
       }
     },
