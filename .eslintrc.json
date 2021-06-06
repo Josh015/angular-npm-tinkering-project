@@ -40,7 +40,15 @@
               ["builtin", "external"],
 
               // Project-specific imports
-              ["parent", "index", "sibling", "internal"]
+              [
+                "internal",
+                "unknown",
+                "parent",
+                "sibling",
+                "index",
+                "object",
+                "type"
+              ]
             ],
             "newlines-between": "always",
             "alphabetize": {
