@@ -46,7 +46,7 @@ export class ToolbarComponent {
             'ContactManager.Toolbar.SnackBar.Message',
             'ContactManager.Toolbar.SnackBar.Action',
           ])
-          .subscribe((values: { [id: string]: string }) => {
+          .subscribe((values: Record<string, string>) => {
             this.openSnackBar(
               values['ContactManager.Toolbar.SnackBar.Message'],
               values['ContactManager.Toolbar.SnackBar.Action']

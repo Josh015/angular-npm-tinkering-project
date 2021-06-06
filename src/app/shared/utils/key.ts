@@ -1,3 +1,1 @@
-export type Keys<T> = {
-  [key in keyof T]: unknown;
-};
+export type Keys<T> = Record<keyof T, unknown>;
