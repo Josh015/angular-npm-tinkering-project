@@ -1,4 +1,4 @@
-import { Note } from './notes.model';
+import { Note } from './note';
 
 export interface User {
   id: number | null;

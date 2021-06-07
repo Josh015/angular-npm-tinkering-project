@@ -13,7 +13,7 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
-import { User } from '../../models/users.model';
+import { User } from '../../models';
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
 
 @Component({

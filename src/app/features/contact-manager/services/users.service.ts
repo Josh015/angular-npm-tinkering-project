@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 
-import { User } from '../models/users.model';
+import { User } from '../models';
 
 @Injectable({
   providedIn: 'root',

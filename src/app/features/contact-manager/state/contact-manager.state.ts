@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 
-import { User } from '../models/users.model';
+import { User } from '../models';
 import * as AppState from 'src/app/state';
 
 export interface State extends AppState.State {

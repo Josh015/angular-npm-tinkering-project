@@ -10,7 +10,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 
-import { User } from '../../models/users.model';
+import { User } from '../../models';
 import { createUser, createUserSuccess, State } from '../../state';
 import { Keys, y2kValidator, year2012Validator } from 'src/app/shared';
 

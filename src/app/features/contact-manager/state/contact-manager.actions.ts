@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { User } from '../models/users.model';
+import { User } from '../models';
 
 export const loadUsers = createAction('[Contact Manager] Load Users');
 
