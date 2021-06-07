@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 
 import { User } from '../../models/users.model';
 import { createUser, createUserSuccess, State } from '../../state';
-import { CustomValidators, Keys } from 'src/app/shared';
+import { Keys, y2kValidator, year2012Validator } from 'src/app/shared';
 
 @Component({
   selector: 'app-new-contact-dialog',
@@ -29,10 +29,7 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
   readonly maxBirthDate = new Date();
   readonly formGroup = this.fb.group({
     id: [null],
-    birthDate: [
-      null,
-      [Validators.required, CustomValidators.y2k, CustomValidators.year2012],
-    ],
+    birthDate: [null, [Validators.required, y2kValidator, year2012Validator]],
     gender: [null, [Validators.required]],
     name: [
       '',

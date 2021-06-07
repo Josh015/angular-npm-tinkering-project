@@ -32,7 +32,10 @@
           "error",
           { "allowExpressions": true }
         ],
-        "@typescript-eslint/no-extraneous-class": "off",
+        "@typescript-eslint/no-extraneous-class": [
+          "error",
+          { "allowWithDecorator": true }
+        ],
         "@typescript-eslint/unbound-method": "off", // TODO: Remove when fixed
 
         // Preferences
