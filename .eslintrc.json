@@ -13,42 +13,51 @@
         // Manually add "src/" directory to import plugin's "internal" group
         "import/internal-regex": "^src/"
       },
-
-      // These plugins are in this specific order to maximize rule coverage
       "extends": [
+        // These presets are in this specific order to control rule overrides
+        "eslint:recommended",
+        "plugin:import/recommended",
+        "plugin:import/typescript",
+        "plugin:@typescript-eslint/all",
         "plugin:@angular-eslint/all",
         "plugin:@angular-eslint/ng-cli-compat",
         "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
         "plugin:@angular-eslint/recommended--extra",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "eslint:recommended",
-        "plugin:import/recommended",
-        "plugin:import/typescript",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
         "plugin:prettier/recommended"
       ],
-
-      // Adds missing rules and/or turns off unwanted ones from plugin presets
       "rules": {
+        // Angular fixes
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          { "allowExpressions": true }
+        ],
+        "@typescript-eslint/no-extraneous-class": "off",
+        "@typescript-eslint/unbound-method": "off", // TODO: Remove when fixed
+
+        // Preferences
+        "@typescript-eslint/array-type": "error",
+        "@typescript-eslint/consistent-type-imports": "off",
+        "@typescript-eslint/lines-between-class-members": "off",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-magic-numbers": "off",
+        "@typescript-eslint/no-type-alias": "off",
+        "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/prefer-readonly-parameter-types": "off",
         "import/no-unresolved": "off",
         "import/order": [
           "error",
           {
             "groups": [
-              // Global imports
+              // Global
               ["builtin", "external"],
 
-              // Project-specific imports
-              [
-                "internal",
-                "unknown",
-                "parent",
-                "sibling",
-                "index",
-                "object",
-                "type"
-              ]
+              // Project
+              ["internal", "unknown", "parent", "sibling", "index"],
+
+              // Misc.
+              "type",
+              "object"
             ],
             "newlines-between": "always",
             "alphabetize": {
@@ -56,33 +65,34 @@
               "caseInsensitive": true
             }
           }
-        ],
-        "@typescript-eslint/class-literal-property-style": "error",
-        "@typescript-eslint/consistent-indexed-object-style": "error",
-        "@typescript-eslint/explicit-function-return-type": [
-          "error",
-          { "allowExpressions": true }
-        ],
-        "@typescript-eslint/method-signature-style": "error",
-        "@typescript-eslint/no-confusing-non-null-assertion": "error",
-        "@typescript-eslint/no-confusing-void-expression": "error",
-        "@typescript-eslint/no-implicit-any-catch": "error",
-        "@typescript-eslint/no-invalid-void-type": "error",
-        "@typescript-eslint/no-require-imports": "error",
-        "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
-        "@typescript-eslint/no-unnecessary-condition": "error",
-        "@typescript-eslint/prefer-includes": "error",
-        "@typescript-eslint/prefer-nullish-coalescing": "error",
-        "@typescript-eslint/prefer-optional-chain": "error",
-        "@typescript-eslint/prefer-readonly": "error",
-        "@typescript-eslint/prefer-string-starts-ends-with": "error",
-        "@typescript-eslint/promise-function-async": "error",
-        "@typescript-eslint/sort-type-union-intersection-members": "error",
-        "@typescript-eslint/switch-exhaustiveness-check": "error",
-
-        // TODO: Remove this override once Angular's validators are fixed
-        "@typescript-eslint/unbound-method": "off"
+        ]
       }
+    },
+    {
+      "env": {
+        "browser": true,
+        "node": true,
+        "jasmine": true,
+        "protractor": true,
+        "es6": true
+        // "es2017": true,
+        // "es2020": true,
+        // "es2021": true,
+        // "worker": true,
+        // "serviceworker": true,
+        // "jest": true,
+        // "jquery": true,
+      },
+      "files": ["*.js", "*.jsx"],
+      "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        }
+      },
+      "extends": ["eslint:recommended"],
+      "rules": {}
     },
     {
       "files": ["*.html"],
