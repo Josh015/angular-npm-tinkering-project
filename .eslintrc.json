@@ -53,11 +53,12 @@
               ["builtin", "external"],
 
               // Project
-              ["internal", "unknown", "parent", "sibling", "index"],
+              ["internal", "parent", "sibling", "index"],
 
               // Misc.
               "type",
-              "object"
+              "object",
+              "unknown"
             ],
             "newlines-between": "always",
             "alphabetize": {
