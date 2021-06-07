@@ -3,5 +3,22 @@
     "source.fixAll.eslint": true
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "UNPATCHED",
+    "browserslist",
+    "classlist",
+    "compat",
+    "datepicker",
+    "devkit",
+    "instanceof",
+    "jasminewd",
+    "messageformat",
+    "mousemove",
+    "ngrx",
+    "pluralsight",
+    "serviceworker",
+    "sidenav",
+    "subdir"
+  ]
 }

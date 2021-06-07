@@ -32,7 +32,7 @@ export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot({ app: appReducer, router: routerReducer }),
     StoreDevtoolsModule.instrument({
-      name: 'Angular Material App DevTools',
+      name: 'Angular NPM Tinkering Project App DevTools',
       maxAge: 25,
       logOnly: environment.production,
     }),
