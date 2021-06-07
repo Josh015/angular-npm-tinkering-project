@@ -78,20 +78,21 @@
             "identifiers": true,
             "lang": "en_US",
             "skipWords": [
+              "accessor",
               "breakpoint",
               "checkbox",
               "classlist",
               "datepicker",
+              "debounce",
               "devtools",
-              "dom",
               "instanceof",
-              "ltr",
+              "keypress",
               "mousemove",
+              "nullable",
               "paginator",
-              "rtl",
+              "renderer",
               "sanitizer",
               "sidenav",
-              "svg",
               "tooltip",
               "urls",
               "validators",
@@ -104,7 +105,7 @@
             // "skipWordIfMatch": [
             //   "^foobar.*$" // words that begin with foobar will not be checked
             // ],
-            "minLength": 3
+            "minLength": 4
           }
         ]
       }

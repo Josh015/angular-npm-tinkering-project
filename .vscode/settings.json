@@ -9,16 +9,20 @@
     "browserslist",
     "classlist",
     "compat",
+    "copyindex",
     "datepicker",
     "devkit",
     "instanceof",
     "jasminewd",
     "messageformat",
     "mousemove",
+    "ngcc",
     "ngrx",
     "pluralsight",
+    "readonly",
     "serviceworker",
     "sidenav",
-    "subdir"
+    "subdir",
+    "webcomponents"
   ]
 }
