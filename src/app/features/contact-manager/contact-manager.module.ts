@@ -20,14 +20,14 @@ import { SharedModule } from 'src/app/shared';
 @NgModule({
   imports: [
     ContactManagerRoutingModule,
+    EffectsModule.forFeature([ContactManagerEffects]),
     FlexLayoutModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forFeature('contact-manager', contactManagerReducer),
-    EffectsModule.forFeature([ContactManagerEffects]),
-    TranslateModule.forChild({ extend: true }),
     ReactiveFormsModule,
     SharedModule,
+    StoreModule.forFeature('contact-manager', contactManagerReducer),
+    TranslateModule.forChild({ extend: true }),
   ],
   providers: [UsersService],
   declarations: [

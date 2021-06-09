@@ -29,6 +29,7 @@ export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
     BrowserAnimationsModule,
     BrowserModule,
     EffectsModule.forRoot([]),
+    HttpClientModule,
     StoreRouterConnectingModule.forRoot(),
     StoreModule.forRoot({ app: appReducer, router: routerReducer }),
     StoreDevtoolsModule.instrument({
@@ -48,7 +49,6 @@ export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
         useClass: TranslateMessageFormatCompiler,
       },
     }),
-    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
