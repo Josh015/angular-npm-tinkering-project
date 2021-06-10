@@ -20,7 +20,7 @@ import { Note } from '../../models';
 export class NotesComponent implements AfterViewInit {
   readonly dataSource = new MatTableDataSource<Note>();
 
-  displayedColumns: string[] = ['id', 'title', 'date'];
+  displayedColumns = ['id', 'title', 'date'];
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
