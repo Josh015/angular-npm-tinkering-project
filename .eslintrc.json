@@ -46,22 +46,22 @@
           "error",
           {
             "selector": "default",
-            "format": ["strictCamelCase"],
+            "format": ["camelCase"],
             "leadingUnderscore": "forbid",
             "trailingUnderscore": "forbid"
           },
           {
             "selector": "variable",
-            "format": ["strictCamelCase", "UPPER_CASE"]
+            "format": ["camelCase", "UPPER_CASE"]
           },
 
           {
             "selector": "typeLike",
-            "format": ["StrictPascalCase"]
+            "format": ["PascalCase"]
           },
           {
             "selector": "enumMember",
-            "format": ["StrictPascalCase"]
+            "format": ["PascalCase", "UPPER_CASE"]
           }
         ],
         "@typescript-eslint/no-explicit-any": "error",
