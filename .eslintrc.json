@@ -54,14 +54,13 @@
             "selector": "variable",
             "format": ["camelCase", "UPPER_CASE"]
           },
-
           {
             "selector": "typeLike",
             "format": ["PascalCase"]
           },
           {
             "selector": "enumMember",
-            "format": ["PascalCase", "UPPER_CASE"]
+            "format": ["PascalCase"]
           }
         ],
         "@typescript-eslint/no-explicit-any": "error",
