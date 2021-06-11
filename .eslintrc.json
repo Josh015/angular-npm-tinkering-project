@@ -46,6 +46,7 @@
         "@typescript-eslint/no-magic-numbers": "off",
         "@typescript-eslint/no-type-alias": "off",
         "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/prefer-enum-initializers": "off",
         "@typescript-eslint/prefer-readonly-parameter-types": "off",
         "import/no-unresolved": "off",
         "import/order": [
