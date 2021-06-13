@@ -28,7 +28,9 @@ export class ContactManagerEffects {
       mergeMap(() =>
         this.contactManagerService.loadAllUsers().pipe(
           map((users) => loadUsersSuccess({ users })),
-          catchError((error: string) => of(loadUsersError({ error })))
+          catchError((error: unknown) =>
+            of(loadUsersError({ error: error as string }))
+          )
         )
       )
     )
@@ -40,7 +42,9 @@ export class ContactManagerEffects {
       concatMap(({ user }) =>
         this.contactManagerService.addUser(user).pipe(
           map((newUser) => createUserSuccess({ user: newUser })),
-          catchError((error: string) => of(createUserError({ error })))
+          catchError((error: unknown) =>
+            of(createUserError({ error: error as string }))
+          )
         )
       )
     )
