@@ -109,6 +109,7 @@
               "devtools",
               "instanceof",
               "keypress",
+              "keyup",
               "mousemove",
               "nullable",
               "paginator",

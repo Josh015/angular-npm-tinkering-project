@@ -34,7 +34,7 @@ export class NotesComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator ?? null;
   }
 
-  applyFilter(event: Event): void {
+  applyFilter(event: KeyboardEvent): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
