@@ -1,26 +1,22 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 
 import { User } from '../../models';
 import { createUser, createUserSuccess, State } from '../../state';
 import { Keys, y2kValidator, year2012Validator } from 'src/app/shared';
 
+@UntilDestroy()
 @Component({
   selector: 'app-new-contact-dialog',
   templateUrl: './new-contact-dialog.component.html',
   styleUrls: ['./new-contact-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewContactDialogComponent implements OnInit, OnDestroy {
+export class NewContactDialogComponent implements OnInit {
   static readonly nameMaxLength = 20;
   static readonly bioMaxLength = 30;
 
@@ -43,8 +39,6 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
     notes: [[]],
   } as Keys<User>);
 
-  private readonly subscription = new Subscription();
-
   constructor(
     private readonly dialogRef: MatDialogRef<NewContactDialogComponent>,
     private readonly store: Store<State>,
@@ -53,15 +47,11 @@ export class NewContactDialogComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.actions$.pipe(ofType(createUserSuccess)).subscribe(({ user }) => {
+    this.actions$
+      .pipe(ofType(createUserSuccess), untilDestroyed(this))
+      .subscribe(({ user }) => {
         this.dialogRef.close(user);
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+      });
   }
 
   save(): void {

@@ -2,14 +2,13 @@ import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import {
   ChangeDetectionStrategy,
   Component,
-  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 
 import { getUsers, getUsersLoading, State } from '../../state';
 import {
@@ -19,13 +18,14 @@ import {
   toggleTextDirection,
 } from 'src/app/state';
 
+@UntilDestroy()
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidenavComponent implements OnInit, OnDestroy {
+export class SidenavComponent implements OnInit {
   static readonly smallWidthBreakpoint = 720;
 
   readonly usersLoading$ = this.store.select(getUsersLoading);
@@ -37,8 +37,6 @@ export class SidenavComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatSidenav) sidenav?: MatSidenav;
 
-  private readonly subscription = new Subscription();
-
   constructor(
     private readonly breakpointObserver: BreakpointObserver,
     private readonly router: Router,
@@ -46,25 +44,18 @@ export class SidenavComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription.add(
-      this.breakpointObserver
-        .observe([`(max-width: ${SidenavComponent.smallWidthBreakpoint}px)`])
-        .subscribe((state: BreakpointState) => {
-          this.isScreenSmall = state.matches;
-        })
-    );
+    this.breakpointObserver
+      .observe([`(max-width: ${SidenavComponent.smallWidthBreakpoint}px)`])
+      .pipe(untilDestroyed(this))
+      .subscribe((state: BreakpointState) => {
+        this.isScreenSmall = state.matches;
+      });
 
-    this.subscription.add(
-      this.router.events.subscribe(() => {
-        if (this.isScreenSmall) {
-          this.sidenav?.close();
-        }
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.router.events.pipe(untilDestroyed(this)).subscribe(() => {
+      if (this.isScreenSmall) {
+        this.sidenav?.close();
+      }
+    });
   }
 
   toggleTheme(): void {
