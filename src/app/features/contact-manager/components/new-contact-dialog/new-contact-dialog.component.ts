@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 
 import { User } from '../../models';
 import { createUser, createUserSuccess, State } from '../../state';
-import { Keys, y2kValidator, year2012Validator } from 'src/app/shared';
+import { Keys, y2kValidator, year2012Validator } from 'src/app/utils';
 
 @UntilDestroy()
 @Component({
