@@ -13,7 +13,6 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ContactManagerRoutingModule } from './contact-manager-routing.module';
 import { ContactManagerComponent } from './contact-manager.component';
-import { UsersService } from './services/users.service';
 import { ContactManagerEffects, contactManagerReducer } from './state';
 import { SharedModule } from 'src/app/shared';
 
@@ -29,7 +28,6 @@ import { SharedModule } from 'src/app/shared';
     StoreModule.forFeature('contact-manager', contactManagerReducer),
     TranslateModule.forChild({ extend: true }),
   ],
-  providers: [UsersService],
   declarations: [
     ContactManagerComponent,
     MainContentComponent,
