@@ -14,7 +14,7 @@ import {
 } from './contact-manager.actions';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: null,
 })
 export class ContactManagerEffects {
   constructor(
