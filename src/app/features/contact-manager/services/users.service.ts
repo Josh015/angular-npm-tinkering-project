@@ -6,7 +6,7 @@ import { delay, tap } from 'rxjs/operators';
 import { User } from '../models';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: null,
 })
 export class UsersService {
   static readonly rootUrl = 'https://angular-material-api.azurewebsites.net';
