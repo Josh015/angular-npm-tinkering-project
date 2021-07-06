@@ -1,1 +1,5 @@
-export type Keys<T> = Record<keyof T, unknown>;
+/* eslint-disable */
+
+export type Keys<T> = {
+  [key in keyof T]: unknown;
+};
