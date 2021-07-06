@@ -1,9 +1,11 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { ValidationErrors, ValidatorFn } from '@angular/forms';
+
+import { AbstractControlTyped } from '../helpers/typed-reactive-forms';
 
 export const y2kValidator: ValidatorFn = (
-  control: AbstractControl
+  control: AbstractControlTyped<Date | null>
 ): ValidationErrors | null => {
-  const date = control.value as Date | null;
+  const date = control.value;
 
   if (
     !date ||
