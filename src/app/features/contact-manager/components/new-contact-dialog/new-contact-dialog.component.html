@@ -10,8 +10,8 @@
         </mat-label>
         <mat-select [formControl]="controls.avatar" required>
           <mat-select-trigger>
-            <mat-icon [svgIcon]="formGroup.value.avatar"></mat-icon>
-            {{ formGroup.value.avatar }}
+            <mat-icon [svgIcon]="controls.avatar.value"></mat-icon>
+            {{ controls.avatar.value }}
           </mat-select-trigger>
           <mat-option *ngFor="let avatar of avatars" [value]="avatar">
             <mat-icon [svgIcon]="avatar"></mat-icon>
