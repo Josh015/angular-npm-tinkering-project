@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Actions, ofType } from '@ngrx/effects';
@@ -7,11 +7,7 @@ import { Store } from '@ngrx/store';
 
 import { User } from '../../models';
 import { createUser, createUserSuccess, State } from '../../state';
-import {
-  newFormGroupTyped,
-  y2kValidator,
-  year2012Validator,
-} from 'src/app/utils';
+import { Keys, y2kValidator, year2012Validator } from 'src/app/utils';
 
 @UntilDestroy()
 @Component({
@@ -27,7 +23,7 @@ export class NewContactDialogComponent implements OnInit {
   readonly avatars = ['svg-1', 'svg-2', 'svg-3', 'svg-4'];
   readonly minBirthDate = new Date('1970-01-01Z00:00:00:000');
   readonly maxBirthDate = new Date();
-  readonly formGroup = newFormGroupTyped<User>({
+  readonly formGroup = this.fb.group({
     id: [null],
     birthDate: [null, [Validators.required, y2kValidator, year2012Validator]],
     gender: [null, [Validators.required]],
@@ -41,12 +37,13 @@ export class NewContactDialogComponent implements OnInit {
     avatar: [null, [Validators.required]],
     bio: ['', [Validators.maxLength(NewContactDialogComponent.bioMaxLength)]],
     notes: [[]],
-  });
+  } as Keys<User>);
 
   constructor(
     private readonly dialogRef: MatDialogRef<NewContactDialogComponent>,
     private readonly store: Store<State>,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private readonly fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +56,7 @@ export class NewContactDialogComponent implements OnInit {
 
   save(): void {
     if (this.formGroup.valid) {
-      this.store.dispatch(createUser({ user: this.formGroup.value }));
+      this.store.dispatch(createUser({ user: this.formGroup.value as User }));
     }
   }
 

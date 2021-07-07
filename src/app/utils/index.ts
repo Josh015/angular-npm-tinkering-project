@@ -1,4 +1,3 @@
-export * from './helpers/typed-reactive-forms';
 export * from './types/key';
 export * from './types/ng-changes';
 export * from './validators/y2k.validator';
