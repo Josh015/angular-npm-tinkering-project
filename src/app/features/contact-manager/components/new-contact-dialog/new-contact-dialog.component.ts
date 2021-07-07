@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Actions, ofType } from '@ngrx/effects';
@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 
 import { User } from '../../models';
 import { createUser, createUserSuccess, State } from '../../state';
-import { Keys, y2kValidator, year2012Validator } from 'src/app/utils';
+import { ControlsGroup, y2kValidator, year2012Validator } from 'src/app/utils';
 
 @UntilDestroy()
 @Component({
@@ -23,27 +23,30 @@ export class NewContactDialogComponent implements OnInit {
   readonly avatars = ['svg-1', 'svg-2', 'svg-3', 'svg-4'];
   readonly minBirthDate = new Date('1970-01-01Z00:00:00:000');
   readonly maxBirthDate = new Date();
-  readonly formGroup = this.fb.group({
-    id: [null],
-    birthDate: [null, [Validators.required, y2kValidator, year2012Validator]],
-    gender: [null, [Validators.required]],
-    name: [
-      '',
-      [
-        Validators.required,
-        Validators.maxLength(NewContactDialogComponent.nameMaxLength),
-      ],
-    ],
-    avatar: [null, [Validators.required]],
-    bio: ['', [Validators.maxLength(NewContactDialogComponent.bioMaxLength)]],
-    notes: [[]],
-  } as Keys<User>);
+  readonly controls = {
+    id: new FormControl(null),
+    birthDate: new FormControl(null, [
+      Validators.required,
+      y2kValidator,
+      year2012Validator,
+    ]),
+    gender: new FormControl(null, [Validators.required]),
+    name: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(NewContactDialogComponent.nameMaxLength),
+    ]),
+    avatar: new FormControl(null, [Validators.required]),
+    bio: new FormControl('', [
+      Validators.maxLength(NewContactDialogComponent.bioMaxLength),
+    ]),
+    notes: new FormControl([]),
+  } as ControlsGroup<User>;
+  readonly formGroup = new FormGroup(this.controls);
 
   constructor(
     private readonly dialogRef: MatDialogRef<NewContactDialogComponent>,
     private readonly store: Store<State>,
-    private readonly actions$: Actions,
-    private readonly fb: FormBuilder
+    private readonly actions$: Actions
   ) {}
 
   ngOnInit(): void {
