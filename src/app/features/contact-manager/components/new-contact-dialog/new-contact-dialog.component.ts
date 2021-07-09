@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { typedFormGroup } from 'ngx-forms-typed';
 
 import { User } from '../../models';
 import { createUser, createUserSuccess, State } from '../../state';
-import { ControlsGroup, y2kValidator, year2012Validator } from 'src/app/utils';
+import { y2kValidator, year2012Validator } from 'src/app/utils';
 
 @UntilDestroy()
 @Component({
@@ -23,7 +24,7 @@ export class NewContactDialogComponent implements OnInit {
   readonly avatars = ['svg-1', 'svg-2', 'svg-3', 'svg-4'];
   readonly minBirthDate = new Date('1970-01-01Z00:00:00:000');
   readonly maxBirthDate = new Date();
-  readonly controls = {
+  readonly formGroup = typedFormGroup<User>({
     id: new FormControl(null),
     birthDate: new FormControl(null, [
       Validators.required,
@@ -40,8 +41,7 @@ export class NewContactDialogComponent implements OnInit {
       Validators.maxLength(NewContactDialogComponent.bioMaxLength),
     ]),
     notes: new FormControl([]),
-  } as ControlsGroup<User>;
-  readonly formGroup = new FormGroup(this.controls);
+  });
 
   constructor(
     private readonly dialogRef: MatDialogRef<NewContactDialogComponent>,
@@ -59,7 +59,7 @@ export class NewContactDialogComponent implements OnInit {
 
   save(): void {
     if (this.formGroup.valid) {
-      this.store.dispatch(createUser({ user: this.formGroup.value as User }));
+      this.store.dispatch(createUser({ user: this.formGroup.value }));
     }
   }
 

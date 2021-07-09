@@ -8,10 +8,10 @@
         <mat-label>
           {{ 'ContactManager.NewContactDialog.AvatarField.Label' | translate }}
         </mat-label>
-        <mat-select [formControl]="controls.avatar" required>
+        <mat-select [formControl]="formGroup.controls.avatar" required>
           <mat-select-trigger>
-            <mat-icon [svgIcon]="controls.avatar.value"></mat-icon>
-            {{ controls.avatar.value }}
+            <mat-icon [svgIcon]="formGroup.controls.avatar.value"></mat-icon>
+            {{ formGroup.controls.avatar.value }}
           </mat-select-trigger>
           <mat-option *ngFor="let avatar of avatars" [value]="avatar">
             <mat-icon [svgIcon]="avatar"></mat-icon>
@@ -23,7 +23,7 @@
         <mat-label>
           {{ 'ContactManager.NewContactDialog.GenderField.Label' | translate }}
         </mat-label>
-        <mat-select [formControl]="controls.gender" required>
+        <mat-select [formControl]="formGroup.controls.gender" required>
           <mat-option value="male">
             {{
               'ContactManager.NewContactDialog.GenderField.Options.Male'
@@ -48,8 +48,8 @@
         <mat-label>
           {{ 'ContactManager.NewContactDialog.NameField.Label' | translate }}
         </mat-label>
-        <input matInput [formControl]="controls.name" required />
-        <mat-error *ngIf="controls.name.errors as errors">
+        <input matInput [formControl]="formGroup.controls.name" required />
+        <mat-error *ngIf="formGroup.controls.name.errors as errors">
           <ng-container *ngIf="errors['maxlength'] as maxLength">
             {{
               'ContactManager.NewContactDialog.NameField.Errors.MaxLength'
@@ -67,7 +67,7 @@
           {{ 'ContactManager.NewContactDialog.BornField.Label' | translate }}
         </mat-label>
         <input
-          [formControl]="controls.birthDate"
+          [formControl]="formGroup.controls.birthDate"
           matInput
           [matDatepicker]="picker"
           [min]="minBirthDate"
@@ -76,7 +76,7 @@
         />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="controls.birthDate.errors as errors">
+        <mat-error *ngIf="formGroup.controls.birthDate.errors as errors">
           <ng-container *ngIf="errors['y2k']">
             {{
               'ContactManager.NewContactDialog.BornField.Errors.Y2K' | translate
@@ -94,10 +94,15 @@
         <mat-label>
           {{ 'ContactManager.NewContactDialog.BioField.Label' | translate }}
         </mat-label>
-        <textarea matInput [formControl]="controls.bio" rows="10" cols="30">
+        <textarea
+          matInput
+          [formControl]="formGroup.controls.bio"
+          rows="10"
+          cols="30"
+        >
           <!-- [maxlength]="bioMaxLength">!--> <!-- NOTE: Doesn't allow newlines!-->
         </textarea>
-        <mat-error *ngIf="controls.bio.errors as errors">
+        <mat-error *ngIf="formGroup.controls.bio.errors as errors">
           <ng-container *ngIf="errors['maxlength'] as maxLength">
             {{
               'ContactManager.NewContactDialog.BioField.Errors.MaxLength'
