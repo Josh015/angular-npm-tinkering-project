@@ -1,0 +1,28 @@
+{
+  // See http://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+  // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+
+  // List of extensions which should be recommended for users of this workspace.
+  "recommendations": [
+    // Most Angular extensions you'll ever need.
+    "johnpapa.angular-essentials",
+
+    // Syntax highlighting for browserslist file.
+    "webben.browserslist",
+
+    // Spellchecking.
+    "streetsidesoftware.code-spell-checker",
+
+    // Preview the UI font in-editor.
+    "stxr.iconfont-preview",
+
+    // SVG previews.
+    "jock.svg",
+
+    // Tracking all the TODO & FIXME comments.
+    "gruntfuggly.todo-tree",
+
+    // Consistent markdown style.
+    "davidanson.vscode-markdownlint"
+  ]
+}
