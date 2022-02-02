@@ -14,7 +14,11 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ContactManagerRoutingModule } from './contact-manager-routing.module';
 import { ContactManagerComponent } from './contact-manager.component';
 import { UsersService } from './services/users.service';
-import { ContactManagerEffects, contactManagerReducer } from './state';
+import {
+  ContactManagerEffects,
+  contactManagerReducer,
+  FEATURE_KEY,
+} from './store';
 import { SharedModule } from 'src/app/shared';
 
 // NOTE: ContactManagerModule -> ContactManagerEffects -> UsersService so we
@@ -28,7 +32,7 @@ import { SharedModule } from 'src/app/shared';
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule,
-    StoreModule.forFeature('contact-manager', contactManagerReducer),
+    StoreModule.forFeature(FEATURE_KEY, contactManagerReducer),
     TranslateModule.forChild({ extend: true }),
   ],
   providers: [UsersService],

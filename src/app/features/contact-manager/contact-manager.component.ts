@@ -3,7 +3,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
-import { loadUsers, State } from './state';
+import { loadUsers, State } from './store';
 
 @Component({
   selector: 'app-contact-manager-app',

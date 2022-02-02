@@ -10,13 +10,13 @@ import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 
-import { getUsers, getUsersLoading, State } from '../../state';
+import { getUsers, getUsersLoading, State } from '../../store';
 import {
   getIsDarkTheme,
   getTextDirection,
   toggleDarkTheme,
   toggleTextDirection,
-} from 'src/app/state';
+} from 'src/app/store';
 
 @UntilDestroy()
 @Component({

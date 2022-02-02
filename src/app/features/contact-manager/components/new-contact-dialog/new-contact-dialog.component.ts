@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { typedFormGroup } from 'ngx-forms-typed';
 
 import { User } from '../../models';
-import { createUser, createUserSuccess, State } from '../../state';
+import { createUser, createUserSuccess, State } from '../../store';
 import { y2kValidator, year2012Validator } from 'src/app/utils';
 
 @UntilDestroy()

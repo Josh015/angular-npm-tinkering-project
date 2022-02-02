@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { getCurrentUser, State } from '../../state';
+import { getCurrentUser, State } from '../../store';
 
 @Component({
   selector: 'app-main-content',

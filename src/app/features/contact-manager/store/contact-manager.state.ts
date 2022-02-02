@@ -1,9 +1,11 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 
 import { User } from '../models';
-import * as AppState from 'src/app/state';
+import * as app from 'src/app/store';
 
-export interface State extends AppState.State {
+export const FEATURE_KEY = 'contactManager';
+
+export interface State extends app.State {
   contactManager: ContactManagerState;
 }
 

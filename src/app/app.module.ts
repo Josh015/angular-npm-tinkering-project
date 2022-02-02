@@ -16,7 +16,7 @@ import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-comp
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { appReducer } from './state';
+import { appReducer, FEATURE_KEY } from './store';
 import { environment } from 'src/environments/environment';
 
 export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
@@ -31,7 +31,7 @@ export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
     EffectsModule.forRoot([]),
     HttpClientModule,
     StoreRouterConnectingModule.forRoot(),
-    StoreModule.forRoot({ app: appReducer, router: routerReducer }),
+    StoreModule.forRoot({ [FEATURE_KEY]: appReducer, router: routerReducer }),
     StoreDevtoolsModule.instrument({
       name: 'Angular NPM Tinkering Project App DevTools',
       maxAge: 25,

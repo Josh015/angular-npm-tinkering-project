@@ -1,12 +1,16 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { adapter, ContactManagerState } from './contact-manager.state';
-import { selectRouteParams } from 'src/app/state/app.selectors';
+import {
+  adapter,
+  ContactManagerState,
+  FEATURE_KEY,
+} from './contact-manager.state';
+import { selectRouteParams } from 'src/app/store/app.selectors';
 
 const { selectEntities, selectAll } = adapter.getSelectors();
 
 const getContactManagerFeatureState =
-  createFeatureSelector<ContactManagerState>('contact-manager');
+  createFeatureSelector<ContactManagerState>(FEATURE_KEY);
 
 const getUserEntities = createSelector(
   getContactManagerFeatureState,

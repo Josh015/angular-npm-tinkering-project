@@ -1,7 +1,7 @@
 import { getSelectors, RouterReducerState } from '@ngrx/router-store';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { State } from './app.state';
+import { AppState, FEATURE_KEY } from './app.state';
 
 export const selectRouter = createFeatureSelector<RouterReducerState>('router');
 
@@ -16,7 +16,7 @@ export const {
   selectUrl, // select the current url
 } = getSelectors(selectRouter);
 
-const getAppFeatureState = createFeatureSelector<State>('app');
+const getAppFeatureState = createFeatureSelector<AppState>(FEATURE_KEY);
 
 export const getIsDarkTheme = createSelector(
   getAppFeatureState,

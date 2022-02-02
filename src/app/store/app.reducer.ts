@@ -1,9 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { toggleDarkTheme, toggleTextDirection } from './app.actions';
-import { initialState, State } from './app.state';
+import { AppState, initialState } from './app.state';
 
-export const appReducer = createReducer<State>(
+export const appReducer = createReducer<AppState>(
   initialState,
   on(toggleDarkTheme, (state) => ({
     ...state,
