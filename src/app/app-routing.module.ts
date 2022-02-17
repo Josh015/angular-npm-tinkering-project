@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: 'contact-manager',
     loadChildren: async () =>
-      import('./features/contact-manager/contact-manager.module').then(
+      import('./contact-manager/contact-manager.module').then(
         (m) => m.ContactManagerModule
       ),
   },
