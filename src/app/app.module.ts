@@ -23,7 +23,7 @@ export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AppRoutingModule.components],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
