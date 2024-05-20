@@ -14,8 +14,7 @@ export class UsersService {
   static readonly usersUrl = `${UsersService.rootUrl}/users`;
 
   private readonly http = inject(HttpClient);
-
-  readonly usersConstants = inject(UsersConstants);
+  private readonly usersConstants = inject(UsersConstants);
 
   private ids: number[] = [];
 
@@ -31,12 +30,16 @@ export class UsersService {
 
   loadAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(UsersService.usersUrl).pipe(
-      delay(600), // Delay to show loading spinner
+      // Delay to show loading spinner
+      delay(600),
+
+      // Keep a list of used IDs for adding new users.
       tap((users) => {
         this.ids = users.map((user) => user.id ?? 0).filter((id) => id);
       }),
+
+      // Add missing fields for dummy data.
       tap((users) => {
-        // Add missing fields for dummy data.
         for (let [index, user] of users.entries()) {
           user.birthDate = new Date();
           user.birthDate.setDate(user.birthDate.getDate() + index);
