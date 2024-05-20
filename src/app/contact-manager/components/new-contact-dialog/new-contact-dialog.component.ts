@@ -18,10 +18,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UsersConstants } from '../../services/users-constants';
 import { MaterialModule } from 'src/app/material.module';
 
-export type ModelFormGroup<T> = FormGroup<{
-  [K in keyof T]: FormControl<T[K]>;
-}>;
-
 @Component({
   selector: 'app-new-contact-dialog',
   standalone: true,
