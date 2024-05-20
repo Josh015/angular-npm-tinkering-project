@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -14,7 +14,7 @@ import { SharedModule } from 'src/app/shared';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainContentComponent {
-  readonly user$ = this.store.select(getCurrentUser);
+  private readonly store = inject(Store<State>);
 
-  constructor(private readonly store: Store<State>) {}
+  readonly user$ = this.store.select(getCurrentUser);
 }

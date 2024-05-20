@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
@@ -17,10 +17,8 @@ import {
   providedIn: null,
 })
 export class ContactManagerEffects {
-  constructor(
-    private readonly actions$: Actions,
-    private readonly contactManagerService: UsersService
-  ) {}
+  private readonly actions$ = inject(Actions);
+  private readonly contactManagerService = inject(UsersService);
 
   readonly loadUsers$ = createEffect(() =>
     this.actions$.pipe(
@@ -29,11 +27,11 @@ export class ContactManagerEffects {
         this.contactManagerService.loadAllUsers().pipe(
           map((users) => loadUsersSuccess({ users })),
           catchError((error: unknown) =>
-            of(loadUsersError({ error: error as string }))
-          )
-        )
-      )
-    )
+            of(loadUsersError({ error: error as string })),
+          ),
+        ),
+      ),
+    ),
   );
 
   readonly createUser$ = createEffect(() =>
@@ -43,10 +41,10 @@ export class ContactManagerEffects {
         this.contactManagerService.addUser(user).pipe(
           map((newUser) => createUserSuccess({ user: newUser })),
           catchError((error: unknown) =>
-            of(createUserError({ error: error as string }))
-          )
-        )
-      )
-    )
+            of(createUserError({ error: error as string })),
+          ),
+        ),
+      ),
+    ),
   );
 }
