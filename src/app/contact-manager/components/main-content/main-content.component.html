@@ -1,4 +1,4 @@
-<div *ngIf="user$ | async as user">
+@if (user$ | async; as user) {
   <mat-card>
     <mat-card-header>
       <mat-icon mat-card-avatar [svgIcon]="user.avatar" />
@@ -30,4 +30,4 @@
       </mat-tab-group>
     </mat-card-content>
   </mat-card>
-</div>
+}

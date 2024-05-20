@@ -13,13 +13,12 @@
             <mat-icon [svgIcon]="formGroup.controls.avatar.value || ''" />
             {{ formGroup.controls.avatar.value }}
           </mat-select-trigger>
-          <mat-option
-            *ngFor="let avatar of usersConstants.avatars"
-            [value]="avatar"
-          >
-            <mat-icon [svgIcon]="avatar" />
-            {{ avatar }}
-          </mat-option>
+          @for (avatar of usersConstants.avatars; track avatar) {
+            <mat-option [value]="avatar">
+              <mat-icon [svgIcon]="avatar" />
+              {{ avatar }}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
@@ -52,18 +51,20 @@
           {{ 'ContactManager.NewContactDialog.NameField.Label' | translate }}
         </mat-label>
         <input matInput [formControl]="formGroup.controls.name" required />
-        <mat-error *ngIf="formGroup.controls.name.errors as errors">
-          <ng-container *ngIf="errors['maxlength'] as maxLength">
-            {{
-              'ContactManager.NewContactDialog.NameField.Errors.MaxLength'
-                | translate
-                  : {
-                      excessCount:
-                        maxLength.actualLength - maxLength.requiredLength
-                    }
-            }}
-          </ng-container>
-        </mat-error>
+        @if (formGroup.controls.name.errors; as errors) {
+          <mat-error>
+            @if (errors['maxlength']; as maxLength) {
+              {{
+                'ContactManager.NewContactDialog.NameField.Errors.MaxLength'
+                  | translate
+                    : {
+                        excessCount:
+                          maxLength.actualLength - maxLength.requiredLength
+                      }
+              }}
+            }
+          </mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>
@@ -79,19 +80,22 @@
         />
         <mat-datepicker-toggle matSuffix [for]="picker" />
         <mat-datepicker #picker />
-        <mat-error *ngIf="formGroup.controls.birthDate.errors as errors">
-          <ng-container *ngIf="errors['y2k']">
-            {{
-              'ContactManager.NewContactDialog.BornField.Errors.Y2K' | translate
-            }}
-          </ng-container>
-          <ng-container *ngIf="errors['year2012']">
-            {{
-              'ContactManager.NewContactDialog.BornField.Errors.Year2012'
-                | translate
-            }}
-          </ng-container>
-        </mat-error>
+        @if (formGroup.controls.birthDate.errors; as errors) {
+          <mat-error>
+            @if (errors['y2k']) {
+              {{
+                'ContactManager.NewContactDialog.BornField.Errors.Y2K'
+                  | translate
+              }}
+            }
+            @if (errors['year2012']) {
+              {{
+                'ContactManager.NewContactDialog.BornField.Errors.Year2012'
+                  | translate
+              }}
+            }
+          </mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>
@@ -105,18 +109,20 @@
         >
           <!-- [maxlength]="bioMaxLength">!--> <!-- NOTE: Doesn't allow newlines!-->
         </textarea>
-        <mat-error *ngIf="formGroup.controls.bio.errors as errors">
-          <ng-container *ngIf="errors['maxlength'] as maxLength">
-            {{
-              'ContactManager.NewContactDialog.BioField.Errors.MaxLength'
-                | translate
-                  : {
-                      excessCount:
-                        maxLength.actualLength - maxLength.requiredLength
-                    }
-            }}
-          </ng-container>
-        </mat-error>
+        @if (formGroup.controls.bio.errors; as errors) {
+          <mat-error>
+            @if (errors['maxlength']; as maxLength) {
+              {{
+                'ContactManager.NewContactDialog.BioField.Errors.MaxLength'
+                  | translate
+                    : {
+                        excessCount:
+                          maxLength.actualLength - maxLength.requiredLength
+                      }
+              }}
+            }
+          </mat-error>
+        }
       </mat-form-field>
     </div>
   </form>
