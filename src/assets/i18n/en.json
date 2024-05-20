@@ -14,11 +14,7 @@
       },
       "GenderField": {
         "Label": "Gender",
-        "Options": {
-          "Male": "Male",
-          "Female": "Female",
-          "Enby": "Non-Binary"
-        }
+        "Option": "{gender, select, male{Male} female{Female} enby{Non-Binary} other{?}}"
       },
       "NameField": {
         "Label": "Name",

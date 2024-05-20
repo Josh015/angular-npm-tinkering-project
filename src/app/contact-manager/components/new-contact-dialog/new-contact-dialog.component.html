@@ -29,8 +29,8 @@
           @for (gender of usersConstants.genders; track gender) {
             <mat-option [value]="gender">
               {{
-                'ContactManager.NewContactDialog.GenderField.Options.' +
-                  (gender | titlecase) | translate
+                'ContactManager.NewContactDialog.GenderField.Option'
+                  | translate: { gender }
               }}
             </mat-option>
           }
