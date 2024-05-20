@@ -52,8 +52,8 @@
         </mat-label>
         <input matInput [formControl]="formGroup.controls.name" required />
         @if (formGroup.controls.name.errors; as errors) {
-          <mat-error>
-            @if (errors['maxlength']; as maxLength) {
+          @if (errors['maxlength']; as maxLength) {
+            <mat-error>
               {{
                 'ContactManager.NewContactDialog.NameField.Errors.MaxLength'
                   | translate
@@ -62,8 +62,8 @@
                           maxLength.actualLength - maxLength.requiredLength
                       }
               }}
-            }
-          </mat-error>
+            </mat-error>
+          }
         }
       </mat-form-field>
       <mat-form-field appearance="fill">
@@ -81,20 +81,22 @@
         <mat-datepicker-toggle matSuffix [for]="picker" />
         <mat-datepicker #picker />
         @if (formGroup.controls.birthDate.errors; as errors) {
-          <mat-error>
-            @if (errors['y2k']) {
+          @if (errors['y2k']) {
+            <mat-error>
               {{
                 'ContactManager.NewContactDialog.BornField.Errors.Y2K'
                   | translate
               }}
-            }
-            @if (errors['year2012']) {
+            </mat-error>
+          }
+          @if (errors['year2012']) {
+            <mat-error>
               {{
                 'ContactManager.NewContactDialog.BornField.Errors.Year2012'
                   | translate
               }}
-            }
-          </mat-error>
+            </mat-error>
+          }
         }
       </mat-form-field>
       <mat-form-field appearance="fill">
@@ -110,8 +112,8 @@
           <!-- [maxlength]="bioMaxLength">!--> <!-- NOTE: Doesn't allow newlines!-->
         </textarea>
         @if (formGroup.controls.bio.errors; as errors) {
-          <mat-error>
-            @if (errors['maxlength']; as maxLength) {
+          @if (errors['maxlength']; as maxLength) {
+            <mat-error>
               {{
                 'ContactManager.NewContactDialog.BioField.Errors.MaxLength'
                   | translate
@@ -120,8 +122,8 @@
                           maxLength.actualLength - maxLength.requiredLength
                       }
               }}
-            }
-          </mat-error>
+            </mat-error>
+          }
         }
       </mat-form-field>
     </div>
