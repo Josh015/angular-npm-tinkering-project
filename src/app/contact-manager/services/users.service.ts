@@ -1,20 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 
 import { User } from '../models';
+import { UsersConstants } from './users-constants';
 
 @Injectable({
   providedIn: null,
 })
 export class UsersService {
-  static readonly rootUrl = 'https://angular-material-api.azurewebsites.net';
+  static readonly rootUrl = 'https://dummyapi.online/api/';
   static readonly usersUrl = `${UsersService.rootUrl}/users`;
 
-  private ids: number[] = [];
+  private readonly http = inject(HttpClient);
 
-  constructor(private readonly http: HttpClient) {}
+  readonly usersConstants = inject(UsersConstants);
+
+  private ids: number[] = [];
 
   addUser(user: User): Observable<User> {
     // Needed to simulate saving users to DB.
@@ -31,7 +34,31 @@ export class UsersService {
       delay(600), // Delay to show loading spinner
       tap((users) => {
         this.ids = users.map((user) => user.id ?? 0).filter((id) => id);
-      })
+      }),
+      tap((users) => {
+        // Add missing fields for dummy data.
+        for (let [index, user] of users.entries()) {
+          user.birthDate = new Date();
+          user.birthDate.setDate(user.birthDate.getDate() + index);
+
+          user.bio = (user as any).email;
+          user.avatar =
+            this.usersConstants.avatars[
+              index % this.usersConstants.avatars.length
+            ];
+          user.gender = ['male', 'female', 'enby'][index % 3];
+
+          user.notes = Object.values(
+            (user as any).address as Map<string, string>,
+          ).map((value, index) => {
+            return {
+              id: index + 1,
+              date: new Date(),
+              title: value,
+            };
+          });
+        }
+      }),
       // catchError(this.handleError)
     );
   }

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  inject,
   Output,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,28 +12,29 @@ import {
   SimpleSnackBar,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { User } from '../../models';
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
+import { SharedModule } from 'src/app/shared';
 
 @Component({
   selector: 'app-toolbar',
+  standalone: true,
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
+  imports: [SharedModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {
+  private readonly dialog = inject(MatDialog);
+  private readonly snackBar = inject(MatSnackBar);
+  private readonly router = inject(Router);
+  private readonly translate = inject(TranslateService);
+
   @Output() readonly toggleSidenav = new EventEmitter<void>();
   @Output() readonly toggleTheme = new EventEmitter<void>();
   @Output() readonly toggleDir = new EventEmitter<void>();
-
-  constructor(
-    private readonly dialog: MatDialog,
-    private readonly snackBar: MatSnackBar,
-    private readonly router: Router,
-    private readonly translate: TranslateService
-  ) {}
 
   openAddContactDialog(): void {
     const dialogRef = this.dialog.open(NewContactDialogComponent, {
@@ -59,7 +61,7 @@ export class ToolbarComponent {
 
   openSnackBar(
     message: string,
-    action: string
+    action: string,
   ): MatSnackBarRef<SimpleSnackBar> {
     return this.snackBar.open(message, action, {
       duration: 5000,

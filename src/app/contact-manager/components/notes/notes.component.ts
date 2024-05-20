@@ -10,11 +10,15 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Note } from '../../models';
+import { SharedModule } from 'src/app/shared';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-notes',
+  standalone: true,
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.scss'],
+  imports: [SharedModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotesComponent implements AfterViewInit {

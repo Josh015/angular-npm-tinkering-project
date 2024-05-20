@@ -1,6 +1,6 @@
 import { Note } from './note';
 
-export interface User {
+export type User = {
   id: number | null;
   birthDate: Date;
   name: string;
@@ -9,4 +9,4 @@ export interface User {
   gender: string;
 
   notes: Note[];
-}
+};

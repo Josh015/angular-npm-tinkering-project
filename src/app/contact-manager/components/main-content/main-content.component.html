@@ -1,7 +1,7 @@
 <div *ngIf="user$ | async as user">
   <mat-card>
     <mat-card-header>
-      <mat-icon mat-card-avatar [svgIcon]="user.avatar"></mat-icon>
+      <mat-icon mat-card-avatar [svgIcon]="user.avatar" />
       <mat-card-title>
         {{
           'ContactManager.MainContent.NameAndGenderTitle'
@@ -25,7 +25,7 @@
           <p>{{ user.bio }}</p>
         </mat-tab>
         <mat-tab [label]="'ContactManager.MainContent.NotesTab' | translate">
-          <app-notes [notes]="user.notes"></app-notes>
+          <app-notes [notes]="user.notes" />
         </mat-tab>
       </mat-tab-group>
     </mat-card-content>

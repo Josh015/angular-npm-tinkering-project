@@ -1,13 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet>',
-  styleUrls: [],
+  template: '<router-outlet />',
+  standalone: true,
+  imports: [RouterOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
+  title = 'angular-npm-tinkering-project';
+
   constructor(translate: TranslateService) {
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');

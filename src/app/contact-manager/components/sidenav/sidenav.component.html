@@ -13,7 +13,7 @@
       {{ 'ContactManager.Sidenav.Title' | translate }}
     </mat-toolbar>
     <ng-container *ngIf="usersLoading$ | async; else usersLoaded">
-      <mat-spinner style="margin: 0 auto"></mat-spinner>
+      <mat-spinner style="margin: 0 auto" />
     </ng-container>
 
     <ng-template #usersLoaded>
@@ -24,7 +24,7 @@
             routerLinkActive="active-list-item"
             [routerLink]="['/contact-manager', user.id]"
           >
-            <mat-icon [svgIcon]="user.avatar"></mat-icon> {{ user.name }}
+            <mat-icon [svgIcon]="user.avatar" /> {{ user.name }}
           </a>
         </mat-list-item>
       </mat-nav-list>
@@ -36,9 +36,9 @@
       (toggleTheme)="toggleTheme()"
       (toggleSidenav)="sidenav.toggle()"
       (toggleDir)="toggleDir()"
-    ></app-toolbar>
+    />
     <div class="wrapper">
-      <router-outlet></router-outlet>
+      <router-outlet />
     </div>
   </div>
 </mat-sidenav-container>
