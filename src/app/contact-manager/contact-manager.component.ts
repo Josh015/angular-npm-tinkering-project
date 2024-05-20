@@ -10,7 +10,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
-import { loadUsers, State } from './store';
+import { ContactManagerActions, State } from './store';
 import { UsersService } from './services/users.service';
 import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';
 import { NotesComponent } from './components/notes/notes.component';
@@ -45,6 +45,6 @@ export class ContactManagerComponent implements OnInit {
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg'),
     );
 
-    this.store.dispatch(loadUsers());
+    this.store.dispatch(ContactManagerActions.loadUsers());
   }
 }

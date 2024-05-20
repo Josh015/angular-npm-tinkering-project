@@ -12,7 +12,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
 import { Note, User } from '../../models';
-import { createUser, createUserSuccess, State } from '../../store';
+import { ContactManagerActions, State } from '../../store';
 import { y2kValidator, year2012Validator } from 'src/app/utils';
 import { TranslateModule } from '@ngx-translate/core';
 import { UsersConstants } from '../../services/users-constants';
@@ -58,7 +58,10 @@ export class NewContactDialogComponent {
 
   constructor() {
     this.actions$
-      .pipe(ofType(createUserSuccess), takeUntilDestroyed())
+      .pipe(
+        ofType(ContactManagerActions.createUserSuccess),
+        takeUntilDestroyed(),
+      )
       .subscribe(({ user }) => {
         this.dialogRef.close(user);
       });
@@ -67,7 +70,9 @@ export class NewContactDialogComponent {
   save(): void {
     if (this.formGroup.valid) {
       this.store.dispatch(
-        createUser({ user: this.formGroup.getRawValue() as User }),
+        ContactManagerActions.createUser({
+          user: this.formGroup.getRawValue() as User,
+        }),
       );
     }
   }

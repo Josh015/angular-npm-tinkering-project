@@ -8,7 +8,7 @@
         "project": ["tsconfig.json", "e2e/tsconfig.json"],
         "createDefaultProgram": true
       },
-      "plugins": ["import", "rxjs", "spellcheck"],
+      "plugins": ["@ngrx", "import", "rxjs", "spellcheck"],
       "settings": {
         // Manually add "src/" directory to import plugin's "internal" group
         "import/internal-regex": "^src/"

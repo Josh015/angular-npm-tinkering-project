@@ -17,14 +17,9 @@ import {
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { getUsers, getUsersLoading, State } from '../../store';
+import { contactManagerFeature, getUsers, State } from '../../store';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
-import {
-  getIsDarkTheme,
-  getTextDirection,
-  toggleDarkTheme,
-  toggleTextDirection,
-} from 'src/app/store';
+import { AppActions, appFeature } from 'src/app/store';
 import { MaterialModule } from 'src/app/material.module';
 
 @Component({
@@ -50,10 +45,12 @@ export class SidenavComponent {
   private readonly router = inject(Router);
   private readonly store = inject(Store<State>);
 
-  readonly usersLoading$ = this.store.select(getUsersLoading);
+  readonly usersLoading$ = this.store.select(
+    contactManagerFeature.selectUsersLoading,
+  );
   readonly users$ = this.store.select(getUsers);
-  readonly isDarkTheme$ = this.store.select(getIsDarkTheme);
-  readonly textDirection$ = this.store.select(getTextDirection);
+  readonly isDarkTheme$ = this.store.select(appFeature.selectIsDarkTheme);
+  readonly textDirection$ = this.store.select(appFeature.selectTextDirection);
 
   isScreenSmall = false;
 
@@ -75,10 +72,10 @@ export class SidenavComponent {
   }
 
   toggleTheme(): void {
-    this.store.dispatch(toggleDarkTheme());
+    this.store.dispatch(AppActions.toggleDarkTheme());
   }
 
   toggleDir(): void {
-    this.store.dispatch(toggleTextDirection());
+    this.store.dispatch(AppActions.toggleTextDirection());
   }
 }
