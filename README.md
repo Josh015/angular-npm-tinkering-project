@@ -5,5 +5,6 @@ This test project is a heavily-modified version of the code from the [pluralsigh
 ## To Run
 
 ```shell
+npm install
 ng serve -o
 ```

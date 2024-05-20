@@ -29,7 +29,7 @@ export class NotesComponent implements AfterViewInit {
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
-  @Input() set notes(value: Note[]) {
+  @Input({ required: true }) set notes(value: Note[]) {
     this.dataSource.data = value;
   }
 
