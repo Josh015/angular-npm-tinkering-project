@@ -1,9 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormControl,
   FormGroup,
@@ -12,7 +8,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -27,7 +22,6 @@ export type ModelFormGroup<T> = FormGroup<{
   [K in keyof T]: FormControl<T[K]>;
 }>;
 
-@UntilDestroy()
 @Component({
   selector: 'app-new-contact-dialog',
   standalone: true,
@@ -36,7 +30,7 @@ export type ModelFormGroup<T> = FormGroup<{
   imports: [FormsModule, ReactiveFormsModule, SharedModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NewContactDialogComponent implements OnInit {
+export class NewContactDialogComponent {
   static readonly nameMaxLength = 20;
   static readonly bioMaxLength = 30;
 
@@ -66,9 +60,9 @@ export class NewContactDialogComponent implements OnInit {
     notes: new FormControl<Note[]>([]),
   });
 
-  ngOnInit(): void {
+  constructor() {
     this.actions$
-      .pipe(ofType(createUserSuccess), untilDestroyed(this))
+      .pipe(ofType(createUserSuccess), takeUntilDestroyed())
       .subscribe(({ user }) => {
         this.dialogRef.close(user);
       });

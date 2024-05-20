@@ -1,9 +1,9 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  OnInit,
   ViewChild,
 } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -13,7 +13,6 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -27,7 +26,6 @@ import {
 } from 'src/app/store';
 import { SharedModule } from 'src/app/shared';
 
-@UntilDestroy()
 @Component({
   selector: 'app-sidenav',
   standalone: true,
@@ -43,7 +41,7 @@ import { SharedModule } from 'src/app/shared';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent {
   static readonly smallWidthBreakpoint = 720;
 
   private readonly breakpointObserver = inject(BreakpointObserver);
@@ -59,15 +57,15 @@ export class SidenavComponent implements OnInit {
 
   @ViewChild(MatSidenav) sidenav?: MatSidenav;
 
-  ngOnInit(): void {
+  constructor() {
     this.breakpointObserver
       .observe([`(max-width: ${SidenavComponent.smallWidthBreakpoint}px)`])
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntilDestroyed())
       .subscribe((state: BreakpointState) => {
         this.isScreenSmall = state.matches;
       });
 
-    this.router.events.pipe(untilDestroyed(this)).subscribe(() => {
+    this.router.events.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.isScreenSmall) {
         this.sidenav?.close();
       }
