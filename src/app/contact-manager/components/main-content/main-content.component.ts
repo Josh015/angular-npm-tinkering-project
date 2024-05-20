@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
@@ -11,7 +11,7 @@ import { MaterialModule } from 'src/app/material.module';
   selector: 'app-main-content',
   standalone: true,
   templateUrl: './main-content.component.html',
-  imports: [CommonModule, MaterialModule, NotesComponent, TranslateModule],
+  imports: [AsyncPipe, MaterialModule, NotesComponent, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainContentComponent {
