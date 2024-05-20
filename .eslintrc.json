@@ -8,7 +8,7 @@
         "project": ["tsconfig.json", "e2e/tsconfig.json"],
         "createDefaultProgram": true
       },
-      "plugins": ["@ngrx", "import", "rxjs", "spellcheck"],
+      "plugins": ["@ngrx", "import", "rxjs"],
       "settings": {
         // Manually add "src/" directory to import plugin's "internal" group
         "import/internal-regex": "^src/"
@@ -18,12 +18,9 @@
         "eslint:recommended",
         "plugin:import/recommended",
         "plugin:import/typescript",
-        "plugin:@typescript-eslint/all",
+        "plugin:@typescript-eslint/recommended",
         "plugin:rxjs/recommended",
         "plugin:@angular-eslint/all",
-        "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
-        "plugin:@angular-eslint/recommended--extra",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:prettier/recommended"
       ],
@@ -38,6 +35,7 @@
           { "allowWithDecorator": true }
         ],
         "@typescript-eslint/unbound-method": "off", // TODO: Remove when fixed
+        "@angular-eslint/use-injectable-provided-in": "off",
 
         // Preferences
         "@typescript-eslint/array-type": "error",
@@ -114,46 +112,121 @@
         "rxjs/no-compat": ["error"],
         "rxjs/no-explicit-generics": ["error"],
         "rxjs/no-exposed-subjects": ["error"],
-        "rxjs/no-nested-subscribe": ["off"],
-        "spellcheck/spell-checker": [
-          "warn",
+        "rxjs/no-nested-subscribe": ["off"]
+      }
+    },
+    {
+      "files": ["*grouped-actions.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json", "e2e/tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "plugins": ["@ngrx", "import", "rxjs"],
+      "settings": {
+        // Manually add "src/" directory to import plugin's "internal" group
+        "import/internal-regex": "^src/"
+      },
+      "extends": [
+        // These presets are in this specific order to control rule overrides
+        "eslint:recommended",
+        "plugin:import/recommended",
+        "plugin:import/typescript",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:rxjs/recommended",
+        "plugin:@angular-eslint/all",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        // Angular fixes
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          { "allowExpressions": true }
+        ],
+        "@typescript-eslint/no-extraneous-class": [
+          "error",
+          { "allowWithDecorator": true }
+        ],
+        "@typescript-eslint/unbound-method": "off", // TODO: Remove when fixed
+        "@angular-eslint/use-injectable-provided-in": "off",
+
+        // Preferences
+        "@typescript-eslint/array-type": "error",
+        "@typescript-eslint/consistent-type-imports": "off",
+        "@typescript-eslint/lines-between-class-members": "off",
+        "@typescript-eslint/naming-convention": "off",
+        // "@typescript-eslint/naming-convention": [
+        //   "error",
+        //   {
+        //     "selector": "default",
+        //     "format": ["camelCase"],
+        //     "leadingUnderscore": "forbid",
+        //     "trailingUnderscore": "forbid"
+        //   },
+        //   {
+        //     "selector": "variable",
+        //     "format": ["camelCase", "UPPER_CASE"]
+        //   },
+        //   {
+        //     "selector": "typeLike",
+        //     "format": ["PascalCase"]
+        //   },
+        //   {
+        //     "selector": "enumMember",
+        //     "format": ["PascalCase"]
+        //   }
+        // ],
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-magic-numbers": "off",
+        "@typescript-eslint/no-type-alias": "off",
+        "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/prefer-enum-initializers": "off",
+        "@typescript-eslint/prefer-readonly-parameter-types": "off",
+        "import/no-unresolved": "off",
+        "import/order": [
+          "error",
           {
-            "comments": true,
-            "strings": true,
-            "identifiers": true,
-            "lang": "en_US",
-            "skipWords": [
-              "accessor",
-              "breakpoint",
-              "checkbox",
-              "classlist",
-              "datepicker",
-              "debounce",
-              "devtools",
-              "instanceof",
-              "keypress",
-              "keyup",
-              "mousemove",
-              "nullable",
-              "paginator",
-              "renderer",
-              "sanitizer",
-              "sidenav",
-              "tooltip",
-              "urls",
-              "validators",
-              "webpack"
+            "groups": [
+              // Global
+              ["builtin", "external"],
+
+              // Project
+              ["internal", "parent", "sibling", "index"],
+
+              // Misc.
+              "type",
+              "object",
+              "unknown"
             ],
-            "skipIfMatch": [
-              "http://[^s]*",
-              "^[-\\w]+/[-\\w\\.]+$" //For MIME Types
-            ],
-            // "skipWordIfMatch": [
-            //   "^foobar.*$" // words that begin with foobar will not be checked
-            // ],
-            "minLength": 4
+            "newlines-between": "always",
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            }
           }
-        ]
+        ],
+        "rxjs/finnish": [
+          "error",
+          {
+            "functions": false,
+            "methods": false,
+            "names": {
+              "^(canActivate|canActivateChild|canDeactivate|canLoad|intercept|resolve|validate)$": false
+            },
+            "parameters": true,
+            "properties": true,
+            "strict": false,
+            "types": {
+              "^EventEmitter$": false,
+              "^Store$": false
+            },
+            "variables": true
+          }
+        ],
+        "rxjs/no-compat": ["error"],
+        "rxjs/no-explicit-generics": ["error"],
+        "rxjs/no-exposed-subjects": ["error"],
+        "rxjs/no-nested-subscribe": ["off"]
       }
     },
     {

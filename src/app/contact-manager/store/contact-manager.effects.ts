@@ -3,12 +3,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
 
-import { UsersService } from '../services/users.service';
 import { ContactManagerActions } from './contact-manager.grouped-actions';
+import { UsersService } from '../services/users.service';
 
-@Injectable({
-  providedIn: null,
-})
+@Injectable()
 export class ContactManagerEffects {
   private readonly actions$ = inject(Actions);
   private readonly contactManagerService = inject(UsersService);

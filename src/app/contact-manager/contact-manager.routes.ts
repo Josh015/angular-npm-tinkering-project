@@ -2,11 +2,11 @@ import { Routes } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideState } from '@ngrx/store';
 
-import { ContactManagerComponent } from './contact-manager.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
-import { ContactManagerEffects, contactManagerFeature } from './store';
-import { UsersService } from './services/users.service';
+import { ContactManagerComponent } from './contact-manager.component';
 import { UsersConstants } from './services/users-constants';
+import { UsersService } from './services/users.service';
+import { ContactManagerEffects, contactManagerFeature } from './store';
 
 const routes: Routes = [
   {

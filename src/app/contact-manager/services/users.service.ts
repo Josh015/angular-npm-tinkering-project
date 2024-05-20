@@ -1,14 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 
-import { User } from '../models';
 import { UsersConstants } from './users-constants';
+import { User } from '../models';
 
-@Injectable({
-  providedIn: null,
-})
+@Injectable()
 export class UsersService {
   static readonly rootUrl = 'https://dummyapi.online/api/';
   static readonly usersUrl = `${UsersService.rootUrl}/users`;
@@ -40,7 +39,7 @@ export class UsersService {
 
       // Add missing fields for dummy data.
       tap((users) => {
-        for (let [index, user] of users.entries()) {
+        for (const [index, user] of users.entries()) {
           user.birthDate = new Date();
           user.birthDate.setDate(user.birthDate.getDate() + index);
 

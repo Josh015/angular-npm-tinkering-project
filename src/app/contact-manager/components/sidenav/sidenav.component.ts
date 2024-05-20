@@ -19,14 +19,14 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { contactManagerFeature, getUsers, State } from '../../store';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
-import { AppActions, appFeature } from 'src/app/store';
 import { MaterialModule } from 'src/app/material.module';
+import { AppActions, appFeature } from 'src/app/store';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss'],
+  styleUrl: './sidenav.component.scss',
   imports: [
     AsyncPipe,
     MaterialModule,

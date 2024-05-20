@@ -10,12 +10,12 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
-import { ContactManagerActions, State } from './store';
-import { UsersService } from './services/users.service';
 import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';
 import { NotesComponent } from './components/notes/notes.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { UsersService } from './services/users.service';
+import { ContactManagerActions, State } from './store';
 import { MaterialModule } from 'src/app/material.module';
 
 @Component({

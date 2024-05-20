@@ -10,19 +10,19 @@ import {
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Note, User } from '../../models';
-import { ContactManagerActions, State } from '../../store';
-import { y2kValidator, year2012Validator } from 'src/app/utils';
-import { TranslateModule } from '@ngx-translate/core';
 import { UsersConstants } from '../../services/users-constants';
+import { ContactManagerActions, State } from '../../store';
 import { MaterialModule } from 'src/app/material.module';
+import { y2kValidator, year2012Validator } from 'src/app/utils';
 
 @Component({
   selector: 'app-new-contact-dialog',
   standalone: true,
   templateUrl: './new-contact-dialog.component.html',
-  styleUrls: ['./new-contact-dialog.component.scss'],
+  styleUrl: './new-contact-dialog.component.scss',
   imports: [FormsModule, ReactiveFormsModule, MaterialModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

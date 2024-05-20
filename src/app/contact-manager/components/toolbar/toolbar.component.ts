@@ -22,7 +22,7 @@ import { MaterialModule } from 'src/app/material.module';
   selector: 'app-toolbar',
   standalone: true,
   templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.scss'],
+  styleUrl: './toolbar.component.scss',
   imports: [MaterialModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

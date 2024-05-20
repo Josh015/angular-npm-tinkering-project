@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
-import { selectRouteParams } from 'src/app/store/app.selectors';
 import { adapter, contactManagerFeature } from './contact-manager.feature';
+import { selectRouteParams } from 'src/app/store/app.selectors';
 
 const { selectAll } = adapter.getSelectors();
 

@@ -8,16 +8,16 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Note } from '../../models';
-import { TranslateModule } from '@ngx-translate/core';
 import { MaterialModule } from 'src/app/material.module';
 
 @Component({
   selector: 'app-notes',
   standalone: true,
   templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.scss'],
+  styleUrl: './notes.component.scss',
   imports: [MaterialModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
