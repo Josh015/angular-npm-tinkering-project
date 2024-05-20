@@ -16,14 +16,14 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { User } from '../../models';
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
-import { SharedModule } from 'src/app/shared';
+import { MaterialModule } from 'src/app/material.module';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
-  imports: [SharedModule, TranslateModule],
+  imports: [MaterialModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {

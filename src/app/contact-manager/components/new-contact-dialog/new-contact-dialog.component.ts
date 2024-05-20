@@ -15,8 +15,8 @@ import { Note, User } from '../../models';
 import { createUser, createUserSuccess, State } from '../../store';
 import { y2kValidator, year2012Validator } from 'src/app/utils';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from 'src/app/shared';
 import { UsersConstants } from '../../services/users-constants';
+import { MaterialModule } from 'src/app/material.module';
 
 export type ModelFormGroup<T> = FormGroup<{
   [K in keyof T]: FormControl<T[K]>;
@@ -27,7 +27,7 @@ export type ModelFormGroup<T> = FormGroup<{
   standalone: true,
   templateUrl: './new-contact-dialog.component.html',
   styleUrls: ['./new-contact-dialog.component.scss'],
-  imports: [FormsModule, ReactiveFormsModule, SharedModule, TranslateModule],
+  imports: [FormsModule, ReactiveFormsModule, MaterialModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewContactDialogComponent {

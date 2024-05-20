@@ -1,11 +1,12 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   ViewChild,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSidenav } from '@angular/material/sidenav';
 import {
   Router,
@@ -24,7 +25,7 @@ import {
   toggleDarkTheme,
   toggleTextDirection,
 } from 'src/app/store';
-import { SharedModule } from 'src/app/shared';
+import { MaterialModule } from 'src/app/material.module';
 
 @Component({
   selector: 'app-sidenav',
@@ -32,10 +33,11 @@ import { SharedModule } from 'src/app/shared';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
   imports: [
+    CommonModule,
+    MaterialModule,
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
-    SharedModule,
     ToolbarComponent,
     TranslateModule,
   ],
