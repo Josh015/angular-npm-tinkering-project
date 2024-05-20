@@ -49,7 +49,10 @@ export class UsersService {
             this.usersConstants.avatars[
               index % this.usersConstants.avatars.length
             ];
-          user.gender = ['male', 'female', 'enby'][index % 3];
+          user.gender =
+            this.usersConstants.genders[
+              index % this.usersConstants.genders.length
+            ];
 
           user.notes = Object.values(
             (user as any).address as Map<string, string>,

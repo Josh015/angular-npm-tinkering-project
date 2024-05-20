@@ -17,13 +17,20 @@ import { y2kValidator, year2012Validator } from 'src/app/utils';
 import { TranslateModule } from '@ngx-translate/core';
 import { UsersConstants } from '../../services/users-constants';
 import { MaterialModule } from 'src/app/material.module';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-new-contact-dialog',
   standalone: true,
   templateUrl: './new-contact-dialog.component.html',
   styleUrls: ['./new-contact-dialog.component.scss'],
-  imports: [FormsModule, ReactiveFormsModule, MaterialModule, TranslateModule],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    TitleCasePipe,
+    TranslateModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewContactDialogComponent {

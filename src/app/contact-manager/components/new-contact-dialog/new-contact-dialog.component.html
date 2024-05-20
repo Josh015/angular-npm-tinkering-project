@@ -26,24 +26,14 @@
           {{ 'ContactManager.NewContactDialog.GenderField.Label' | translate }}
         </mat-label>
         <mat-select [formControl]="formGroup.controls.gender" required>
-          <mat-option value="male">
-            {{
-              'ContactManager.NewContactDialog.GenderField.Options.Male'
-                | translate
-            }}
-          </mat-option>
-          <mat-option value="female">
-            {{
-              'ContactManager.NewContactDialog.GenderField.Options.Female'
-                | translate
-            }}
-          </mat-option>
-          <mat-option value="enby">
-            {{
-              'ContactManager.NewContactDialog.GenderField.Options.NonBinary'
-                | translate
-            }}
-          </mat-option>
+          @for (gender of usersConstants.genders; track gender) {
+            <mat-option [value]="gender">
+              {{
+                'ContactManager.NewContactDialog.GenderField.Options.' +
+                  (gender | titlecase) | translate
+              }}
+            </mat-option>
+          }
         </mat-select>
       </mat-form-field>
       <mat-form-field appearance="fill">
