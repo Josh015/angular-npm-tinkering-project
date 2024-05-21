@@ -17,7 +17,7 @@ import {
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { contactManagerFeature, getUsers, State } from '../../store';
+import { contactManagerFeature, selectGetUsers } from '../../store';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { MaterialModule } from 'src/app/material.module';
 import { AppActions, appFeature } from 'src/app/store';
@@ -43,12 +43,12 @@ export class SidenavComponent {
 
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);
-  private readonly store = inject(Store<State>);
+  private readonly store = inject(Store);
 
   readonly usersLoading$ = this.store.select(
     contactManagerFeature.selectUsersLoading,
   );
-  readonly users$ = this.store.select(getUsers);
+  readonly users$ = this.store.select(selectGetUsers);
   readonly isDarkTheme$ = this.store.select(appFeature.selectIsDarkTheme);
   readonly textDirection$ = this.store.select(appFeature.selectTextDirection);
 

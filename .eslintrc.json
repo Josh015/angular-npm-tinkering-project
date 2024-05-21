@@ -22,6 +22,7 @@
         "plugin:rxjs/recommended",
         "plugin:@angular-eslint/all",
         "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:@ngrx/recommended",
         "plugin:prettier/recommended"
       ],
       "rules": {
@@ -135,6 +136,7 @@
         "plugin:rxjs/recommended",
         "plugin:@angular-eslint/all",
         "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:@ngrx/recommended",
         "plugin:prettier/recommended"
       ],
       "rules": {

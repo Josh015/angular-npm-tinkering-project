@@ -19,13 +19,19 @@ export const appFeature = createFeature({
       isDarkTheme: false,
       textDirection: 'ltr',
     },
-    on(AppActions.toggleDarkTheme, (state) => ({
-      ...state,
-      isDarkTheme: !state.isDarkTheme,
-    })),
-    on(AppActions.toggleTextDirection, (state) => ({
-      ...state,
-      textDirection: state.textDirection === 'ltr' ? 'rtl' : 'ltr',
-    })),
+    on(
+      AppActions.toggleDarkTheme,
+      (state): AppState => ({
+        ...state,
+        isDarkTheme: !state.isDarkTheme,
+      }),
+    ),
+    on(
+      AppActions.toggleTextDirection,
+      (state): AppState => ({
+        ...state,
+        textDirection: state.textDirection === 'ltr' ? 'rtl' : 'ltr',
+      }),
+    ),
   ),
 });

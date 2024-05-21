@@ -23,31 +23,46 @@ export const contactManagerFeature = createFeature({
       usersLoading: false,
       error: '',
     }),
-    on(ContactManagerActions.loadUsers, (state) => ({
-      ...state,
-      usersLoading: true,
-    })),
-    on(ContactManagerActions.loadUsersSuccess, (state, { users }) =>
-      adapter.addMany(users, {
+    on(
+      ContactManagerActions.loadUsers,
+      (state): ContactManagerState => ({
         ...state,
-        usersLoading: false,
-        error: '',
+        usersLoading: true,
       }),
     ),
-    on(ContactManagerActions.loadUsersError, (state, { error }) =>
-      adapter.removeAll({ ...state, usersLoading: false, error }),
+    on(
+      ContactManagerActions.loadUsersSuccess,
+      (state, { users }): ContactManagerState =>
+        adapter.addMany(users, {
+          ...state,
+          usersLoading: false,
+          error: '',
+        }),
     ),
-    on(ContactManagerActions.createUser, (state) => ({
-      ...state,
-      usersLoading: true,
-    })),
-    on(ContactManagerActions.createUserSuccess, (state, { user }) =>
-      adapter.addOne(user, { ...state, usersLoading: false, error: '' }),
+    on(
+      ContactManagerActions.loadUsersError,
+      (state, { error }): ContactManagerState =>
+        adapter.removeAll({ ...state, usersLoading: false, error }),
     ),
-    on(ContactManagerActions.createUserError, (state, { error }) => ({
-      ...state,
-      usersLoading: false,
-      error,
-    })),
+    on(
+      ContactManagerActions.createUser,
+      (state): ContactManagerState => ({
+        ...state,
+        usersLoading: true,
+      }),
+    ),
+    on(
+      ContactManagerActions.createUserSuccess,
+      (state, { user }): ContactManagerState =>
+        adapter.addOne(user, { ...state, usersLoading: false, error: '' }),
+    ),
+    on(
+      ContactManagerActions.createUserError,
+      (state, { error }): ContactManagerState => ({
+        ...state,
+        usersLoading: false,
+        error,
+      }),
+    ),
   ),
 });

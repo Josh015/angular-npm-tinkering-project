@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { Note, User } from '../../models';
 import { UsersConstants } from '../../services/users-constants';
-import { ContactManagerActions, State } from '../../store';
+import { ContactManagerActions } from '../../store';
 import { MaterialModule } from 'src/app/material.module';
 import { y2kValidator, year2012Validator } from 'src/app/utils';
 
@@ -31,7 +31,7 @@ export class NewContactDialogComponent {
   static readonly bioMaxLength = 30;
 
   private readonly dialogRef = inject(MatDialogRef<NewContactDialogComponent>);
-  private readonly store = inject(Store<State>);
+  private readonly store = inject(Store);
   private readonly actions$ = inject(Actions);
 
   readonly usersConstants = inject(UsersConstants);

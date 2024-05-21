@@ -11,8 +11,8 @@ export class ContactManagerEffects {
   private readonly actions$ = inject(Actions);
   private readonly contactManagerService = inject(UsersService);
 
-  readonly loadUsers$ = createEffect(() =>
-    this.actions$.pipe(
+  readonly loadUsers$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(ContactManagerActions.loadUsers),
       mergeMap(() =>
         this.contactManagerService.loadAllUsers().pipe(
@@ -24,11 +24,11 @@ export class ContactManagerEffects {
           ),
         ),
       ),
-    ),
-  );
+    );
+  });
 
-  readonly createUser$ = createEffect(() =>
-    this.actions$.pipe(
+  readonly createUser$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(ContactManagerActions.createUser),
       concatMap(({ user }) =>
         this.contactManagerService.addUser(user).pipe(
@@ -42,6 +42,6 @@ export class ContactManagerEffects {
           ),
         ),
       ),
-    ),
-  );
+    );
+  });
 }

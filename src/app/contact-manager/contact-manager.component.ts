@@ -15,7 +15,7 @@ import { NotesComponent } from './components/notes/notes.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { UsersService } from './services/users.service';
-import { ContactManagerActions, State } from './store';
+import { ContactManagerActions } from './store';
 import { MaterialModule } from 'src/app/material.module';
 
 @Component({
@@ -38,7 +38,7 @@ import { MaterialModule } from 'src/app/material.module';
 export class ContactManagerComponent implements OnInit {
   private readonly iconRegistry = inject(MatIconRegistry);
   private readonly sanitizer = inject(DomSanitizer);
-  private readonly store = inject(Store<State>);
+  private readonly store = inject(Store);
 
   ngOnInit(): void {
     this.iconRegistry.addSvgIconSet(
