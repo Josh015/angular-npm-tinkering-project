@@ -4,12 +4,12 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 
-import { AVATARS, GENDERS, User } from '../models';
+import { AVATARS, GENDERS, User } from './models';
 
 @Injectable()
-export class UsersService {
+export class ContactManagerService {
   static readonly rootUrl = 'https://dummyapi.online/api/';
-  static readonly usersUrl = `${UsersService.rootUrl}/users`;
+  static readonly usersUrl = `${ContactManagerService.rootUrl}/users`;
 
   private readonly http = inject(HttpClient);
 
@@ -26,7 +26,7 @@ export class UsersService {
   }
 
   loadAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(UsersService.usersUrl).pipe(
+    return this.http.get<User[]>(ContactManagerService.usersUrl).pipe(
       // Delay to show loading spinner
       delay(600),
 

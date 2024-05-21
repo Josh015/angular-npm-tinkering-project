@@ -14,7 +14,7 @@ import { NewContactDialogComponent } from './components/new-contact-dialog/new-c
 import { NotesComponent } from './components/notes/notes.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { UsersService } from './services/users.service';
+import { ContactManagerService } from './contact-manager.service';
 import { ContactManagerActions } from './store';
 import { MaterialModule } from 'src/app/material.module';
 
@@ -33,7 +33,6 @@ import { MaterialModule } from 'src/app/material.module';
     SidenavComponent,
     ToolbarComponent,
   ],
-  providers: [UsersService],
 })
 export class ContactManagerComponent implements OnInit {
   private readonly iconRegistry = inject(MatIconRegistry);

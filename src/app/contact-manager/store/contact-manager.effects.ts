@@ -4,12 +4,12 @@ import { of } from 'rxjs';
 import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
 
 import { ContactManagerActions } from './contact-manager.grouped-actions';
-import { UsersService } from '../services/users.service';
+import { ContactManagerService } from '../contact-manager.service';
 
 @Injectable()
 export class ContactManagerEffects {
   private readonly actions$ = inject(Actions);
-  private readonly contactManagerService = inject(UsersService);
+  private readonly contactManagerService = inject(ContactManagerService);
 
   readonly loadUsers$ = createEffect(() => {
     return this.actions$.pipe(

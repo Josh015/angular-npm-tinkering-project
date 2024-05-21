@@ -4,7 +4,7 @@ import { provideState } from '@ngrx/store';
 
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { ContactManagerComponent } from './contact-manager.component';
-import { UsersService } from './services/users.service';
+import { ContactManagerService } from './contact-manager.service';
 import { ContactManagerEffects, contactManagerFeature } from './store';
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
     providers: [
       provideEffects([ContactManagerEffects]),
       provideState(contactManagerFeature),
-      UsersService,
+      ContactManagerService,
     ],
     children: [
       { path: ':userId', component: MainContentComponent },
