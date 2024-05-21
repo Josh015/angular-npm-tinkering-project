@@ -20,7 +20,7 @@
         "plugin:import/typescript",
         "plugin:@typescript-eslint/recommended",
         "plugin:rxjs/recommended",
-        "plugin:@angular-eslint/all",
+        "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:@ngrx/recommended",
         "plugin:prettier/recommended"
@@ -111,7 +111,7 @@
           }
         ],
         "rxjs/no-compat": ["error"],
-        "rxjs/no-explicit-generics": ["error"],
+        "rxjs/no-explicit-generics": ["off"],
         "rxjs/no-exposed-subjects": ["error"],
         "rxjs/no-nested-subscribe": ["off"]
       }
@@ -134,7 +134,7 @@
         "plugin:import/typescript",
         "plugin:@typescript-eslint/recommended",
         "plugin:rxjs/recommended",
-        "plugin:@angular-eslint/all",
+        "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "plugin:@ngrx/recommended",
         "plugin:prettier/recommended"
@@ -226,7 +226,7 @@
           }
         ],
         "rxjs/no-compat": ["error"],
-        "rxjs/no-explicit-generics": ["error"],
+        "rxjs/no-explicit-generics": ["off"],
         "rxjs/no-exposed-subjects": ["error"],
         "rxjs/no-nested-subscribe": ["off"]
       }
