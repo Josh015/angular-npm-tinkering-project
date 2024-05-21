@@ -8,8 +8,8 @@ import { AVATARS, GENDERS, User } from './models';
 
 @Injectable()
 export class ContactManagerService {
-  static readonly rootUrl = 'https://dummyapi.online/api/';
-  static readonly usersUrl = `${ContactManagerService.rootUrl}/users`;
+  static readonly rootUrl = 'https://dummyapi.online/api';
+  static readonly usersUrl = `${ContactManagerService.rootUrl}/users` as const;
 
   private readonly http = inject(HttpClient);
 
