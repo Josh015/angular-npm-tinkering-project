@@ -13,7 +13,7 @@
             <mat-icon [svgIcon]="formGroup.controls.avatar.value || ''" />
             {{ formGroup.controls.avatar.value }}
           </mat-select-trigger>
-          @for (avatar of usersConstants.avatars; track avatar) {
+          @for (avatar of avatars; track avatar) {
             <mat-option [value]="avatar">
               <mat-icon [svgIcon]="avatar" />
               {{ avatar }}
@@ -26,7 +26,7 @@
           {{ 'ContactManager.NewContactDialog.GenderField.Label' | translate }}
         </mat-label>
         <mat-select [formControl]="formGroup.controls.gender" required>
-          @for (gender of usersConstants.genders; track gender) {
+          @for (gender of genders; track gender) {
             <mat-option [value]="gender">
               {{
                 'ContactManager.NewContactDialog.GenderField.Option'

@@ -12,8 +12,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { Note, User } from '../../models';
-import { UsersConstants } from '../../services/users-constants';
+import { AVATARS, Avatar, GENDERS, Gender, Note, User } from '../../models';
 import { ContactManagerActions } from '../../store';
 import { MaterialModule } from 'src/app/material.module';
 import { y2kValidator, year2012Validator } from 'src/app/utils';
@@ -34,7 +33,8 @@ export class NewContactDialogComponent {
   private readonly store = inject(Store);
   private readonly actions$ = inject(Actions);
 
-  readonly usersConstants = inject(UsersConstants);
+  readonly avatars = AVATARS;
+  readonly genders = GENDERS;
   readonly minBirthDate = new Date('1970-01-01Z00:00:00:000');
   readonly maxBirthDate = new Date();
   readonly formGroup = new FormGroup({
@@ -44,12 +44,12 @@ export class NewContactDialogComponent {
       y2kValidator,
       year2012Validator,
     ]),
-    gender: new FormControl<string | null>(null, [Validators.required]),
+    gender: new FormControl<Gender | null>(null, [Validators.required]),
     name: new FormControl<string>('', [
       Validators.required,
       Validators.maxLength(NewContactDialogComponent.nameMaxLength),
     ]),
-    avatar: new FormControl<string | null>(null, [Validators.required]),
+    avatar: new FormControl<Avatar | null>(null, [Validators.required]),
     bio: new FormControl<string>('', [
       Validators.maxLength(NewContactDialogComponent.bioMaxLength),
     ]),

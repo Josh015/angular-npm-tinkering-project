@@ -4,8 +4,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
 
-import { UsersConstants } from './users-constants';
-import { User } from '../models';
+import { AVATARS, GENDERS, User } from '../models';
 
 @Injectable()
 export class UsersService {
@@ -13,7 +12,6 @@ export class UsersService {
   static readonly usersUrl = `${UsersService.rootUrl}/users`;
 
   private readonly http = inject(HttpClient);
-  private readonly usersConstants = inject(UsersConstants);
 
   private ids: number[] = [];
 
@@ -44,14 +42,8 @@ export class UsersService {
           user.birthDate.setDate(user.birthDate.getDate() + index);
 
           user.bio = (user as any).email;
-          user.avatar =
-            this.usersConstants.avatars[
-              index % this.usersConstants.avatars.length
-            ];
-          user.gender =
-            this.usersConstants.genders[
-              index % this.usersConstants.genders.length
-            ];
+          user.avatar = AVATARS[index % AVATARS.length];
+          user.gender = GENDERS[index % GENDERS.length];
 
           user.notes = Object.values(
             (user as any).address as Map<string, string>,

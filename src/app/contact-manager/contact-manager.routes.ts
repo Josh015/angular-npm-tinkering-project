@@ -4,7 +4,6 @@ import { provideState } from '@ngrx/store';
 
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { ContactManagerComponent } from './contact-manager.component';
-import { UsersConstants } from './services/users-constants';
 import { UsersService } from './services/users.service';
 import { ContactManagerEffects, contactManagerFeature } from './store';
 
@@ -15,7 +14,6 @@ const routes: Routes = [
     providers: [
       provideEffects([ContactManagerEffects]),
       provideState(contactManagerFeature),
-      UsersConstants,
       UsersService,
     ],
     children: [
