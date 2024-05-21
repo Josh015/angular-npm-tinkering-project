@@ -5,12 +5,12 @@ import { selectRouteParams } from 'src/app/store/app.selectors';
 
 const { selectAll } = adapter.getSelectors();
 
-export const selectGetUsers = createSelector(
+export const selectUsers = createSelector(
   contactManagerFeature.selectContactManagerState,
   selectAll,
 );
 
-export const selectGetCurrentUser = createSelector(
+export const selectCurrentUser = createSelector(
   contactManagerFeature.selectEntities,
   selectRouteParams,
   (entities, { userId }) => entities[userId as string] ?? null,

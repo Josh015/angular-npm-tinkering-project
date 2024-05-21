@@ -17,7 +17,7 @@ import {
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { contactManagerFeature, selectGetUsers } from '../../store';
+import { contactManagerFeature, selectUsers } from '../../store';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { MaterialModule } from 'src/app/material.module';
 import { AppActions, appFeature } from 'src/app/store';
@@ -48,7 +48,7 @@ export class SidenavComponent {
   readonly usersLoading$ = this.store.select(
     contactManagerFeature.selectUsersLoading,
   );
-  readonly users$ = this.store.select(selectGetUsers);
+  readonly users$ = this.store.select(selectUsers);
   readonly isDarkTheme$ = this.store.select(appFeature.selectIsDarkTheme);
   readonly textDirection$ = this.store.select(appFeature.selectTextDirection);
 

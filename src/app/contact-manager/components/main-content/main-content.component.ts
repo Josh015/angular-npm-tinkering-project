@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { selectGetCurrentUser } from '../../store';
+import { selectCurrentUser } from '../../store';
 import { NotesComponent } from '../notes/notes.component';
 import { MaterialModule } from 'src/app/material.module';
 
@@ -17,5 +17,5 @@ import { MaterialModule } from 'src/app/material.module';
 export class MainContentComponent {
   private readonly store = inject(Store);
 
-  readonly user$ = this.store.select(selectGetCurrentUser);
+  readonly user$ = this.store.select(selectCurrentUser);
 }
