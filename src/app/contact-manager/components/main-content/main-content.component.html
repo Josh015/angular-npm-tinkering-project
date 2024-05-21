@@ -3,20 +3,10 @@
     <mat-card-header>
       <mat-icon mat-card-avatar [svgIcon]="user.avatar" />
       <mat-card-title>
-        {{
-          'ContactManager.MainContent.NameAndGenderTitle'
-            | translate
-              : {
-                  name: user.name,
-                  gender: user.gender
-                }
-        }}
+        {{ 'ContactManager.MainContent.NameAndGenderTitle' | translate: user }}
       </mat-card-title>
       <mat-card-subtitle>
-        {{
-          'ContactManager.MainContent.BirthdaySubTitle'
-            | translate: { birthDate: user.birthDate }
-        }}
+        {{ 'ContactManager.MainContent.BirthdaySubTitle' | translate: user }}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
