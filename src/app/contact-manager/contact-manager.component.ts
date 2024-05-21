@@ -1,11 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
   Component,
   inject,
   OnInit,
 } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
@@ -15,7 +13,6 @@ import { NotesComponent } from './components/notes/notes.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ContactManagerActions } from './store';
-import { MaterialModule } from 'src/app/material.module';
 
 @Component({
   selector: 'app-contact-manager-app',
@@ -23,12 +20,8 @@ import { MaterialModule } from 'src/app/material.module';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    FormsModule,
-    HttpClientModule,
-    MaterialModule,
     NewContactDialogComponent,
     NotesComponent,
-    ReactiveFormsModule,
     SidenavComponent,
     ToolbarComponent,
   ],
