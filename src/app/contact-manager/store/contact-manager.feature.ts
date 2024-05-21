@@ -16,13 +16,15 @@ export interface ContactManagerState extends EntityState<User> {
 
 export const adapter = createEntityAdapter<User>();
 
+export const initialState: ContactManagerState = adapter.getInitialState({
+  usersLoading: false,
+  error: '',
+});
+
 export const contactManagerFeature = createFeature({
   name: 'contactManager',
   reducer: createReducer<ContactManagerState>(
-    adapter.getInitialState({
-      usersLoading: false,
-      error: '',
-    }),
+    initialState,
     on(
       ContactManagerActions.loadUsers,
       (state): ContactManagerState => ({

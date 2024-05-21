@@ -12,13 +12,15 @@ export interface AppState {
   textDirection: Direction;
 }
 
+export const initialState: AppState = {
+  isDarkTheme: false,
+  textDirection: 'ltr',
+};
+
 export const appFeature = createFeature({
   name: 'app',
   reducer: createReducer<AppState>(
-    {
-      isDarkTheme: false,
-      textDirection: 'ltr',
-    },
+    initialState,
     on(
       AppActions.toggleDarkTheme,
       (state): AppState => ({
