@@ -1,7 +1,12 @@
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideRouter } from '@angular/router';
+import {
+  PreloadAllModules,
+  provideRouter,
+  withDebugTracing,
+  withPreloading,
+} from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
 import { provideState, provideStore } from '@ngrx/store';
@@ -26,15 +31,27 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideEffects([]),
     provideHttpClient(),
-    provideRouter(routes),
+
+    environment.production
+      ? provideRouter(routes)
+      : provideRouter(
+          routes,
+          withPreloading(PreloadAllModules),
+          withDebugTracing(),
+        ),
+
     provideRouterStore(),
     provideStore({ router: routerReducer }),
     provideState(appFeature),
-    provideStoreDevtools({
-      name: 'Angular NPM Tinkering Project App DevTools',
-      maxAge: 25,
-      logOnly: environment.production,
-    }),
+
+    environment.production
+      ? []
+      : provideStoreDevtools({
+          name: 'Angular NPM Tinkering Project App DevTools',
+          maxAge: 25,
+          logOnly: environment.production,
+        }),
+
     importProvidersFrom([
       TranslateModule.forRoot({
         defaultLanguage: 'en',
