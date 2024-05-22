@@ -20,11 +20,11 @@ import { MaterialModule } from 'src/app/material.module';
 
 @Component({
   selector: 'app-toolbar',
-  standalone: true,
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
-  imports: [MaterialModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MaterialModule, TranslateModule],
 })
 export class ToolbarComponent {
   private readonly dialog = inject(MatDialog);

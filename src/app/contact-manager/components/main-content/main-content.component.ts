@@ -9,10 +9,10 @@ import { MaterialModule } from 'src/app/material.module';
 
 @Component({
   selector: 'app-main-content',
-  standalone: true,
   templateUrl: './main-content.component.html',
-  imports: [AsyncPipe, MaterialModule, NotesComponent, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [AsyncPipe, MaterialModule, NotesComponent, TranslateModule],
 })
 export class MainContentComponent {
   private readonly store = inject(Store);

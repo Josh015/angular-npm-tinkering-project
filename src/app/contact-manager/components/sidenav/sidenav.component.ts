@@ -24,9 +24,10 @@ import { AppActions, appFeature } from 'src/app/store';
 
 @Component({
   selector: 'app-sidenav',
-  standalone: true,
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   imports: [
     AsyncPipe,
     MaterialModule,
@@ -36,7 +37,6 @@ import { AppActions, appFeature } from 'src/app/store';
     ToolbarComponent,
     TranslateModule,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidenavComponent {
   static readonly smallWidthBreakpoint = 720;

@@ -5,9 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   template: '<router-outlet />',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [RouterOutlet],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   title = 'angular-npm-tinkering-project';

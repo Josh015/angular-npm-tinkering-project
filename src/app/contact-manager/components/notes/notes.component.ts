@@ -15,11 +15,11 @@ import { MaterialModule } from 'src/app/material.module';
 
 @Component({
   selector: 'app-notes',
-  standalone: true,
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.scss',
-  imports: [MaterialModule, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MaterialModule, TranslateModule],
 })
 export class NotesComponent implements AfterViewInit {
   readonly dataSource = new MatTableDataSource<Note>();

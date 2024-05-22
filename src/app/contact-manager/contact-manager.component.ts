@@ -17,8 +17,8 @@ import { ContactManagerActions } from './store';
 @Component({
   selector: 'app-contact-manager-app',
   template: '<app-sidenav />',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
   imports: [
     NewContactDialogComponent,
     NotesComponent,
