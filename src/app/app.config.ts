@@ -29,7 +29,6 @@ export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
-    provideEffects([]),
     provideHttpClient(),
 
     environment.production
@@ -40,9 +39,10 @@ export const appConfig: ApplicationConfig = {
           withDebugTracing(),
         ),
 
-    provideRouterStore(),
     provideStore({ router: routerReducer }),
     provideState(appFeature),
+    provideRouterStore(),
+    provideEffects([]),
 
     environment.production
       ? []
