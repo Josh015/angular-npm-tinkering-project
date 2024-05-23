@@ -1,5 +1,5 @@
 <div class="mat-elevation-z8">
-  <mat-form-field>
+  <mat-form-field class="w-full">
     <mat-label> {{ 'ContactManager.Notes.Filter' | translate }} </mat-label>
     <input
       #filter
@@ -9,7 +9,7 @@
     />
   </mat-form-field>
 
-  <table mat-table matSort [dataSource]="dataSource">
+  <table mat-table matSort [dataSource]="dataSource" class="w-full">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ 'ContactManager.Notes.NumberColumn' | translate }}

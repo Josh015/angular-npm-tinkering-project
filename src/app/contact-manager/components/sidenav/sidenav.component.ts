@@ -25,7 +25,6 @@ import { AppActions, appFeature } from 'src/app/store';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [

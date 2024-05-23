@@ -16,7 +16,6 @@ import { MaterialModule } from 'src/app/material.module';
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
-  styleUrl: './notes.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [MaterialModule, TranslateModule],

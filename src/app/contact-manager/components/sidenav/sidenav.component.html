@@ -1,11 +1,12 @@
 <mat-sidenav-container
-  class="app-sidenav-container"
+  class="flex-1 w-full min-w-full h-full min-h-full"
   [class.dark-theme]="isDarkTheme$ | async"
   [dir]="(textDirection$ | async) || 'ltr'"
+  autosize
 >
   <mat-sidenav
     #sidenav
-    class="app-sidenav mat-elevation-z10"
+    class="w-[240px] mat-elevation-z10"
     [opened]="!isScreenSmall"
     [mode]="isScreenSmall ? 'over' : 'side'"
   >
@@ -20,7 +21,7 @@
           <mat-list-item>
             <a
               matLine
-              routerLinkActive="active-list-item"
+              routerLinkActive="text-[#3f51b5]"
               [routerLink]="['/contact-manager', user.id]"
             >
               <mat-icon [svgIcon]="user.avatar" /> {{ user.name }}
@@ -31,13 +32,13 @@
     }
   </mat-sidenav>
 
-  <div class="app-sidenav-content">
+  <div class="flex flex-col h-full">
     <app-toolbar
       (toggleTheme)="toggleTheme()"
       (toggleSidenav)="sidenav.toggle()"
       (toggleDir)="toggleDir()"
     />
-    <div class="wrapper">
+    <div class="m-[50px]">
       <router-outlet />
     </div>
   </div>

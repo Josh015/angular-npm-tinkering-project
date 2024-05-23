@@ -20,7 +20,6 @@ import { y2kValidator, year2012Validator } from 'src/app/utils';
 @Component({
   selector: 'app-new-contact-dialog',
   templateUrl: './new-contact-dialog.component.html',
-  styleUrl: './new-contact-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, MaterialModule, TranslateModule],
