@@ -4,17 +4,16 @@ import { MainContentComponent } from './components/main-content/main-content.com
 import { ContactManagerComponent } from './contact-manager.component';
 import { UserService } from './services/user.service';
 
-const routes: Routes = [
+export const USER_ID = 'userId';
+export const CONTACT_MANAGER_ROUTES: Routes = [
   {
     path: '',
     component: ContactManagerComponent,
     providers: [UserService],
     children: [
-      { path: ':userId', component: MainContentComponent },
+      { path: `:${USER_ID}`, component: MainContentComponent },
       { path: '', component: MainContentComponent },
     ],
   },
   { path: '**', redirectTo: '' },
 ];
-
-export default routes;
