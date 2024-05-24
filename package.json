@@ -27,7 +27,6 @@
     "@messageformat/core": "^3.3.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
-    "messageformat": "^2.3.0",
     "ngx-translate-messageformat-compiler": "^7.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
@@ -35,11 +34,11 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.3.7",
-    "@angular-eslint/builder": "^17.4.1",
-    "@angular-eslint/eslint-plugin": "^17.4.1",
-    "@angular-eslint/eslint-plugin-template": "^17.4.1",
-    "@angular-eslint/schematics": "^17.4.1",
-    "@angular-eslint/template-parser": "^17.4.1",
+    "@angular-eslint/builder": "^17.5.1",
+    "@angular-eslint/eslint-plugin": "^17.5.1",
+    "@angular-eslint/eslint-plugin-template": "^17.5.1",
+    "@angular-eslint/schematics": "^17.5.1",
+    "@angular-eslint/template-parser": "^17.5.1",
     "@angular/cli": "^17.3.7",
     "@angular/compiler-cli": "^17.3.0",
     "@types/jasmine": "~5.1.0",
@@ -64,6 +63,7 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.3",
-    "typescript": "~5.4.2"
+    "typescript": "~5.4.2",
+    "typescript-eslint": "^7.10.0"
   }
 }
