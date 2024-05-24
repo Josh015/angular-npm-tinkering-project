@@ -1,4 +1,4 @@
-# Angular NPM tinkering project
+# Angular NPM Tinkering Project
 
 This test project is a heavily-modified version of the code from the [pluralsight course Angular Material](https://www.pluralsight.com/courses/angular-material) to provide me with a suitably complex codebase for trying out various Angular packages and seeing how they interact.
 
@@ -9,9 +9,9 @@ yarn install
 yarn start
 ```
 
-## Included Packages
+## Packages
 
-I've utilized a cross-section of NPM packages that I consider to be indispensible in a modern web application.
+I'm utilizing a set of NPM packages that I consider to be essential in modern web applications.
 
 - [Angular](https://angular.dev/)
 - [Angular Material](https://material.angular.io/)
@@ -21,3 +21,7 @@ I've utilized a cross-section of NPM packages that I consider to be indispensibl
 - [ngx-translate](https://github.com/ngx-translate/core)
 - [Prettier](https://prettier.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
+
+## Screenshot
+
+![Angular NPM Tinkering Project Preview](screenshots/preview.png)
