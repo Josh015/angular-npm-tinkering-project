@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  ViewChild,
+  viewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -24,17 +24,16 @@ export class NotesComponent implements AfterViewInit {
   protected readonly dataSource = new MatTableDataSource<Note>();
 
   protected displayedColumns = ['id', 'title', 'date'];
-
-  @ViewChild(MatSort) protected sort?: MatSort;
-  @ViewChild(MatPaginator) protected paginator?: MatPaginator;
+  protected sort = viewChild.required(MatSort);
+  protected paginator = viewChild.required(MatPaginator);
 
   @Input({ required: true }) set notes(value: Note[]) {
     this.dataSource.data = value;
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort ?? null;
-    this.dataSource.paginator = this.paginator ?? null;
+    this.dataSource.sort = this.sort();
+    this.dataSource.paginator = this.paginator();
   }
 
   protected applyFilter(event: KeyboardEvent): void {

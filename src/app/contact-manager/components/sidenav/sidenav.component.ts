@@ -5,7 +5,7 @@ import {
   ChangeDetectorRef,
   Component,
   inject,
-  ViewChild,
+  viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -47,11 +47,10 @@ export class SidenavComponent {
   protected readonly usersLoading = this.userService.loading;
   protected readonly users = this.userService.data;
 
+  protected sidenav = viewChild.required(MatSidenav);
   protected isScreenSmall = false;
   protected isDarkTheme = false;
   protected textDirection: Direction = 'ltr';
-
-  @ViewChild(MatSidenav) protected sidenav?: MatSidenav;
 
   constructor() {
     this.breakpointObserver
@@ -64,7 +63,7 @@ export class SidenavComponent {
 
     this.router.events.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.isScreenSmall) {
-        this.sidenav?.close();
+        this.sidenav().close();
       }
     });
   }
