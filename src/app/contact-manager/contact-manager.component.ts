@@ -8,10 +8,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 
-import { NewContactDialogComponent } from './components/new-contact-dialog/new-contact-dialog.component';
-import { NotesComponent } from './components/notes/notes.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ContactManagerActions } from './store';
 
 @Component({
@@ -19,12 +16,7 @@ import { ContactManagerActions } from './store';
   template: '<app-sidenav />',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    NewContactDialogComponent,
-    NotesComponent,
-    SidenavComponent,
-    ToolbarComponent,
-  ],
+  imports: [SidenavComponent],
 })
 export class ContactManagerComponent implements OnInit {
   private readonly iconRegistry = inject(MatIconRegistry);

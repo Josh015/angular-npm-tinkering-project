@@ -15,7 +15,6 @@ yarn start
 - [Angular Material](https://material.angular.io/)
 - [ESLint](https://eslint.org/)
 - [messageformat](https://messageformat.github.io/messageformat/)
-- [NgRx](https://ngrx.io/)
 - [ngx-translate](https://github.com/ngx-translate/core)
 - [Prettier](https://prettier.io/)
 - [Tailwind CSS](https://tailwindcss.com/)

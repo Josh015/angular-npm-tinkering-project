@@ -1,6 +1,7 @@
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   PreloadAllModules,
   provideRouter,
@@ -28,9 +29,6 @@ export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimations(),
-    provideHttpClient(),
-
     environment.production
       ? provideRouter(routes)
       : provideRouter(
@@ -39,6 +37,9 @@ export const appConfig: ApplicationConfig = {
           withDebugTracing(),
         ),
 
+    provideAnimationsAsync(),
+    provideHttpClient(),
+    provideNativeDateAdapter(),
     provideStore({ router: routerReducer }),
     provideState(appFeature),
     provideRouterStore(),
