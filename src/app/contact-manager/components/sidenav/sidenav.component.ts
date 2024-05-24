@@ -2,7 +2,6 @@ import { Direction } from '@angular/cdk/bidi';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   inject,
   viewChild,
@@ -39,7 +38,6 @@ import { MaterialModule } from 'src/app/material.module';
 export class SidenavComponent {
   static readonly smallWidthBreakpoint = 768;
 
-  private readonly cdr = inject(ChangeDetectorRef);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);
   private readonly userService = inject(UserService);
@@ -58,7 +56,6 @@ export class SidenavComponent {
       .pipe(takeUntilDestroyed())
       .subscribe((state: BreakpointState) => {
         this.isScreenSmall = state.matches;
-        this.cdr.detectChanges();
       });
 
     this.router.events.pipe(takeUntilDestroyed()).subscribe(() => {
