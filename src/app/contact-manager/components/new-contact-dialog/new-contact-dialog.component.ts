@@ -9,8 +9,8 @@ import {
 import { MatDialogRef } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ContactManagerService } from '../../contact-manager.service';
 import { AVATARS, Avatar, GENDERS, Gender, Note, User } from '../../models';
+import { UserService } from '../../services/user.service';
 import { MaterialModule } from 'src/app/material.module';
 import { y2kValidator, year2012Validator } from 'src/app/utils';
 
@@ -26,7 +26,7 @@ export class NewContactDialogComponent {
   static readonly bioMaxLength = 30;
 
   private readonly dialogRef = inject(MatDialogRef<NewContactDialogComponent>);
-  private readonly contactManagerService = inject(ContactManagerService);
+  private readonly userService = inject(UserService);
 
   readonly avatars = AVATARS;
   readonly genders = GENDERS;
@@ -54,7 +54,7 @@ export class NewContactDialogComponent {
   async save(): Promise<void> {
     if (this.formGroup.valid) {
       try {
-        const user = await this.contactManagerService.addUser(
+        const user = await this.userService.create(
           this.formGroup.getRawValue() as User,
         );
 

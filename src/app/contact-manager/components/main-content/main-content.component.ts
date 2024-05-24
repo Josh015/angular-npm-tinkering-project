@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { combineLatestWith, map } from 'rxjs';
 
-import { ContactManagerService } from '../../contact-manager.service';
+import { UserService } from '../../services/user.service';
 import { NotesComponent } from '../notes/notes.component';
 import { MaterialModule } from 'src/app/material.module';
 
@@ -17,7 +17,7 @@ import { MaterialModule } from 'src/app/material.module';
 })
 export class MainContentComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
-  private readonly contactManagerService = inject(ContactManagerService);
+  private readonly userService = inject(UserService);
   private readonly userId$ = this.activatedRoute.params.pipe(
     map((params) => {
       const id = +params['userId'];
@@ -25,7 +25,7 @@ export class MainContentComponent {
     }),
   );
   readonly user$ = this.userId$.pipe(
-    combineLatestWith(this.contactManagerService.users$),
+    combineLatestWith(this.userService.data$),
     map(([userId, users]) => {
       return userId === 0 ? null : users.find((u) => u.id === userId) ?? null;
     }),

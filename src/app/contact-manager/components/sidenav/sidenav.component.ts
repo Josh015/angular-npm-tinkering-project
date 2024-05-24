@@ -18,7 +18,7 @@ import {
 } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ContactManagerService } from '../../contact-manager.service';
+import { UserService } from '../../services/user.service';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { MaterialModule } from 'src/app/material.module';
 
@@ -44,10 +44,10 @@ export class SidenavComponent {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);
-  private readonly contactManagerService = inject(ContactManagerService);
+  private readonly userService = inject(UserService);
 
-  readonly usersLoading$ = this.contactManagerService.usersLoading$;
-  readonly users$ = this.contactManagerService.users$;
+  readonly usersLoading$ = this.userService.loading$;
+  readonly users$ = this.userService.data$;
 
   isScreenSmall = false;
   isDarkTheme = false;
