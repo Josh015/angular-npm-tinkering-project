@@ -18,14 +18,19 @@
     } @else {
       <mat-nav-list>
         @for (user of users$ | async; track user) {
-          <mat-list-item>
+          <mat-list-item (click)="anchor.click()">
             <a
-              matLine
+              #anchor
+              matListItemTitle
               routerLinkActive="text-[#3f51b5]"
               [routerLink]="['/contact-manager', user.id]"
+              class="block"
             >
-              <mat-icon [svgIcon]="user.avatar" /> {{ user.name }}
+              {{ user.name }}
             </a>
+            <button mat-icon-button matListItemMeta>
+              <mat-icon [svgIcon]="user.avatar" />
+            </button>
           </mat-list-item>
         }
       </mat-nav-list>
