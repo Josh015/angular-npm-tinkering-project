@@ -53,11 +53,15 @@ export class NewContactDialogComponent {
 
   async save(): Promise<void> {
     if (this.formGroup.valid) {
-      const user = await this.contactManagerService.addUser(
-        this.formGroup.getRawValue() as User,
-      );
+      try {
+        const user = await this.contactManagerService.addUser(
+          this.formGroup.getRawValue() as User,
+        );
 
-      this.dismiss(user);
+        this.dismiss(user);
+      } catch (error) {
+        this.dismiss();
+      }
     }
   }
 
