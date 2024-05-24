@@ -1,12 +1,12 @@
 <mat-sidenav-container
-  class="flex-1 w-full min-w-full h-full min-h-full"
+  class="h-full min-h-full w-full min-w-full flex-1"
   [class.dark-theme]="isDarkTheme$ | async"
   [dir]="(textDirection$ | async) || 'ltr'"
   autosize
 >
   <mat-sidenav
     #sidenav
-    class="w-[240px] mat-elevation-z10"
+    class="mat-elevation-z10 w-[240px]"
     [opened]="!isScreenSmall"
     [mode]="isScreenSmall ? 'over' : 'side'"
   >
@@ -37,7 +37,7 @@
     }
   </mat-sidenav>
 
-  <div class="flex flex-col h-full">
+  <div class="flex h-full flex-col">
     <app-toolbar
       (toggleTheme)="toggleTheme()"
       (toggleSidenav)="sidenav.toggle()"
