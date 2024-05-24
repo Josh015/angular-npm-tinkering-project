@@ -1,7 +1,7 @@
 @if (user(); as user) {
   <mat-card>
     <mat-card-header>
-      <mat-icon mat-card-avatar [svgIcon]="user.avatar" />
+      <mat-icon [svgIcon]="user.avatar" mat-card-avatar />
       <mat-card-title>
         {{ 'ContactManager.MainContent.NameAndGenderTitle' | translate: user }}
       </mat-card-title>

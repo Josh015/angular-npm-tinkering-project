@@ -10,5 +10,9 @@
       }
     }
   ],
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "plugins": [
+    "prettier-plugin-jsdoc",
+    "prettier-plugin-organize-attributes",
+    "prettier-plugin-tailwindcss"
+  ]
 }

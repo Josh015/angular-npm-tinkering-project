@@ -40,7 +40,7 @@
         <mat-label>
           {{ 'ContactManager.NewContactDialog.NameField.Label' | translate }}
         </mat-label>
-        <input matInput [formControl]="formGroup.controls.name" required />
+        <input [formControl]="formGroup.controls.name" matInput required />
         @if (formGroup.controls.name.errors; as errors) {
           @if (errors['maxlength']; as maxLength) {
             <mat-error>
@@ -62,13 +62,13 @@
         </mat-label>
         <input
           [formControl]="formGroup.controls.birthDate"
-          matInput
           [matDatepicker]="picker"
           [min]="minBirthDate"
           [max]="maxBirthDate"
+          matInput
           required
         />
-        <mat-datepicker-toggle matSuffix [for]="picker" />
+        <mat-datepicker-toggle [for]="picker" matSuffix />
         <mat-datepicker #picker />
         @if (formGroup.controls.birthDate.errors; as errors) {
           @if (errors['y2k']) {
@@ -94,8 +94,8 @@
           {{ 'ContactManager.NewContactDialog.BioField.Label' | translate }}
         </mat-label>
         <textarea
-          matInput
           [formControl]="formGroup.controls.bio"
+          matInput
           rows="10"
           cols="30"
         >
@@ -121,15 +121,15 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button
+    [disabled]="!formGroup.valid"
+    (click)="save()"
     mat-button
     color="primary"
-    (click)="save()"
-    [disabled]="!formGroup.valid"
   >
     <mat-icon>save</mat-icon>
     {{ 'ContactManager.NewContactDialog.Save' | translate }}
   </button>
-  <button mat-button color="primary" (click)="dismiss()">
+  <button (click)="dismiss()" mat-button color="primary">
     <mat-icon>cancel</mat-icon>
     {{ 'ContactManager.NewContactDialog.Cancel' | translate }}
   </button>

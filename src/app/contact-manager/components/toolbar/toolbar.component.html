@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="sidenav-toggle" (click)="toggleSidenav.emit()">
+  <button class="sidenav-toggle" (click)="toggleSidenav.emit()" mat-icon-button>
     <mat-icon>menu</mat-icon>
   </button>
 
@@ -7,17 +7,17 @@
 
   <span class="flex-auto"></span>
 
-  <button mat-button [matMenuTriggerFor]="menu">
+  <button [matMenuTriggerFor]="menu" mat-button>
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="openAddContactDialog()">
+    <button (click)="openAddContactDialog()" mat-menu-item>
       {{ 'ContactManager.Toolbar.Menu.NewContact' | translate }}
     </button>
-    <button mat-menu-item (click)="toggleTheme.emit()">
+    <button (click)="toggleTheme.emit()" mat-menu-item>
       {{ 'ContactManager.Toolbar.Menu.ToggleTheme' | translate }}
     </button>
-    <button mat-menu-item (click)="toggleDir.emit()">
+    <button (click)="toggleDir.emit()" mat-menu-item>
       {{ 'ContactManager.Toolbar.Menu.ToggleDir' | translate }}
     </button>
   </mat-menu>

@@ -5,8 +5,8 @@
   autosize
 >
   <mat-sidenav
-    #sidenav
     class="mat-elevation-z10 w-[240px]"
+    #sidenav
     [opened]="!isScreenSmall"
     [mode]="isScreenSmall ? 'over' : 'side'"
   >
@@ -19,15 +19,15 @@
       <mat-nav-list>
         @for (user of users(); track user) {
           <mat-list-item
-            (click)="anchor.click()"
             [activated]="anchor.classList.contains('active')"
+            (click)="anchor.click()"
           >
             <a
+              class="block"
               #anchor
+              [routerLink]="['/contact-manager', user.id]"
               matListItemTitle
               routerLinkActive="active"
-              [routerLink]="['/contact-manager', user.id]"
-              class="block"
             >
               {{ user.name }}
             </a>
