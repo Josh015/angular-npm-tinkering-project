@@ -7,7 +7,7 @@ import { User } from '../models';
 
 @Injectable()
 export class UserService {
-  static readonly dbDelayMilliseconds = 600;
+  static readonly fetchDelayMilliseconds = 600;
   static readonly usersUrl = '/assets/users.json';
 
   private readonly http = inject(HttpClient);
@@ -29,8 +29,8 @@ export class UserService {
 
     return lastValueFrom(
       of(user).pipe(
-        delay(UserService.dbDelayMilliseconds),
-        tap(() => this.loadingSubject$.next(false)),
+        delay(UserService.fetchDelayMilliseconds),
+        finalize(() => this.loadingSubject$.next(false)),
       ),
     );
   }
@@ -40,7 +40,7 @@ export class UserService {
 
     return lastValueFrom(
       this.http.get<User[]>(UserService.usersUrl).pipe(
-        delay(UserService.dbDelayMilliseconds),
+        delay(UserService.fetchDelayMilliseconds),
         tap((users) => {
           this.dataStore.users = users;
           this.dataSubject$.next(users);
