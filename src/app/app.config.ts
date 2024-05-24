@@ -1,5 +1,9 @@
 import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideExperimentalZonelessChangeDetection,
+} from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
@@ -35,6 +39,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(),
     provideNativeDateAdapter(),
+    provideExperimentalZonelessChangeDetection(),
     importProvidersFrom([
       TranslateModule.forRoot({
         defaultLanguage: 'en',
