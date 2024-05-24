@@ -1,8 +1,12 @@
-import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { combineLatestWith, map } from 'rxjs';
 
 import { USER_ID } from '../../contact-manager.routes';
 import { UserService } from '../../services/user.service';
@@ -14,21 +18,18 @@ import { MaterialModule } from 'src/app/material.module';
   templateUrl: './main-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [AsyncPipe, MaterialModule, NotesComponent, TranslateModule],
+  imports: [MaterialModule, NotesComponent, TranslateModule],
 })
 export class MainContentComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
-  private readonly userId$ = this.activatedRoute.params.pipe(
-    map((params) => {
-      const id = +params[USER_ID];
-      return isNaN(id) ? 0 : id;
-    }),
-  );
-  readonly user$ = this.userId$.pipe(
-    combineLatestWith(this.userService.data$),
-    map(([userId, users]) => {
-      return userId === 0 ? null : users.find((u) => u.id === userId) ?? null;
-    }),
-  );
+  private readonly params = toSignal(this.activatedRoute.params);
+  private readonly users = this.userService.data;
+
+  protected readonly user = computed(() => {
+    const params = this.params();
+    const userId = !params ? 0 : +params[USER_ID];
+
+    return this.users().find((u) => u.id === userId);
+  });
 }

@@ -1,4 +1,4 @@
-@if (user$ | async; as user) {
+@if (user(); as user) {
   <mat-card>
     <mat-card-header>
       <mat-icon mat-card-avatar [svgIcon]="user.avatar" />

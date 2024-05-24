@@ -32,11 +32,11 @@ export class ToolbarComponent {
   private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
 
-  @Output() readonly toggleSidenav = new EventEmitter<void>();
-  @Output() readonly toggleTheme = new EventEmitter<void>();
-  @Output() readonly toggleDir = new EventEmitter<void>();
+  @Output() protected readonly toggleSidenav = new EventEmitter<void>();
+  @Output() protected readonly toggleTheme = new EventEmitter<void>();
+  @Output() protected readonly toggleDir = new EventEmitter<void>();
 
-  openAddContactDialog(): void {
+  protected openAddContactDialog(): void {
     const dialogRef = this.dialog.open(NewContactDialogComponent, {
       width: '450px',
     });
@@ -59,7 +59,7 @@ export class ToolbarComponent {
     });
   }
 
-  openSnackBar(
+  protected openSnackBar(
     message: string,
     action: string,
   ): MatSnackBarRef<SimpleSnackBar> {

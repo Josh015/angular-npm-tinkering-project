@@ -1,6 +1,5 @@
 import { Direction } from '@angular/cdk/bidi';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -29,7 +28,6 @@ import { MaterialModule } from 'src/app/material.module';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    AsyncPipe,
     MaterialModule,
     RouterLink,
     RouterLinkActive,
@@ -46,14 +44,14 @@ export class SidenavComponent {
   private readonly router = inject(Router);
   private readonly userService = inject(UserService);
 
-  readonly usersLoading$ = this.userService.loading$;
-  readonly users$ = this.userService.data$;
+  protected readonly usersLoading = this.userService.loading;
+  protected readonly users = this.userService.data;
 
-  isScreenSmall = false;
-  isDarkTheme = false;
-  textDirection: Direction = 'ltr';
+  protected isScreenSmall = false;
+  protected isDarkTheme = false;
+  protected textDirection: Direction = 'ltr';
 
-  @ViewChild(MatSidenav) sidenav?: MatSidenav;
+  @ViewChild(MatSidenav) protected sidenav?: MatSidenav;
 
   constructor() {
     this.breakpointObserver
@@ -71,11 +69,11 @@ export class SidenavComponent {
     });
   }
 
-  toggleTheme(): void {
+  protected toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;
   }
 
-  toggleDir(): void {
+  protected toggleDir(): void {
     this.textDirection = this.textDirection === 'ltr' ? 'rtl' : 'ltr';
   }
 }

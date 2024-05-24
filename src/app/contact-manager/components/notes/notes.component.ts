@@ -21,12 +21,12 @@ import { MaterialModule } from 'src/app/material.module';
   imports: [MaterialModule, TranslateModule],
 })
 export class NotesComponent implements AfterViewInit {
-  readonly dataSource = new MatTableDataSource<Note>();
+  protected readonly dataSource = new MatTableDataSource<Note>();
 
-  displayedColumns = ['id', 'title', 'date'];
+  protected displayedColumns = ['id', 'title', 'date'];
 
-  @ViewChild(MatSort) sort?: MatSort;
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  @ViewChild(MatSort) protected sort?: MatSort;
+  @ViewChild(MatPaginator) protected paginator?: MatPaginator;
 
   @Input({ required: true }) set notes(value: Note[]) {
     this.dataSource.data = value;
@@ -37,7 +37,7 @@ export class NotesComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator ?? null;
   }
 
-  applyFilter(event: KeyboardEvent): void {
+  protected applyFilter(event: KeyboardEvent): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

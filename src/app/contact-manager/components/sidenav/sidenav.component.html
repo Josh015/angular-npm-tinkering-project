@@ -13,11 +13,11 @@
     <mat-toolbar color="primary">
       {{ 'ContactManager.Sidenav.Title' | translate }}
     </mat-toolbar>
-    @if (usersLoading$ | async) {
+    @if (usersLoading()) {
       <mat-spinner style="margin: 0 auto" />
     } @else {
       <mat-nav-list>
-        @for (user of users$ | async; track user) {
+        @for (user of users(); track user) {
           <mat-list-item
             (click)="anchor.click()"
             [activated]="anchor.classList.contains('active')"

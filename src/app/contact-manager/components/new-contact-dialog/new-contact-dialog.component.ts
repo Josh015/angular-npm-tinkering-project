@@ -28,11 +28,11 @@ export class NewContactDialogComponent {
   private readonly dialogRef = inject(MatDialogRef<NewContactDialogComponent>);
   private readonly userService = inject(UserService);
 
-  readonly avatars = AVATARS;
-  readonly genders = GENDERS;
-  readonly minBirthDate = new Date('1970-01-01Z00:00:00:000');
-  readonly maxBirthDate = new Date();
-  readonly formGroup = new FormGroup({
+  protected readonly avatars = AVATARS;
+  protected readonly genders = GENDERS;
+  protected readonly minBirthDate = new Date('1970-01-01Z00:00:00:000');
+  protected readonly maxBirthDate = new Date();
+  protected readonly formGroup = new FormGroup({
     id: new FormControl<number | null>(null),
     birthDate: new FormControl<Date | null>(null, [
       Validators.required,
@@ -51,7 +51,7 @@ export class NewContactDialogComponent {
     notes: new FormControl<Note[]>([]),
   });
 
-  async save(): Promise<void> {
+  protected async save(): Promise<void> {
     if (this.formGroup.valid) {
       try {
         const user = await this.userService.create(
@@ -65,7 +65,7 @@ export class NewContactDialogComponent {
     }
   }
 
-  dismiss(user?: User): void {
+  protected dismiss(user?: User): void {
     this.dialogRef.close(user ?? null);
   }
 }
