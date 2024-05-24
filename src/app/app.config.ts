@@ -8,10 +8,6 @@ import {
   withDebugTracing,
   withPreloading,
 } from '@angular/router';
-import { provideEffects } from '@ngrx/effects';
-import { provideRouterStore, routerReducer } from '@ngrx/router-store';
-import { provideState, provideStore } from '@ngrx/store';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
 import {
   TranslateCompiler,
   TranslateLoader,
@@ -21,7 +17,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 
 import { routes } from './app.routes';
-import { appFeature } from './store';
 import { environment } from 'src/environments/environment';
 
 export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
@@ -40,19 +35,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(),
     provideNativeDateAdapter(),
-    provideStore({ router: routerReducer }),
-    provideState(appFeature),
-    provideRouterStore(),
-    provideEffects([]),
-
-    environment.production
-      ? []
-      : provideStoreDevtools({
-          name: 'Angular NPM Tinkering Project App DevTools',
-          maxAge: 25,
-          logOnly: environment.production,
-        }),
-
     importProvidersFrom([
       TranslateModule.forRoot({
         defaultLanguage: 'en',

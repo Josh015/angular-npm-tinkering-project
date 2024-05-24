@@ -1,9 +1,10 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { combineLatestWith, map } from 'rxjs';
 
-import { selectCurrentUser } from '../../store';
+import { ContactManagerService } from '../../contact-manager.service';
 import { NotesComponent } from '../notes/notes.component';
 import { MaterialModule } from 'src/app/material.module';
 
@@ -15,7 +16,18 @@ import { MaterialModule } from 'src/app/material.module';
   imports: [AsyncPipe, MaterialModule, NotesComponent, TranslateModule],
 })
 export class MainContentComponent {
-  private readonly store = inject(Store);
-
-  readonly user$ = this.store.select(selectCurrentUser);
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly contactManagerService = inject(ContactManagerService);
+  private readonly userId$ = this.activatedRoute.params.pipe(
+    map((params) => {
+      const id = +params['userId'];
+      return isNaN(id) ? 0 : id;
+    }),
+  );
+  readonly user$ = this.userId$.pipe(
+    combineLatestWith(this.contactManagerService.users$),
+    map(([userId, users]) => {
+      return userId === 0 ? null : users.find((u) => u.id === userId) ?? null;
+    }),
+  );
 }

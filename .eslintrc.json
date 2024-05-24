@@ -8,7 +8,7 @@
         "project": ["tsconfig.json"],
         "createDefaultProgram": true
       },
-      "plugins": ["@ngrx", "import", "rxjs"],
+      "plugins": ["import", "rxjs"],
       "settings": {
         // Manually add "src/" directory to import plugin's "internal" group
         "import/internal-regex": "^src/"
@@ -22,7 +22,6 @@
         "plugin:rxjs/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:@ngrx/recommended",
         "plugin:prettier/recommended"
       ],
       "rules": {
@@ -105,12 +104,6 @@
         "rxjs/no-compat": ["error"],
         "rxjs/no-exposed-subjects": ["error"],
         "rxjs/no-nested-subscribe": ["off"]
-      }
-    },
-    {
-      "files": ["*grouped-actions.ts"],
-      "rules": {
-        "@typescript-eslint/naming-convention": "off"
       }
     },
     {

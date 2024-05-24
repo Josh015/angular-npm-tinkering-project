@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormControl,
   FormGroup,
@@ -8,12 +7,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Actions, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { ContactManagerService } from '../../contact-manager.service';
 import { AVATARS, Avatar, GENDERS, Gender, Note, User } from '../../models';
-import { ContactManagerActions } from '../../store';
 import { MaterialModule } from 'src/app/material.module';
 import { y2kValidator, year2012Validator } from 'src/app/utils';
 
@@ -29,8 +26,7 @@ export class NewContactDialogComponent {
   static readonly bioMaxLength = 30;
 
   private readonly dialogRef = inject(MatDialogRef<NewContactDialogComponent>);
-  private readonly store = inject(Store);
-  private readonly actions$ = inject(Actions);
+  private readonly contactManagerService = inject(ContactManagerService);
 
   readonly avatars = AVATARS;
   readonly genders = GENDERS;
@@ -55,28 +51,17 @@ export class NewContactDialogComponent {
     notes: new FormControl<Note[]>([]),
   });
 
-  constructor() {
-    this.actions$
-      .pipe(
-        ofType(ContactManagerActions.createUserSuccess),
-        takeUntilDestroyed(),
-      )
-      .subscribe(({ user }) => {
-        this.dialogRef.close(user);
-      });
-  }
-
   save(): void {
     if (this.formGroup.valid) {
-      this.store.dispatch(
-        ContactManagerActions.createUser({
-          user: this.formGroup.getRawValue() as User,
-        }),
-      );
+      this.contactManagerService
+        .addUser(this.formGroup.getRawValue() as User)
+        .subscribe((user) => {
+          this.dismiss(user);
+        });
     }
   }
 
-  dismiss(): void {
-    this.dialogRef.close(null);
+  dismiss(user?: User): void {
+    this.dialogRef.close(user ?? null);
   }
 }

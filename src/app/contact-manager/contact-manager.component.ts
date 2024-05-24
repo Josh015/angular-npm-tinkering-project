@@ -6,10 +6,9 @@ import {
 } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Store } from '@ngrx/store';
 
 import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { ContactManagerActions } from './store';
+import { ContactManagerService } from './contact-manager.service';
 
 @Component({
   selector: 'app-contact-manager-app',
@@ -21,13 +20,13 @@ import { ContactManagerActions } from './store';
 export class ContactManagerComponent implements OnInit {
   private readonly iconRegistry = inject(MatIconRegistry);
   private readonly sanitizer = inject(DomSanitizer);
-  private readonly store = inject(Store);
+  private readonly contactManagerService = inject(ContactManagerService);
 
   ngOnInit(): void {
     this.iconRegistry.addSvgIconSet(
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg'),
     );
 
-    this.store.dispatch(ContactManagerActions.loadUsers());
+    this.contactManagerService.fetchUsers().subscribe();
   }
 }

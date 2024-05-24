@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { delay, finalize, tap } from 'rxjs/operators';
 
 import { AVATARS, GENDERS, User } from './models';
 
@@ -12,6 +12,12 @@ export class ContactManagerService {
   static readonly usersUrl = `${ContactManagerService.rootUrl}/users` as const;
 
   private readonly http = inject(HttpClient);
+
+  private readonly usersLoadingSubject$ = new BehaviorSubject(false);
+  readonly usersLoading$ = this.usersLoadingSubject$.asObservable();
+
+  private readonly usersSubject$ = new BehaviorSubject<User[]>([]);
+  readonly users$ = this.usersSubject$.asObservable();
 
   private ids: number[] = [];
 
@@ -25,7 +31,9 @@ export class ContactManagerService {
     }).pipe(delay(600)); // Delay to show loading spinner
   }
 
-  loadAllUsers(): Observable<User[]> {
+  fetchUsers(): Observable<User[]> {
+    this.usersLoadingSubject$.next(true);
+
     return this.http.get<User[]>(ContactManagerService.usersUrl).pipe(
       // Delay to show loading spinner
       delay(600),
@@ -56,7 +64,9 @@ export class ContactManagerService {
           });
         }
       }),
-      // catchError(this.handleError)
+      tap((users) => this.usersSubject$.next(users)),
+      // catchError(this.handleError),
+      finalize(() => this.usersLoadingSubject$.next(false)),
     );
   }
 

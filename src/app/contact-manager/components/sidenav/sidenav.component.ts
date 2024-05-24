@@ -1,3 +1,4 @@
+import { Direction } from '@angular/cdk/bidi';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
 import {
@@ -15,13 +16,11 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { contactManagerFeature, selectUsers } from '../../store';
+import { ContactManagerService } from '../../contact-manager.service';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { MaterialModule } from 'src/app/material.module';
-import { AppActions, appFeature } from 'src/app/store';
 
 @Component({
   selector: 'app-sidenav',
@@ -45,16 +44,14 @@ export class SidenavComponent {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);
-  private readonly store = inject(Store);
+  private readonly contactManagerService = inject(ContactManagerService);
 
-  readonly usersLoading$ = this.store.select(
-    contactManagerFeature.selectUsersLoading,
-  );
-  readonly users$ = this.store.select(selectUsers);
-  readonly isDarkTheme$ = this.store.select(appFeature.selectIsDarkTheme);
-  readonly textDirection$ = this.store.select(appFeature.selectTextDirection);
+  readonly usersLoading$ = this.contactManagerService.usersLoading$;
+  readonly users$ = this.contactManagerService.users$;
 
   isScreenSmall = false;
+  isDarkTheme = false;
+  textDirection: Direction = 'ltr';
 
   @ViewChild(MatSidenav) sidenav?: MatSidenav;
 
@@ -75,10 +72,10 @@ export class SidenavComponent {
   }
 
   toggleTheme(): void {
-    this.store.dispatch(AppActions.toggleDarkTheme());
+    this.isDarkTheme = !this.isDarkTheme;
   }
 
   toggleDir(): void {
-    this.store.dispatch(AppActions.toggleTextDirection());
+    this.textDirection = this.textDirection === 'ltr' ? 'rtl' : 'ltr';
   }
 }
