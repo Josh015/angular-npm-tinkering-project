@@ -18,7 +18,10 @@
     } @else {
       <mat-nav-list>
         @for (user of users$ | async; track user) {
-          <mat-list-item (click)="anchor.click()">
+          <mat-list-item
+            (click)="anchor.click()"
+            [activated]="anchor.classList.contains('active')"
+          >
             <a
               #anchor
               matListItemTitle
