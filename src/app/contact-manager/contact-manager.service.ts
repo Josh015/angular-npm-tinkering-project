@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, of, throwError } from 'rxjs';
 import { catchError, delay, finalize, tap } from 'rxjs/operators';
 
 import { User } from './models';
@@ -9,6 +8,7 @@ import { User } from './models';
 @Injectable()
 export class ContactManagerService {
   static readonly dbDelayMilliseconds = 600;
+  static readonly usersUrl = '/assets/users.json';
 
   private readonly http = inject(HttpClient);
 
@@ -20,37 +20,39 @@ export class ContactManagerService {
 
   private dataStore: { users: User[] } = { users: [] };
 
-  addUser(user: User): Observable<User> {
+  addUser(user: User): Promise<User> {
+    this.usersLoadingSubject$.next(true);
+
     user.id = this.dataStore.users.length + 1;
     this.dataStore.users.push(user);
     this.usersSubject$.next(this.dataStore.users);
 
-    return of(user).pipe(delay(ContactManagerService.dbDelayMilliseconds)); // Delay to show loading spinner
+    return lastValueFrom(
+      of(user).pipe(
+        delay(ContactManagerService.dbDelayMilliseconds),
+        tap(() => this.usersLoadingSubject$.next(false)),
+      ),
+    );
   }
 
-  // userById(id: number) {
-  //   return this.dataStore.users.find((x) => x.id == id);
-  // }
-
-  fetchUsers(): Observable<User[]> {
-    const usersUrl = '/assets/users.json';
-
+  fetchUsers(): Promise<User[]> {
     this.usersLoadingSubject$.next(true);
 
-    return this.http.get<User[]>(usersUrl).pipe(
-      // Delay to show loading spinner
-      delay(ContactManagerService.dbDelayMilliseconds),
-      tap((users) => {
-        this.dataStore.users = users;
-        this.usersSubject$.next(users);
-      }),
-      catchError((error: unknown) => {
-        console.log('Failed to fetch users');
-        this.dataStore.users = [];
-        this.usersSubject$.next([]);
-        return throwError(() => error);
-      }),
-      finalize(() => this.usersLoadingSubject$.next(false)),
+    return lastValueFrom(
+      this.http.get<User[]>(ContactManagerService.usersUrl).pipe(
+        delay(ContactManagerService.dbDelayMilliseconds),
+        tap((users) => {
+          this.dataStore.users = users;
+          this.usersSubject$.next(users);
+        }),
+        catchError((error: unknown) => {
+          console.log('Failed to fetch users');
+          this.dataStore.users = [];
+          this.usersSubject$.next([]);
+          return throwError(() => error);
+        }),
+        finalize(() => this.usersLoadingSubject$.next(false)),
+      ),
     );
   }
 }

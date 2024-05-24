@@ -51,13 +51,13 @@ export class NewContactDialogComponent {
     notes: new FormControl<Note[]>([]),
   });
 
-  save(): void {
+  async save(): Promise<void> {
     if (this.formGroup.valid) {
-      this.contactManagerService
-        .addUser(this.formGroup.getRawValue() as User)
-        .subscribe((user) => {
-          this.dismiss(user);
-        });
+      const user = await this.contactManagerService.addUser(
+        this.formGroup.getRawValue() as User,
+      );
+
+      this.dismiss(user);
     }
   }
 

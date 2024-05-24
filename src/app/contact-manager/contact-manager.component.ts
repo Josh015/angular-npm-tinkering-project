@@ -22,11 +22,11 @@ export class ContactManagerComponent implements OnInit {
   private readonly sanitizer = inject(DomSanitizer);
   private readonly contactManagerService = inject(ContactManagerService);
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.iconRegistry.addSvgIconSet(
       this.sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg'),
     );
 
-    this.contactManagerService.fetchUsers().subscribe();
+    await this.contactManagerService.fetchUsers();
   }
 }
