@@ -15,7 +15,7 @@ I've utilized a cross-section of NPM packages that I consider to be indispensibl
 
 - [Angular](https://angular.dev/)
 - [Angular Material](https://material.angular.io/)
-- [ESLInt](https://eslint.org/)
+- [ESLint](https://eslint.org/)
 - [messageformat](https://messageformat.github.io/messageformat/)
 - [NgRx](https://ngrx.io/)
 - [ngx-translate](https://github.com/ngx-translate/core)
