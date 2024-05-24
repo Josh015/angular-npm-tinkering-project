@@ -43,11 +43,11 @@ export class SidenavComponent {
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);
   private readonly userService = inject(UserService);
+  private readonly sidenav = viewChild.required(MatSidenav);
 
   protected readonly usersLoading = this.userService.loading;
   protected readonly users = this.userService.data;
 
-  protected sidenav = viewChild.required(MatSidenav);
   protected isScreenSmall = false;
   protected isDarkTheme = false;
   protected textDirection: Direction = 'ltr';

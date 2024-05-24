@@ -21,11 +21,12 @@ import { MaterialModule } from 'src/app/material.module';
   imports: [MaterialModule, TranslateModule],
 })
 export class NotesComponent implements AfterViewInit {
+  private readonly sort = viewChild.required(MatSort);
+  private readonly paginator = viewChild.required(MatPaginator);
+
   protected readonly dataSource = new MatTableDataSource<Note>();
 
   protected displayedColumns = ['id', 'title', 'date'];
-  protected sort = viewChild.required(MatSort);
-  protected paginator = viewChild.required(MatPaginator);
 
   @Input({ required: true }) set notes(value: Note[]) {
     this.dataSource.data = value;
