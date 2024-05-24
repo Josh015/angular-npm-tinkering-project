@@ -24,12 +24,11 @@ export class MainContentComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
   private readonly params = toSignal(this.activatedRoute.params);
-  private readonly users = this.userService.data;
 
   protected readonly user = computed(() => {
     const params = this.params();
     const userId = !params ? 0 : +params[USER_ID];
 
-    return this.users().find((u) => u.id === userId);
+    return this.userService.data().find((u) => u.id === userId);
   });
 }
