@@ -26,8 +26,7 @@ export class NotesComponent implements AfterViewInit {
   private readonly paginator = viewChild.required(MatPaginator);
 
   protected readonly dataSource = new MatTableDataSource<Note>();
-
-  protected displayedColumns = ['id', 'title', 'date'];
+  protected readonly displayedColumns = ['id', 'title', 'date'];
 
   readonly notes = input.required<Note[]>();
 
