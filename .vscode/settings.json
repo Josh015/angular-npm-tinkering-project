@@ -4,6 +4,7 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "css.customData": [".vscode/tailwindcss.json"],
   "cSpell.words": [
     "UNPATCHED",
     "browserslist",

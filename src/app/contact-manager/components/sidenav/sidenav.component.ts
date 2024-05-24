@@ -25,7 +25,7 @@ import { AppActions, appFeature } from 'src/app/store';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.scss',
+  styleUrl: './sidenav.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
@@ -39,7 +39,7 @@ import { AppActions, appFeature } from 'src/app/store';
   ],
 })
 export class SidenavComponent {
-  static readonly smallWidthBreakpoint = 720;
+  static readonly smallWidthBreakpoint = 768;
 
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);

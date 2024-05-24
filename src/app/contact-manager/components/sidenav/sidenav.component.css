@@ -1,0 +1,4 @@
+/* Tailwind custom color doesn't appear to work in routerLinkActive. */
+.active {
+  @apply !text-[#3f51b5];
+}

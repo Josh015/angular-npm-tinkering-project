@@ -1,0 +1,10 @@
+.sidenav-toggle {
+  --icon-width: 56px;
+
+  @apply hidden p-0 m-[8px] min-w-[--icon-width];
+  @apply max-md:flex max-md:items-center max-md:justify-center;
+
+  mat-icon {
+    @apply w-[--icon-width] h-[--icon-width] text-[30px] leading-[--icon-width] text-[white];
+  }
+}

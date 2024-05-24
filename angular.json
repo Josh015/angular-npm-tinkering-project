@@ -40,7 +40,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/tailwind.css", "src/styles.scss"],
+            "styles": ["src/material.scss", "src/styles.css"],
             "scripts": []
           },
           "configurations": {
