@@ -1,9 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   inject,
-  Output,
+  output,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
@@ -32,9 +31,9 @@ export class ToolbarComponent {
   private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
 
-  @Output() protected readonly toggleSidenav = new EventEmitter<void>();
-  @Output() protected readonly toggleTheme = new EventEmitter<void>();
-  @Output() protected readonly toggleDir = new EventEmitter<void>();
+  protected readonly toggleSidenav = output();
+  protected readonly toggleTheme = output();
+  protected readonly toggleDir = output();
 
   protected openAddContactDialog(): void {
     const dialogRef = this.dialog.open(NewContactDialogComponent, {
