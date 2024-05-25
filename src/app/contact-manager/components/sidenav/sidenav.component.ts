@@ -1,5 +1,5 @@
 import { Direction } from '@angular/cdk/bidi';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -54,7 +54,7 @@ export class SidenavComponent {
     this.breakpointObserver
       .observe([`(max-width: ${SidenavComponent.smallWidthBreakpoint}px)`])
       .pipe(takeUntilDestroyed())
-      .subscribe((state: BreakpointState) => {
+      .subscribe((state) => {
         this.isScreenSmall.set(state.matches);
       });
 
