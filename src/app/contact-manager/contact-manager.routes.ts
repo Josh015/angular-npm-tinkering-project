@@ -17,3 +17,4 @@ export const CONTACT_MANAGER_ROUTES: Routes = [
   },
   { path: '**', redirectTo: '' },
 ];
+export default CONTACT_MANAGER_ROUTES;

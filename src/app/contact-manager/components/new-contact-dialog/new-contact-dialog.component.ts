@@ -19,7 +19,7 @@ import { y2kValidator, year2012Validator } from 'src/app/utils';
   templateUrl: './new-contact-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MaterialModule, TranslateModule],
+  imports: [FormsModule, MaterialModule, ReactiveFormsModule, TranslateModule],
 })
 export class NewContactDialogComponent {
   static readonly nameMaxLength = 20;
