@@ -1,14 +1,14 @@
 <mat-sidenav-container
   class="h-full min-h-full w-full min-w-full flex-1"
   [class.dark-theme]="isDarkTheme"
-  [dir]="textDirection"
+  [dir]="textDirection()"
   autosize
 >
   <mat-sidenav
     class="mat-elevation-z10 w-[240px]"
     #sidenav
-    [opened]="!isScreenSmall"
-    [mode]="isScreenSmall ? 'over' : 'side'"
+    [opened]="!isScreenSmall()"
+    [mode]="isScreenSmall() ? 'over' : 'side'"
   >
     <mat-toolbar color="primary">
       {{ 'ContactManager.Sidenav.Title' | translate }}

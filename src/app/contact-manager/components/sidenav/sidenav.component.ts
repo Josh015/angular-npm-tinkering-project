@@ -2,9 +2,9 @@ import { Direction } from '@angular/cdk/bidi';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   inject,
+  signal,
   viewChild,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -39,7 +39,6 @@ import { MaterialModule } from 'src/app/material.module';
 export class SidenavComponent {
   static readonly smallWidthBreakpoint = 768;
 
-  private readonly cdr = inject(ChangeDetectorRef);
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);
   private readonly userService = inject(UserService);
@@ -47,34 +46,30 @@ export class SidenavComponent {
 
   protected readonly usersLoading = this.userService.loading;
   protected readonly users = this.userService.data;
-
-  protected isScreenSmall = false;
-  protected isDarkTheme = false;
-  protected textDirection: Direction = 'ltr';
+  protected readonly isScreenSmall = signal(false);
+  protected readonly isDarkTheme = signal(false);
+  protected readonly textDirection = signal<Direction>('ltr');
 
   constructor() {
     this.breakpointObserver
       .observe([`(max-width: ${SidenavComponent.smallWidthBreakpoint}px)`])
       .pipe(takeUntilDestroyed())
       .subscribe((state: BreakpointState) => {
-        this.isScreenSmall = state.matches;
-
-        // HACK: Fixes sidenav not auto-collapsing when user isn't selected.
-        this.cdr.markForCheck();
+        this.isScreenSmall.set(state.matches);
       });
 
     this.router.events.pipe(takeUntilDestroyed()).subscribe(() => {
-      if (this.isScreenSmall) {
+      if (this.isScreenSmall()) {
         this.sidenav().close();
       }
     });
   }
 
   protected toggleTheme(): void {
-    this.isDarkTheme = !this.isDarkTheme;
+    this.isDarkTheme.update((value) => !value);
   }
 
   protected toggleDir(): void {
-    this.textDirection = this.textDirection === 'ltr' ? 'rtl' : 'ltr';
+    this.textDirection.update((value) => (value === 'ltr' ? 'rtl' : 'ltr'));
   }
 }
