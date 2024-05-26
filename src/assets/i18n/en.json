@@ -53,7 +53,10 @@
           "Number": "No.",
           "Title": "Title"
         },
-        "NoMatchingDataForFilter": "No data matching the filter \"{filterValue}\""
+        "Empty": {
+          "NoData": "No data.",
+          "NoMatchingDataForFilter": "No data matching the filter \"{filterValue}\""
+        }
       }
     },
     "Sidenav": {
