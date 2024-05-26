@@ -2,66 +2,74 @@
   "App": {},
   "ContactManager": {
     "MainContent": {
-      "NameAndGenderTitle": "{name} {gender, select, male{♂} female{♀} enby{⚥} other{?}}",
-      "BirthdaySubTitle": "Birthday {birthDate, date, long}",
-      "BioTab": "Bio",
-      "NotesTab": "Notes"
+      "SubTitle.Birthday": "Birthday {birthDate, date, long}",
+      "Tabs": {
+        "Bio": "Bio",
+        "Notes": "Notes"
+      },
+      "Title.NameAndGender": "{name} {gender, select, male{♂} female{♀} enby{⚥} other{?}}"
     },
     "NewContactDialog": {
-      "Title": "Add new contact",
-      "AvatarField": {
-        "Label": "Avatar"
-      },
-      "GenderField": {
-        "Label": "Gender",
-        "Option": "{gender, select, male{Male} female{Female} enby{Non-Binary} other{?}}"
-      },
-      "NameField": {
-        "Label": "Name",
-        "Errors": {
-          "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two} other{{excessCount}}} {excessCount, plural, =1{character} other{characters}}"
-        }
-      },
-      "BornField": {
-        "Label": "Born",
-        "Errors": {
-          "Y2K": "Invalid birthday since your PC is about to explode!",
-          "Year2012": "Invalid birthday since the world ended!"
-        }
-      },
-      "BioField": {
-        "Label": "Bio",
-        "Errors": {
-          "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two}  other{{excessCount}}} {excessCount, plural, =1{character} other{characters}}"
+      "Cancel": "Cancel",
+      "Form": {
+        "Avatar": {
+          "Label": "Avatar"
+        },
+        "Bio": {
+          "Errors": {
+            "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two}  other{{excessCount}}} {excessCount, plural, =1{character} other{characters}}"
+          },
+          "Label": "Bio"
+        },
+        "Born": {
+          "Errors": {
+            "Y2K": "Invalid birthday since your PC is about to explode!",
+            "Year2012": "Invalid birthday since the world ended!"
+          },
+          "Label": "Born"
+        },
+        "Gender": {
+          "Label": "Gender",
+          "Option": "{gender, select, male{Male} female{Female} enby{Non-Binary} other{?}}"
+        },
+        "Name": {
+          "Errors": {
+            "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two} other{{excessCount}}} {excessCount, plural, =1{character} other{characters}}"
+          },
+          "Label": "Name"
         }
       },
       "Save": "Save",
-      "Cancel": "Cancel"
+      "Title": "Add new contact"
     },
     "Notes": {
       "Filter": "Filter",
-      "NumberColumn": "No.",
-      "TitleColumn": "Title",
-      "DateColumn": {
-        "Title": "Date",
-        "DateFormat": "{value, date, short}"
-      },
-      "NoMatchingDataForFilter": "No data matching the filter \"{filterValue}\""
+      "Grid": {
+        "Columns": {
+          "Date": {
+            "Format": "{value, date, short}",
+            "Title": "Date"
+          },
+          "Number": "No.",
+          "Title": "Title"
+        },
+        "NoMatchingDataForFilter": "No data matching the filter \"{filterValue}\""
+      }
     },
     "Sidenav": {
       "Title": "Contacts"
     },
     "Toolbar": {
-      "Title": "Contact Manager",
       "Menu": {
         "NewContact": "New Contact",
-        "ToggleTheme": "Toggle theme",
-        "ToggleDir": "Toggle dir"
+        "ToggleDir": "Toggle dir",
+        "ToggleTheme": "Toggle theme"
       },
       "SnackBar": {
-        "Message": "Contact added",
-        "Action": "Navigate"
-      }
+        "Action": "Navigate",
+        "Message": "Contact added"
+      },
+      "Title": "Contact Manager"
     }
   }
 }

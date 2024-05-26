@@ -4,18 +4,20 @@
       <mat-card-header>
         <mat-icon [svgIcon]="user.avatar" mat-card-avatar />
         <mat-card-title>
-          {{ t('NameAndGenderTitle', user) }}
+          {{ t('Title.NameAndGender', user) }}
         </mat-card-title>
         <mat-card-subtitle>
-          {{ t('BirthdaySubTitle', user) }}
+          {{ t('SubTitle.Birthday', user) }}
         </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <mat-tab-group>
-          <mat-tab [label]="t('BioTab')">
+        <mat-tab-group
+          *transloco="let t; prefix: 'ContactManager.MainContent.Tabs'"
+        >
+          <mat-tab [label]="t('Bio')">
             <p>{{ user.bio }}</p>
           </mat-tab>
-          <mat-tab [label]="t('NotesTab')">
+          <mat-tab [label]="t('Notes')">
             <app-notes [notes]="user.notes" />
           </mat-tab>
         </mat-tab-group>
