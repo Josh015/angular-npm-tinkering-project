@@ -19,7 +19,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
 
 import { UserService } from '../../services/user.service';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
-import { MaterialModule } from 'src/app/material.module';
+import { MaterialModule } from 'src/app/shared';
 
 @Component({
   selector: 'app-sidenav',

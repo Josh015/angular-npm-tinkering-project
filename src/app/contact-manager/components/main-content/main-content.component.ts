@@ -10,7 +10,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 
 import { UserService } from '../../services/user.service';
 import { NotesComponent } from '../notes/notes.component';
-import { MaterialModule } from 'src/app/material.module';
+import { MaterialModule } from 'src/app/shared';
 
 @Component({
   selector: 'app-main-content',

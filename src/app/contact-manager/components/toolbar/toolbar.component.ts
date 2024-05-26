@@ -15,7 +15,7 @@ import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
 import { User } from '../../models';
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
-import { MaterialModule } from 'src/app/material.module';
+import { MaterialModule } from 'src/app/shared';
 
 @Component({
   selector: 'app-toolbar',

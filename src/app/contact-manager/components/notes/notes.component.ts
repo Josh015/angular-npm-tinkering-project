@@ -12,7 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TranslocoDirective } from '@jsverse/transloco';
 
 import { Note } from '../../models';
-import { MaterialModule } from 'src/app/material.module';
+import { MaterialModule } from 'src/app/shared';
 
 @Component({
   selector: 'app-notes',

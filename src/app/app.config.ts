@@ -12,12 +12,12 @@ import {
   withDebugTracing,
   withPreloading,
 } from '@angular/router';
-
-import { routes } from './app.routes';
-import { environment } from 'src/environments/environment';
-import { TranslocoHttpLoader } from './transloco-loader';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat';
+
+import { routes } from './app.routes';
+import { TranslocoHttpLoader } from './core';
+import { environment } from 'src/environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [

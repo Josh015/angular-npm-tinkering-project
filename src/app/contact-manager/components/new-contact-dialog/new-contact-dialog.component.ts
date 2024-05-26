@@ -11,7 +11,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 
 import { AVATARS, Avatar, GENDERS, Gender, Note, User } from '../../models';
 import { UserService } from '../../services/user.service';
-import { MaterialModule } from 'src/app/material.module';
+import { MaterialModule } from 'src/app/shared';
 import { y2kValidator, year2012Validator } from 'src/app/utils';
 
 @Component({
