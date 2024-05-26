@@ -1,136 +1,126 @@
-<h2 mat-dialog-title>
-  {{ 'ContactManager.NewContactDialog.Title' | translate }}
-</h2>
-<mat-dialog-content>
-  <form [formGroup]="formGroup">
-    <div class="flex flex-col">
-      <mat-form-field appearance="fill">
-        <mat-label>
-          {{ 'ContactManager.NewContactDialog.AvatarField.Label' | translate }}
-        </mat-label>
-        <mat-select [formControl]="formGroup.controls.avatar" required>
-          <mat-select-trigger>
-            <mat-icon [svgIcon]="formGroup.controls.avatar.value || ''" />
-            {{ formGroup.controls.avatar.value }}
-          </mat-select-trigger>
-          @for (avatar of avatars; track avatar) {
-            <mat-option [value]="avatar">
-              <mat-icon [svgIcon]="avatar" />
-              {{ avatar }}
-            </mat-option>
+<ng-container *transloco="let t; prefix: 'ContactManager.NewContactDialog'">
+  <h2 mat-dialog-title>
+    {{ t('Title') }}
+  </h2>
+  <mat-dialog-content>
+    <form [formGroup]="formGroup">
+      <div class="flex flex-col">
+        <mat-form-field appearance="fill">
+          <mat-label>
+            {{ t('AvatarField.Label') }}
+          </mat-label>
+          <mat-select [formControl]="formGroup.controls.avatar" required>
+            <mat-select-trigger>
+              <mat-icon [svgIcon]="formGroup.controls.avatar.value || ''" />
+              {{ formGroup.controls.avatar.value }}
+            </mat-select-trigger>
+            @for (avatar of avatars; track avatar) {
+              <mat-option [value]="avatar">
+                <mat-icon [svgIcon]="avatar" />
+                {{ avatar }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>
+            {{ t('GenderField.Label') }}
+          </mat-label>
+          <mat-select [formControl]="formGroup.controls.gender" required>
+            @for (gender of genders; track gender) {
+              <mat-option [value]="gender">
+                {{ t('GenderField.Option', { gender }) }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>
+            {{ t('NameField.Label') }}
+          </mat-label>
+          <input [formControl]="formGroup.controls.name" matInput required />
+          @if (formGroup.controls.name.errors; as errors) {
+            @if (errors['maxlength']; as maxLength) {
+              <mat-error>
+                {{
+                  t('NameField.Errors.MaxLength', {
+                    excessCount:
+                      maxLength.actualLength - maxLength.requiredLength
+                  })
+                }}
+              </mat-error>
+            }
           }
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>
-          {{ 'ContactManager.NewContactDialog.GenderField.Label' | translate }}
-        </mat-label>
-        <mat-select [formControl]="formGroup.controls.gender" required>
-          @for (gender of genders; track gender) {
-            <mat-option [value]="gender">
-              {{
-                'ContactManager.NewContactDialog.GenderField.Option'
-                  | translate: { gender }
-              }}
-            </mat-option>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>
+            {{ t('BornField.Label') }}
+          </mat-label>
+          <input
+            [formControl]="formGroup.controls.birthDate"
+            [matDatepicker]="picker"
+            [min]="minBirthDate"
+            [max]="maxBirthDate"
+            matInput
+            required
+          />
+          <mat-datepicker-toggle [for]="picker" matSuffix />
+          <mat-datepicker #picker />
+          @if (formGroup.controls.birthDate.errors; as errors) {
+            @if (errors['y2k']) {
+              <mat-error>
+                {{ t('BornField.Errors.Y2K') }}
+              </mat-error>
+            }
+            @if (errors['year2012']) {
+              <mat-error>
+                {{ t('BornField.Errors.Year2012') }}
+              </mat-error>
+            }
           }
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>
-          {{ 'ContactManager.NewContactDialog.NameField.Label' | translate }}
-        </mat-label>
-        <input [formControl]="formGroup.controls.name" matInput required />
-        @if (formGroup.controls.name.errors; as errors) {
-          @if (errors['maxlength']; as maxLength) {
-            <mat-error>
-              {{
-                'ContactManager.NewContactDialog.NameField.Errors.MaxLength'
-                  | translate
-                    : {
-                        excessCount:
-                          maxLength.actualLength - maxLength.requiredLength
-                      }
-              }}
-            </mat-error>
-          }
-        }
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>
-          {{ 'ContactManager.NewContactDialog.BornField.Label' | translate }}
-        </mat-label>
-        <input
-          [formControl]="formGroup.controls.birthDate"
-          [matDatepicker]="picker"
-          [min]="minBirthDate"
-          [max]="maxBirthDate"
-          matInput
-          required
-        />
-        <mat-datepicker-toggle [for]="picker" matSuffix />
-        <mat-datepicker #picker />
-        @if (formGroup.controls.birthDate.errors; as errors) {
-          @if (errors['y2k']) {
-            <mat-error>
-              {{
-                'ContactManager.NewContactDialog.BornField.Errors.Y2K'
-                  | translate
-              }}
-            </mat-error>
-          }
-          @if (errors['year2012']) {
-            <mat-error>
-              {{
-                'ContactManager.NewContactDialog.BornField.Errors.Year2012'
-                  | translate
-              }}
-            </mat-error>
-          }
-        }
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>
-          {{ 'ContactManager.NewContactDialog.BioField.Label' | translate }}
-        </mat-label>
-        <textarea
-          [formControl]="formGroup.controls.bio"
-          matInput
-          rows="10"
-          cols="30"
-        >
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>
+            {{ t('BioField.Label') }}
+          </mat-label>
+          <textarea
+            [formControl]="formGroup.controls.bio"
+            matInput
+            rows="10"
+            cols="30"
+          >
           <!-- [maxlength]="bioMaxLength">!--> <!-- NOTE: Doesn't allow newlines!-->
-        </textarea>
-        @if (formGroup.controls.bio.errors; as errors) {
-          @if (errors['maxlength']; as maxLength) {
-            <mat-error>
-              {{
-                'ContactManager.NewContactDialog.BioField.Errors.MaxLength'
-                  | translate
-                    : {
-                        excessCount:
-                          maxLength.actualLength - maxLength.requiredLength
-                      }
-              }}
-            </mat-error>
+        </textarea
+          >
+          @if (formGroup.controls.bio.errors; as errors) {
+            @if (errors['maxlength']; as maxLength) {
+              <mat-error>
+                {{
+                  t('BioField.Errors.MaxLength', {
+                    excessCount:
+                      maxLength.actualLength - maxLength.requiredLength
+                  })
+                }}
+              </mat-error>
+            }
           }
-        }
-      </mat-form-field>
-    </div>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button
-    [disabled]="!formGroup.valid"
-    (click)="save()"
-    mat-button
-    color="primary"
-  >
-    <mat-icon>save</mat-icon>
-    {{ 'ContactManager.NewContactDialog.Save' | translate }}
-  </button>
-  <button (click)="dismiss()" mat-button color="primary">
-    <mat-icon>cancel</mat-icon>
-    {{ 'ContactManager.NewContactDialog.Cancel' | translate }}
-  </button>
-</mat-dialog-actions>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      [disabled]="!formGroup.valid"
+      (click)="save()"
+      mat-button
+      color="primary"
+    >
+      <mat-icon>save</mat-icon>
+      {{ t('Save') }}
+    </button>
+    <button (click)="dismiss()" mat-button color="primary">
+      <mat-icon>cancel</mat-icon>
+      {{ t('Cancel') }}
+    </button>
+  </mat-dialog-actions>
+</ng-container>

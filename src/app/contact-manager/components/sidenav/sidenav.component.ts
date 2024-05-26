@@ -15,7 +15,7 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 import { UserService } from '../../services/user.service';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
@@ -33,7 +33,7 @@ import { MaterialModule } from 'src/app/material.module';
     RouterLinkActive,
     RouterOutlet,
     ToolbarComponent,
-    TranslateModule,
+    TranslocoPipe,
   ],
 })
 export class SidenavComponent {

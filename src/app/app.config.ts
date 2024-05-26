@@ -1,8 +1,8 @@
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import {
   ApplicationConfig,
-  importProvidersFrom,
   provideExperimentalZonelessChangeDetection,
+  isDevMode,
 } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -12,19 +12,12 @@ import {
   withDebugTracing,
   withPreloading,
 } from '@angular/router';
-import {
-  TranslateCompiler,
-  TranslateLoader,
-  TranslateModule,
-} from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TranslateMessageFormatCompiler } from 'ngx-translate-messageformat-compiler';
 
 import { routes } from './app.routes';
 import { environment } from 'src/environments/environment';
-
-export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
-  new TranslateHttpLoader(http, './assets/i18n/', '.json');
+import { TranslocoHttpLoader } from './transloco-loader';
+import { provideTransloco } from '@jsverse/transloco';
+import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -40,19 +33,17 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideNativeDateAdapter(),
     provideExperimentalZonelessChangeDetection(),
-    importProvidersFrom([
-      TranslateModule.forRoot({
-        defaultLanguage: 'en',
-        loader: {
-          provide: TranslateLoader,
-          useFactory: createTranslateLoader,
-          deps: [HttpClient],
-        },
-        compiler: {
-          provide: TranslateCompiler,
-          useClass: TranslateMessageFormatCompiler,
-        },
-      }),
-    ]),
+    provideTransloco({
+      config: {
+        availableLangs: ['en'],
+        defaultLang: 'en',
+        fallbackLang: 'en',
+        // Remove this option if your application doesn't support changing language in runtime.
+        reRenderOnLangChange: true,
+        prodMode: !isDevMode(),
+      },
+      loader: TranslocoHttpLoader,
+    }),
+    provideTranslocoMessageformat(), // Must come AFTER provideTransloco()!
   ],
 };

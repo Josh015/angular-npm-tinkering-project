@@ -140,6 +140,7 @@ export default [
       'karma.conf.js',
       'postcss.config.js',
       'tailwind.config.js',
+      'transloco.config.js',
     ],
   },
 ];

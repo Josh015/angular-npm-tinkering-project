@@ -1,23 +1,25 @@
-@if (user(); as user) {
-  <mat-card>
-    <mat-card-header>
-      <mat-icon [svgIcon]="user.avatar" mat-card-avatar />
-      <mat-card-title>
-        {{ 'ContactManager.MainContent.NameAndGenderTitle' | translate: user }}
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{ 'ContactManager.MainContent.BirthdaySubTitle' | translate: user }}
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-tab-group>
-        <mat-tab [label]="'ContactManager.MainContent.BioTab' | translate">
-          <p>{{ user.bio }}</p>
-        </mat-tab>
-        <mat-tab [label]="'ContactManager.MainContent.NotesTab' | translate">
-          <app-notes [notes]="user.notes" />
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card-content>
-  </mat-card>
-}
+<ng-container *transloco="let t; prefix: 'ContactManager.MainContent'">
+  @if (user(); as user) {
+    <mat-card>
+      <mat-card-header>
+        <mat-icon [svgIcon]="user.avatar" mat-card-avatar />
+        <mat-card-title>
+          {{ t('NameAndGenderTitle', user) }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ t('BirthdaySubTitle', user) }}
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab [label]="t('BioTab')">
+            <p>{{ user.bio }}</p>
+          </mat-tab>
+          <mat-tab [label]="t('NotesTab')">
+            <app-notes [notes]="user.notes" />
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  }
+</ng-container>

@@ -11,7 +11,7 @@ import {
   SimpleSnackBar,
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
 import { User } from '../../models';
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
@@ -23,13 +23,13 @@ import { MaterialModule } from 'src/app/material.module';
   styleUrl: './toolbar.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MaterialModule, TranslateModule],
+  imports: [MaterialModule, TranslocoDirective],
 })
 export class ToolbarComponent {
   private readonly dialog = inject(MatDialog);
   private readonly snackBar = inject(MatSnackBar);
   private readonly router = inject(Router);
-  private readonly translate = inject(TranslateService);
+  private readonly translocoService = inject(TranslocoService);
 
   protected readonly toggleSidenav = output();
   protected readonly toggleTheme = output();
@@ -42,18 +42,16 @@ export class ToolbarComponent {
 
     dialogRef.afterClosed().subscribe((result: User | null) => {
       if (result) {
-        const keys = [
+        const translations = this.translocoService.translate<string[]>([
           'ContactManager.Toolbar.SnackBar.Message',
           'ContactManager.Toolbar.SnackBar.Action',
-        ];
+        ]);
 
-        this.translate.get(keys).subscribe((values: Record<string, string>) => {
-          this.openSnackBar(values[keys[0]], values[keys[1]])
-            .onAction()
-            .subscribe(() => {
-              void this.router.navigate(['/contact-manager', result.id]);
-            });
-        });
+        this.openSnackBar(translations[0], translations[1])
+          .onAction()
+          .subscribe(() => {
+            void this.router.navigate(['/contact-manager', result.id]);
+          });
       }
     });
   }

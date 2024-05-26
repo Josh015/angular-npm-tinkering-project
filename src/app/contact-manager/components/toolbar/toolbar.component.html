@@ -1,24 +1,30 @@
-<mat-toolbar color="primary">
-  <button class="sidenav-toggle" (click)="toggleSidenav.emit()" mat-icon-button>
-    <mat-icon>menu</mat-icon>
-  </button>
-
-  <span>{{ 'ContactManager.Toolbar.Title' | translate }}</span>
-
-  <span class="flex-auto"></span>
-
-  <button [matMenuTriggerFor]="menu" mat-button>
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button (click)="openAddContactDialog()" mat-menu-item>
-      {{ 'ContactManager.Toolbar.Menu.NewContact' | translate }}
+<ng-container *transloco="let t; prefix: 'ContactManager.Toolbar'">
+  <mat-toolbar color="primary">
+    <button
+      class="sidenav-toggle"
+      (click)="toggleSidenav.emit()"
+      mat-icon-button
+    >
+      <mat-icon>menu</mat-icon>
     </button>
-    <!-- <button (click)="toggleTheme.emit()" mat-menu-item>
-      {{ 'ContactManager.Toolbar.Menu.ToggleTheme' | translate }}
+
+    <span>{{ t('Title') }}</span>
+
+    <span class="flex-auto"></span>
+
+    <button [matMenuTriggerFor]="menu" mat-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="openAddContactDialog()" mat-menu-item>
+        {{ t('Menu.NewContact') }}
+      </button>
+      <!-- <button (click)="toggleTheme.emit()" mat-menu-item>
+      {{ t('Menu.ToggleTheme') }}
     </button> -->
-    <button (click)="toggleDir.emit()" mat-menu-item>
-      {{ 'ContactManager.Toolbar.Menu.ToggleDir' | translate }}
-    </button>
-  </mat-menu>
-</mat-toolbar>
+      <button (click)="toggleDir.emit()" mat-menu-item>
+        {{ t('Menu.ToggleDir') }}
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+</ng-container>

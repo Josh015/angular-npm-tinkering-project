@@ -11,7 +11,7 @@
     [mode]="isScreenSmall() ? 'over' : 'side'"
   >
     <mat-toolbar color="primary">
-      {{ 'ContactManager.Sidenav.Title' | translate }}
+      {{ 'ContactManager.Sidenav.Title' | transloco }}
     </mat-toolbar>
     @if (usersLoading()) {
       <mat-spinner style="margin: 0 auto" />

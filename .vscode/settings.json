@@ -16,6 +16,7 @@
     "enby",
     "instanceof",
     "jasminewd",
+    "jsverse",
     "keyup",
     "messageformat",
     "mousemove",
@@ -27,6 +28,7 @@
     "sidenav",
     "subdir",
     "tailwindcss",
+    "transloco",
     "webcomponents"
   ]
 }

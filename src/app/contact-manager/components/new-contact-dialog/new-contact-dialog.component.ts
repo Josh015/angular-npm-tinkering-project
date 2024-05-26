@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 import { AVATARS, Avatar, GENDERS, Gender, Note, User } from '../../models';
 import { UserService } from '../../services/user.service';
@@ -19,7 +19,12 @@ import { y2kValidator, year2012Validator } from 'src/app/utils';
   templateUrl: './new-contact-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [FormsModule, MaterialModule, ReactiveFormsModule, TranslateModule],
+  imports: [
+    FormsModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    TranslocoDirective,
+  ],
 })
 export class NewContactDialogComponent {
   static readonly nameMaxLength = 20;

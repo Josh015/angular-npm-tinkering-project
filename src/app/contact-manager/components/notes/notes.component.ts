@@ -9,7 +9,7 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 import { Note } from '../../models';
 import { MaterialModule } from 'src/app/material.module';
@@ -19,7 +19,7 @@ import { MaterialModule } from 'src/app/material.module';
   templateUrl: './notes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MaterialModule, TranslateModule],
+  imports: [MaterialModule, TranslocoDirective],
 })
 export class NotesComponent implements AfterViewInit {
   private readonly sort = viewChild.required(MatSort);

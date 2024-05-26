@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 import { UserService } from '../../services/user.service';
 import { NotesComponent } from '../notes/notes.component';
@@ -17,7 +17,7 @@ import { MaterialModule } from 'src/app/material.module';
   templateUrl: './main-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MaterialModule, NotesComponent, TranslateModule],
+  imports: [MaterialModule, NotesComponent, TranslocoDirective],
 })
 export class MainContentComponent {
   static readonly userIdParam = 'userId';
