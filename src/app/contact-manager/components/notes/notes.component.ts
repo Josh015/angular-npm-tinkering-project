@@ -31,7 +31,9 @@ export class NotesComponent implements AfterViewInit {
   readonly notes = input.required<Note[]>();
 
   constructor() {
-    effect(() => (this.dataSource.data = this.notes()));
+    effect(() => (this.dataSource.data = this.notes()), {
+      allowSignalWrites: true,
+    });
   }
 
   ngAfterViewInit(): void {
