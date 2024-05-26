@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
 
-import { MainContentComponent } from './components/main-content/main-content.component';
+import {
+  MainContentComponent,
+  USER_ID,
+} from './components/main-content/main-content.component';
 import { ContactManagerComponent } from './contact-manager.component';
 import { UserService } from './services/user.service';
 
-export const USER_ID = 'userId';
-export const CONTACT_MANAGER_ROUTES: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: ContactManagerComponent,
@@ -17,4 +19,4 @@ export const CONTACT_MANAGER_ROUTES: Routes = [
   },
   { path: '**', redirectTo: '' },
 ];
-export default CONTACT_MANAGER_ROUTES;
+export default routes;

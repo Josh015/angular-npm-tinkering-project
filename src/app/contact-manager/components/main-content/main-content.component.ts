@@ -8,10 +8,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { USER_ID } from '../../contact-manager.routes';
 import { UserService } from '../../services/user.service';
 import { NotesComponent } from '../notes/notes.component';
 import { MaterialModule } from 'src/app/material.module';
+
+export const USER_ID = 'userId';
 
 @Component({
   selector: 'app-main-content',
