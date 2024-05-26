@@ -12,8 +12,6 @@ import { UserService } from '../../services/user.service';
 import { NotesComponent } from '../notes/notes.component';
 import { MaterialModule } from 'src/app/material.module';
 
-export const USER_ID = 'userId';
-
 @Component({
   selector: 'app-main-content',
   templateUrl: './main-content.component.html',
@@ -22,13 +20,15 @@ export const USER_ID = 'userId';
   imports: [MaterialModule, NotesComponent, TranslateModule],
 })
 export class MainContentComponent {
+  static readonly userIdParam = 'userId';
+
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
   private readonly params = toSignal(this.activatedRoute.params);
 
   protected readonly user = computed(() => {
     const params = this.params();
-    const userId = !params ? 0 : +params[USER_ID];
+    const userId = !params ? 0 : +params[MainContentComponent.userIdParam];
 
     return this.userService.data().find((u) => u.id === userId);
   });

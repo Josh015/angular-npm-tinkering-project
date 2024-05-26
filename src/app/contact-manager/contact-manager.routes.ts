@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
 
-import {
-  MainContentComponent,
-  USER_ID,
-} from './components/main-content/main-content.component';
+import { MainContentComponent } from './components/main-content/main-content.component';
 import { ContactManagerComponent } from './contact-manager.component';
 import { UserService } from './services/user.service';
 
@@ -13,7 +10,10 @@ export const routes: Routes = [
     component: ContactManagerComponent,
     providers: [UserService],
     children: [
-      { path: `:${USER_ID}`, component: MainContentComponent },
+      {
+        path: `:${MainContentComponent.userIdParam}`,
+        component: MainContentComponent,
+      },
       { path: '', component: MainContentComponent },
     ],
   },
