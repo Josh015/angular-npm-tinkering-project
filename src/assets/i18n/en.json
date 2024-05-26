@@ -11,13 +11,13 @@
     },
     "NewContactDialog": {
       "Cancel": "Cancel",
-      "Form": {
+      "Fields": {
         "Avatar": {
           "Label": "Avatar"
         },
         "Bio": {
           "Errors": {
-            "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two}  other{{excessCount}}} {excessCount, plural, =1{character} other{characters}}"
+            "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two} other{ {excessCount} }} {excessCount, plural, =1{character} other{characters}}"
           },
           "Label": "Bio"
         },
@@ -30,11 +30,11 @@
         },
         "Gender": {
           "Label": "Gender",
-          "Option": "{gender, select, male{Male} female{Female} enby{Non-Binary} other{?}}"
+          "Options": "{gender, select, male{Male} female{Female} enby{Non-Binary} other{?}}"
         },
         "Name": {
           "Errors": {
-            "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two} other{{excessCount}}} {excessCount, plural, =1{character} other{characters}}"
+            "MaxLength": "Max length exceeded by {excessCount, plural, =1{one} =2{two} other{ {excessCount} }} {excessCount, plural, =1{character} other{characters}}"
           },
           "Label": "Name"
         }

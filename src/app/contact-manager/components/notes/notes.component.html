@@ -10,33 +10,27 @@
       />
     </mat-form-field>
 
-    <table
-      class="w-full"
-      *transloco="let t; prefix: 'ContactManager.Notes.Grid'"
-      [dataSource]="dataSource"
-      mat-table
-      matSort
-    >
+    <table class="w-full" [dataSource]="dataSource" mat-table matSort>
       <ng-container matColumnDef="id">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>
-          {{ t('Columns.Number') }}
+          {{ t('Grid.Columns.Number') }}
         </th>
         <td *matCellDef="let note" mat-cell>{{ note.id }}</td>
       </ng-container>
 
       <ng-container matColumnDef="title">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>
-          {{ t('Columns.Title') }}
+          {{ t('Grid.Columns.Title') }}
         </th>
         <td *matCellDef="let note" mat-cell>{{ note.title }}</td>
       </ng-container>
 
       <ng-container matColumnDef="date">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>
-          {{ t('Columns.Date.Title') }}
+          {{ t('Grid.Columns.Date.Title') }}
         </th>
         <td *matCellDef="let note" mat-cell>
-          {{ t('Columns.Date.Format', { value: note.date }) }}
+          {{ t('Grid.Columns.Date.Format', { value: note.date }) }}
         </td>
       </ng-container>
 
@@ -47,10 +41,10 @@
       <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">
           @if (!filter.value) {
-            {{ t('Empty.NoData') }}
+            {{ t('Grid.Empty.NoData') }}
           } @else {
             {{
-              t('Empty.NoMatchingDataForFilter', {
+              t('Grid.Empty.NoMatchingDataForFilter', {
                 filterValue: filter.value
               })
             }}

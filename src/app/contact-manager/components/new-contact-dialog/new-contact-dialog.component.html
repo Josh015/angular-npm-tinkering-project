@@ -3,14 +3,11 @@
     {{ t('Title') }}
   </h2>
   <mat-dialog-content>
-    <form
-      *transloco="let t; prefix: 'ContactManager.NewContactDialog.Form'"
-      [formGroup]="formGroup"
-    >
+    <form [formGroup]="formGroup">
       <div class="flex flex-col">
         <mat-form-field appearance="fill">
           <mat-label>
-            {{ t('Avatar.Label') }}
+            {{ t('Fields.Avatar.Label') }}
           </mat-label>
           <mat-select [formControl]="formGroup.controls.avatar" required>
             <mat-select-trigger>
@@ -27,26 +24,26 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>
-            {{ t('Gender.Label') }}
+            {{ t('Fields.Gender.Label') }}
           </mat-label>
           <mat-select [formControl]="formGroup.controls.gender" required>
             @for (gender of genders; track gender) {
               <mat-option [value]="gender">
-                {{ t('Gender.Option', { gender }) }}
+                {{ t('Fields.Gender.Options', { gender }) }}
               </mat-option>
             }
           </mat-select>
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>
-            {{ t('Name.Label') }}
+            {{ t('Fields.Name.Label') }}
           </mat-label>
           <input [formControl]="formGroup.controls.name" matInput required />
           @if (formGroup.controls.name.errors; as errors) {
             @if (errors['maxlength']; as maxLength) {
               <mat-error>
                 {{
-                  t('Name.Errors.MaxLength', {
+                  t('Fields.Name.Errors.MaxLength', {
                     excessCount:
                       maxLength.actualLength - maxLength.requiredLength
                   })
@@ -57,7 +54,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>
-            {{ t('Born.Label') }}
+            {{ t('Fields.Born.Label') }}
           </mat-label>
           <input
             [formControl]="formGroup.controls.birthDate"
@@ -72,19 +69,19 @@
           @if (formGroup.controls.birthDate.errors; as errors) {
             @if (errors['y2k']) {
               <mat-error>
-                {{ t('Born.Errors.Y2K') }}
+                {{ t('Fields.Born.Errors.Y2K') }}
               </mat-error>
             }
             @if (errors['year2012']) {
               <mat-error>
-                {{ t('Born.Errors.Year2012') }}
+                {{ t('Fields.Born.Errors.Year2012') }}
               </mat-error>
             }
           }
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>
-            {{ t('Bio.Label') }}
+            {{ t('Fields.Bio.Label') }}
           </mat-label>
           <textarea
             [formControl]="formGroup.controls.bio"
@@ -92,14 +89,12 @@
             rows="10"
             cols="30"
           >
-          <!-- [maxlength]="bioMaxLength">!--> <!-- NOTE: Doesn't allow newlines!-->
-        </textarea
-          >
+          </textarea>
           @if (formGroup.controls.bio.errors; as errors) {
             @if (errors['maxlength']; as maxLength) {
               <mat-error>
                 {{
-                  t('Bio.Errors.MaxLength', {
+                  t('Fields.Bio.Errors.MaxLength', {
                     excessCount:
                       maxLength.actualLength - maxLength.requiredLength
                   })
