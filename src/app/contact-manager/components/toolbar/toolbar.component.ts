@@ -42,12 +42,12 @@ export class ToolbarComponent {
 
     dialogRef.afterClosed().subscribe((result: User | null) => {
       if (result) {
-        const translations = this.translocoService.translate<string[]>([
-          'ContactManager.Toolbar.SnackBar.Message',
-          'ContactManager.Toolbar.SnackBar.Action',
-        ]);
+        const snackBar: Record<string, string> =
+          this.translocoService.translateObject(
+            'ContactManager.Toolbar.SnackBar',
+          );
 
-        this.openSnackBar(translations[0], translations[1])
+        this.openSnackBar(snackBar['Message'], snackBar['Action'])
           .onAction()
           .subscribe(() => {
             void this.router.navigate(['/contact-manager', result.id]);
