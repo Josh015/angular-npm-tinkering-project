@@ -2,8 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  effect,
-  input,
+  Input,
   viewChild,
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
@@ -28,12 +27,9 @@ export class NotesComponent implements AfterViewInit {
   protected readonly dataSource = new MatTableDataSource<Note>();
   protected readonly displayedColumns = ['id', 'title', 'date'];
 
-  readonly notes = input.required<Note[]>();
-
-  constructor() {
-    effect(() => (this.dataSource.data = this.notes()), {
-      allowSignalWrites: true,
-    });
+  @Input()
+  set notes(value: Note[]) {
+    this.dataSource.data = value;
   }
 
   ngAfterViewInit(): void {
