@@ -15,9 +15,9 @@ yarn start
 - [Angular Material](https://material.angular.io/)
 - [ESLint](https://eslint.org/)
 - [messageformat](https://messageformat.github.io/messageformat/)
-- [ngx-translate](https://github.com/ngx-translate/core)
 - [Prettier](https://prettier.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Transloco](https://jsverse.github.io/transloco/)
 - [Yarn](https://yarnpkg.com/)
 
 ## Screenshot
