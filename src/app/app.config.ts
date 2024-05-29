@@ -9,7 +9,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {
   PreloadAllModules,
   provideRouter,
-  withDebugTracing,
+  //withDebugTracing,
   withPreloading,
 } from '@angular/router';
 import { provideTransloco } from '@jsverse/transloco';
@@ -17,16 +17,15 @@ import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat'
 
 import { routes } from './app.routes';
 import { TranslocoHttpLoader } from './core';
-import { environment } from 'src/environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    environment.production
+    !isDevMode()
       ? provideRouter(routes)
       : provideRouter(
           routes,
           withPreloading(PreloadAllModules),
-          withDebugTracing(),
+          //withDebugTracing(),
         ),
 
     provideAnimationsAsync(),
