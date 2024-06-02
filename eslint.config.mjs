@@ -1,13 +1,10 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import ts from 'typescript-eslint';
-import globals from 'globals';
-import angularParser from '@angular-eslint/template-parser';
+import angular from 'angular-eslint';
 // import importLints from 'eslint-plugin-import';
 // import rxjsLints from 'eslint-plugin-rxjs';
-import angularLints from '@angular-eslint/eslint-plugin';
-// import angularLintsTemplate from '@angular-eslint/eslint-plugin-template';
-import prettierLints from 'eslint-plugin-prettier';
+import prettier from 'eslint-plugin-prettier';
 
 const __dirname = import.meta.dirname;
 const compat = new FlatCompat({
@@ -17,32 +14,24 @@ const compat = new FlatCompat({
   allConfig: js.configs.all, // optional unless using "eslint:all"
 });
 
-export default [
-  {
-    languageOptions: {
-      globals: globals.browser,
-      parser: angularParser,
-      parserOptions: {
-        parser: angularParser,
-      },
-    },
-  },
-  js.configs.recommended,
-  ...ts.configs.recommended,
-  // ...compat.config(importLints.configs.recommended),
-  // ...compat.config(importLints.configs.typescript),
-  // ...compat.config(rxjsLints.configs.recommended),
-  ...compat.config(angularLints.configs.recommended),
-  // ...compat.config(angularLintsTemplate.configs.recommended),
-  // ...compat.config(angularLintsTemplate.configs.accessibility),
-  ...compat.config(prettierLints.configs.recommended),
-
+export default ts.config(
   {
     files: ['**/*.ts', '**/*.tsx'],
     settings: {
       // Manually add "src/" directory to import plugin's "internal" group
       'import/internal-regex': '^src/',
     },
+    extends: [
+      js.configs.recommended,
+      ...ts.configs.recommended,
+      ...ts.configs.stylistic,
+      ...angular.configs.tsRecommended,
+      // ...compat.config(importLints.configs.recommended),
+      // ...compat.config(importLints.configs.typescript),
+      // ...compat.config(rxjsLints.configs.recommended),
+      ...compat.config(prettier.configs.recommended),
+    ],
+    processor: angular.processInlineTemplates,
     rules: {
       // Angular fixes
       '@typescript-eslint/explicit-function-return-type': [
@@ -129,11 +118,14 @@ export default [
       // 'rxjs/no-nested-subscribe': ['off'],
     },
   },
-  // {
-  //   files: ['*.html'],
-  //   extends: ['plugin:@angular-eslint/template/recommended'],
-  //   rules: {},
-  // },
+  {
+    files: ['**/*.html'],
+    extends: [
+      ...angular.configs.templateRecommended,
+      ...angular.configs.templateAccessibility,
+    ],
+    rules: {},
+  },
   {
     ignores: [
       '.angular/**',
@@ -143,4 +135,4 @@ export default [
       'transloco.config.js',
     ],
   },
-];
+);
