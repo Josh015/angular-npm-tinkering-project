@@ -117,13 +117,4 @@ export default ts.config(
     ],
     rules: {},
   },
-  {
-    ignores: [
-      '.angular/**',
-      'karma.conf.js',
-      'postcss.config.js',
-      'tailwind.config.js',
-      'transloco.config.js',
-    ],
-  },
 );
