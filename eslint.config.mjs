@@ -1,18 +1,9 @@
-import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import ts from 'typescript-eslint';
 import angular from 'angular-eslint';
 // import importLints from 'eslint-plugin-import';
 // import rxjsLints from 'eslint-plugin-rxjs';
-import prettier from 'eslint-plugin-prettier';
-
-const __dirname = import.meta.dirname;
-const compat = new FlatCompat({
-  baseDirectory: __dirname, // optional; default: process.cwd()
-  resolvePluginsRelativeTo: __dirname, // optional
-  recommendedConfig: js.configs.recommended, // optional unless using "eslint:recommended"
-  allConfig: js.configs.all, // optional unless using "eslint:all"
-});
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default ts.config(
   {
@@ -29,7 +20,7 @@ export default ts.config(
       // ...compat.config(importLints.configs.recommended),
       // ...compat.config(importLints.configs.typescript),
       // ...compat.config(rxjsLints.configs.recommended),
-      ...compat.config(prettier.configs.recommended),
+      prettierRecommended,
     ],
     processor: angular.processInlineTemplates,
     rules: {
