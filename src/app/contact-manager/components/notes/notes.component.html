@@ -4,13 +4,13 @@
       <mat-label> {{ t('Filter') }} </mat-label>
       <input
         #filter
+        matInput
         [placeholder]="t('Filter')"
         (keyup)="applyFilter($event)"
-        matInput
       />
     </mat-form-field>
 
-    <table class="w-full" [dataSource]="dataSource" mat-table matSort>
+    <table class="w-full" mat-table matSort [dataSource]="dataSource">
       <ng-container matColumnDef="id">
         <th *matHeaderCellDef mat-header-cell mat-sort-header>
           {{ t('Grid.Columns.Number') }}
@@ -38,7 +38,7 @@
       <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
 
       <!-- Row shown when there is no matching data. -->
-      <tr class="mat-row" *matNoDataRow>
+      <tr *matNoDataRow class="mat-row">
         <td class="mat-cell" colspan="4">
           @if (!filter.value) {
             {{ t('Grid.Empty.NoData') }}
@@ -54,9 +54,9 @@
     </table>
 
     <mat-paginator
+      showFirstLastButtons
       [pageSize]="2"
       [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons
     />
   </div>
 </ng-container>

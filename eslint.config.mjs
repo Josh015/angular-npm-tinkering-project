@@ -134,6 +134,9 @@ export default tseslint.config(
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility,
     ],
-    rules: {},
+    rules: {
+      '@angular-eslint/template/attributes-order': 'warn',
+      '@angular-eslint/template/prefer-self-closing-tags': 'warn',
+    },
   },
 );

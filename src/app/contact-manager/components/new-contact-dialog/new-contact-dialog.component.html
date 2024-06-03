@@ -9,7 +9,7 @@
           <mat-label>
             {{ t('Fields.Avatar.Label') }}
           </mat-label>
-          <mat-select [formControl]="formGroup.controls.avatar" required>
+          <mat-select required [formControl]="formGroup.controls.avatar">
             <mat-select-trigger>
               <mat-icon [svgIcon]="formGroup.controls.avatar.value || ''" />
               {{ formGroup.controls.avatar.value }}
@@ -26,7 +26,7 @@
           <mat-label>
             {{ t('Fields.Gender.Label') }}
           </mat-label>
-          <mat-select [formControl]="formGroup.controls.gender" required>
+          <mat-select required [formControl]="formGroup.controls.gender">
             @for (gender of genders; track gender) {
               <mat-option [value]="gender">
                 {{ t('Fields.Gender.Options', { gender }) }}
@@ -38,7 +38,7 @@
           <mat-label>
             {{ t('Fields.Name.Label') }}
           </mat-label>
-          <input [formControl]="formGroup.controls.name" matInput required />
+          <input matInput required [formControl]="formGroup.controls.name" />
           @if (formGroup.controls.name.errors; as errors) {
             @if (errors['maxlength']; as maxLength) {
               <mat-error>
@@ -57,14 +57,14 @@
             {{ t('Fields.Born.Label') }}
           </mat-label>
           <input
+            matInput
+            required
             [formControl]="formGroup.controls.birthDate"
             [matDatepicker]="picker"
             [min]="minBirthDate"
             [max]="maxBirthDate"
-            matInput
-            required
           />
-          <mat-datepicker-toggle [for]="picker" matSuffix />
+          <mat-datepicker-toggle matSuffix [for]="picker" />
           <mat-datepicker #picker />
           @if (formGroup.controls.birthDate.errors; as errors) {
             @if (errors['y2k']) {
@@ -84,10 +84,10 @@
             {{ t('Fields.Bio.Label') }}
           </mat-label>
           <textarea
-            [formControl]="formGroup.controls.bio"
             matInput
             rows="10"
             cols="30"
+            [formControl]="formGroup.controls.bio"
           >
           </textarea>
           @if (formGroup.controls.bio.errors; as errors) {
@@ -108,15 +108,15 @@
   </mat-dialog-content>
   <mat-dialog-actions>
     <button
-      [disabled]="!formGroup.valid"
-      (click)="save()"
       mat-button
       color="primary"
+      [disabled]="!formGroup.valid"
+      (click)="save()"
     >
       <mat-icon>save</mat-icon>
       {{ t('Save') }}
     </button>
-    <button (click)="dismiss()" mat-button color="primary">
+    <button mat-button color="primary" (click)="dismiss()">
       <mat-icon>cancel</mat-icon>
       {{ t('Cancel') }}
     </button>

@@ -1,12 +1,12 @@
 <mat-sidenav-container
   class="h-full min-h-full w-full min-w-full flex-1"
+  autosize
   [class.dark-theme]="isDarkTheme()"
   [dir]="textDirection()"
-  autosize
 >
   <mat-sidenav
-    class="mat-elevation-z10 w-[240px]"
     #sidenav
+    class="mat-elevation-z10 w-[240px]"
     [opened]="!isScreenSmall()"
     [mode]="isScreenSmall() ? 'over' : 'side'"
   >
@@ -23,11 +23,11 @@
             (click)="anchor.click()"
           >
             <a
-              class="block"
               #anchor
-              [routerLink]="['/contact-manager', user.id]"
+              class="block"
               matListItemTitle
               routerLinkActive="active"
+              [routerLink]="['/contact-manager', user.id]"
             >
               {{ user.name }}
             </a>

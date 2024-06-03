@@ -2,8 +2,8 @@
   <mat-toolbar color="primary">
     <button
       class="sidenav-toggle"
-      (click)="toggleSidenav.emit()"
       mat-icon-button
+      (click)="toggleSidenav.emit()"
     >
       <mat-icon>menu</mat-icon>
     </button>
@@ -12,17 +12,17 @@
 
     <span class="flex-auto"></span>
 
-    <button [matMenuTriggerFor]="menu" mat-button>
+    <button mat-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button (click)="openAddContactDialog()" mat-menu-item>
+      <button mat-menu-item (click)="openAddContactDialog()">
         {{ t('Menu.NewContact') }}
       </button>
-      <button (click)="toggleTheme.emit()" mat-menu-item>
+      <button mat-menu-item (click)="toggleTheme.emit()">
         {{ t('Menu.ToggleTheme') }}
       </button>
-      <button (click)="toggleDir.emit()" mat-menu-item>
+      <button mat-menu-item (click)="toggleDir.emit()">
         {{ t('Menu.ToggleDir') }}
       </button>
     </mat-menu>

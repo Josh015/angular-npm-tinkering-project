@@ -2,7 +2,7 @@
   @if (user(); as user) {
     <mat-card>
       <mat-card-header>
-        <mat-icon [svgIcon]="user.avatar" mat-card-avatar />
+        <mat-icon mat-card-avatar [svgIcon]="user.avatar" />
         <mat-card-title>
           {{ t('Title.NameAndGender', user) }}
         </mat-card-title>
