@@ -1,10 +1,15 @@
 .sidenav-toggle {
-  --icon-width: 56px;
+  @apply flex items-center justify-center;
+}
 
-  @apply m-[8px] hidden min-w-[--icon-width] p-0;
-  @apply max-md:flex max-md:items-center max-md:justify-center;
+@screen md {
+  .sidenav-toggle {
+    --icon-width: 56px;
 
-  mat-icon {
-    @apply h-[--icon-width] w-[--icon-width] text-[30px] leading-[--icon-width] text-[white];
+    @apply m-[8px] hidden min-w-[--icon-width] p-0;
+
+    mat-icon {
+      @apply h-[--icon-width] w-[--icon-width] text-[30px] leading-[--icon-width] text-[white];
+    }
   }
 }
