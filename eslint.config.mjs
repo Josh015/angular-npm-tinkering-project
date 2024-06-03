@@ -41,15 +41,6 @@ export default ts.config(
       cspellESLintPluginRecommended,
       eslintPluginPrettierRecommended,
     ],
-    rules: {
-      '@cspell/spellchecker': [
-        'warn',
-        {
-          checkComments: true,
-          // autoFix: true,
-        },
-      ],
-    },
   },
   {
     files: ['**/*.ts'],
