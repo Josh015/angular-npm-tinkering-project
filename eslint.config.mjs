@@ -45,7 +45,7 @@ export default ts.config(
       '@cspell/spellchecker': [
         'warn',
         {
-          checkComments: false,
+          checkComments: true,
           // autoFix: true,
         },
       ],
