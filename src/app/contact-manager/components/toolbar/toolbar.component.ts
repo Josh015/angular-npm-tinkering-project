@@ -20,7 +20,6 @@ import { MaterialModule } from 'src/app/shared';
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [MaterialModule, TranslocoDirective],
