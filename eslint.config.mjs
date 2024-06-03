@@ -129,8 +129,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['**/*.html'],
-    ignores: ['src/index.html'],
+    files: ['**/*.component.html'],
     extends: [
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility,
