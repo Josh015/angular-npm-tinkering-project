@@ -1,9 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import {
-  ApplicationConfig,
-  provideExperimentalZonelessChangeDetection,
-  isDevMode,
-} from '@angular/core';
+import { ApplicationConfig, isDevMode } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
@@ -31,7 +27,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(),
     provideNativeDateAdapter(),
-    provideExperimentalZonelessChangeDetection(),
     provideTransloco({
       config: {
         availableLangs: ['en'],

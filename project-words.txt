@@ -12,6 +12,7 @@ instanceof
 jasminewd
 jsverse
 keyup
+lcov
 messageformat
 mousemove
 ngcc
@@ -22,4 +23,5 @@ sidenav
 subdir
 tailwindcss
 transloco
+unmocked
 webcomponents
