@@ -1,16 +1,25 @@
+import { FlatCompat } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import angular from 'angular-eslint';
-// import importLints from 'eslint-plugin-import';
+import importeslint from 'eslint-plugin-import';
 // import rxjsLints from 'eslint-plugin-rxjs';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+
+const __dirname = import.meta.dirname;
+const compat = new FlatCompat({
+  baseDirectory: __dirname, // optional; default: process.cwd()
+  resolvePluginsRelativeTo: __dirname, // optional
+  recommendedConfig: eslint.configs.recommended, // optional unless using "eslint:recommended"
+  allConfig: eslint.configs.all, // optional unless using "eslint:all"
+});
 
 export default tseslint.config(
   {
     languageOptions: {
       parserOptions: {
         project: true,
-        tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: __dirname,
       },
     },
   },
@@ -25,8 +34,8 @@ export default tseslint.config(
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
       ...angular.configs.tsRecommended,
-      // ...compat.config(importLints.configs.recommended),
-      // ...compat.config(importLints.configs.typescript),
+      ...compat.config(importeslint.configs.recommended),
+      ...compat.config(importeslint.configs.typescript),
       // ...compat.config(rxjsLints.configs.recommended),
       eslintPluginPrettierRecommended,
     ],
@@ -70,32 +79,32 @@ export default tseslint.config(
           format: ['PascalCase'],
         },
       ],
-      // 'import/no-unresolved': 'off',
-      // 'import/order': [
-      //   'error',
-      //   {
-      //     groups: [
-      //       // Global
-      //       ['builtin', 'external'],
+      'import/no-unresolved': 'off',
+      'import/order': [
+        'error',
+        {
+          groups: [
+            // Global
+            ['builtin', 'external'],
 
-      //       // Project
-      //       ['internal', 'parent', 'sibling', 'index'],
+            // Project
+            ['internal', 'parent', 'sibling', 'index'],
 
-      //       // Misc.
-      //       'type',
-      //       'object',
-      //       'unknown',
-      //     ],
-      //     'newlines-between': 'always',
-      //     alphabetize: {
-      //       order: 'asc',
-      //       caseInsensitive: true,
-      //     },
-      //   },
-      // ],
+            // Misc.
+            'type',
+            'object',
+            'unknown',
+          ],
+          'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
+        },
+      ],
 
       // RxJS fixes.
-      // 'import/namespace': 'off',
+      'import/namespace': 'off',
       // 'rxjs/finnish': [
       //   'error',
       //   {
