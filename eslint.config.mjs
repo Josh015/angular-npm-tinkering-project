@@ -50,10 +50,10 @@ export default tseslint.config(
         'error',
         { allowWithDecorator: true },
       ],
-      '@angular-eslint/prefer-on-push-component-change-detection': ['error'],
       '@typescript-eslint/unbound-method': 'off',
 
       // Preferences
+      '@angular-eslint/prefer-on-push-component-change-detection': ['error'],
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/array-type': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
