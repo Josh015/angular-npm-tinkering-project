@@ -25,7 +25,6 @@ export default ts.config(
       globals: {
         ...globals.browser,
         ...globals.jasmine,
-        ...globals.jest,
         ...globals.jquery,
         ...globals.node,
       },
