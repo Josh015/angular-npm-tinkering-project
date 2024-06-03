@@ -1,12 +1,12 @@
-import globals from 'globals';
 import { FlatCompat } from '@eslint/eslintrc';
-import js from '@eslint/js';
-import ts from 'typescript-eslint';
 import angular from 'angular-eslint';
-import imports from 'eslint-plugin-import';
-// import rxjsLints from 'eslint-plugin-rxjs';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import globals from 'globals';
+import imports from 'eslint-plugin-import';
+import js from '@eslint/js';
+// import rxjsLints from 'eslint-plugin-rxjs';
+import ts from 'typescript-eslint';
 
 const __dirname = import.meta.dirname;
 const compat = new FlatCompat({
@@ -41,6 +41,12 @@ export default ts.config(
       cspellESLintPluginRecommended,
       eslintPluginPrettierRecommended,
     ],
+  },
+  {
+    files: ['**/*.mjs'],
+    rules: {
+      'sort-imports': 'error',
+    },
   },
   {
     files: ['**/*.ts'],
