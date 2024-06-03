@@ -1,11 +1,11 @@
-import js from '@eslint/js';
-import ts from 'typescript-eslint';
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
 import angular from 'angular-eslint';
 // import importLints from 'eslint-plugin-import';
 // import rxjsLints from 'eslint-plugin-rxjs';
-import prettierRecommended from 'eslint-plugin-prettier/recommended';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
-export default ts.config(
+export default tseslint.config(
   {
     files: ['**/*.ts', '**/*.tsx'],
     settings: {
@@ -13,14 +13,14 @@ export default ts.config(
       'import/internal-regex': '^src/',
     },
     extends: [
-      js.configs.recommended,
-      ...ts.configs.recommended,
-      ...ts.configs.stylistic,
+      eslint.configs.recommended,
+      ...tseslint.configs.recommended,
+      ...tseslint.configs.stylistic,
       ...angular.configs.tsRecommended,
       // ...compat.config(importLints.configs.recommended),
       // ...compat.config(importLints.configs.typescript),
       // ...compat.config(rxjsLints.configs.recommended),
-      prettierRecommended,
+      eslintPluginPrettierRecommended,
     ],
     processor: angular.processInlineTemplates,
     rules: {
