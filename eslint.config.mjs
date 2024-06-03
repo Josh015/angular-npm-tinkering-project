@@ -130,6 +130,7 @@ export default tseslint.config(
   },
   {
     files: ['**/*.html'],
+    ignores: ['src/index.html'],
     extends: [
       ...angular.configs.templateRecommended,
       ...angular.configs.templateAccessibility,
