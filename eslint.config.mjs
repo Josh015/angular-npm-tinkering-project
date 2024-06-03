@@ -7,6 +7,14 @@ import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 export default tseslint.config(
   {
+    languageOptions: {
+      parserOptions: {
+        project: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
     files: ['**/*.ts', '**/*.tsx'],
     settings: {
       // Manually add "src/" directory to import plugin's "internal" group
@@ -14,8 +22,8 @@ export default tseslint.config(
     },
     extends: [
       eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...tseslint.configs.stylistic,
+      ...tseslint.configs.strictTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
       ...angular.configs.tsRecommended,
       // ...compat.config(importLints.configs.recommended),
       // ...compat.config(importLints.configs.typescript),
@@ -34,8 +42,10 @@ export default tseslint.config(
         { allowWithDecorator: true },
       ],
       '@angular-eslint/prefer-on-push-component-change-detection': ['error'],
+      '@typescript-eslint/unbound-method': 'off',
 
       // Preferences
+      '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/array-type': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-var-requires': 'error',

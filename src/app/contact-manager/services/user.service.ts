@@ -30,7 +30,9 @@ export class UserService {
     return lastValueFrom(
       of(user).pipe(
         delay(UserService.fetchDelayMilliseconds),
-        finalize(() => this._loading.set(false)),
+        finalize(() => {
+          this._loading.set(false);
+        }),
       ),
     );
   }
@@ -51,7 +53,9 @@ export class UserService {
           this._data.set([]);
           return throwError(() => error);
         }),
-        finalize(() => this._loading.set(false)),
+        finalize(() => {
+          this._loading.set(false);
+        }),
       ),
     );
   }

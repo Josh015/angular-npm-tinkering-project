@@ -60,7 +60,7 @@ export class SidenavComponent {
 
     this.router.events.pipe(takeUntilDestroyed()).subscribe(() => {
       if (this.isScreenSmall()) {
-        this.sidenav().close();
+        void this.sidenav().close();
       }
     });
   }
