@@ -1,3 +1,4 @@
+import globals from 'globals';
 import { FlatCompat } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
@@ -17,6 +18,13 @@ const compat = new FlatCompat({
 export default tseslint.config(
   {
     languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.jasmine,
+        ...globals.jest,
+        ...globals.jquery,
+        ...globals.node,
+      },
       parserOptions: {
         project: true,
         tsconfigRootDir: __dirname,
@@ -24,13 +32,16 @@ export default tseslint.config(
     },
   },
   {
+    ignores: ['.angular', 'node_modules', '.vscode'],
+  },
+  eslint.configs.recommended,
+  {
     files: ['**/*.ts', '**/*.tsx'],
     settings: {
       // Manually add "src/" directory to import plugin's "internal" group
       'import/internal-regex': '^src/',
     },
     extends: [
-      eslint.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
       ...angular.configs.tsRecommended,
