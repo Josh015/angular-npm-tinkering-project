@@ -1,0 +1,26 @@
+# Project Words
+UNPATCHED
+browserslist
+classlist
+compat
+copyindex
+datepicker
+devkit
+enby
+importeslint
+instanceof
+jasminewd
+jsverse
+keyup
+messageformat
+mousemove
+ngcc
+pluralsight
+readonly
+serviceworker
+sidenav
+subdir
+tailwindcss
+transloco
+tseslint
+webcomponents

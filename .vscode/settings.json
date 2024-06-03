@@ -5,32 +5,25 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "css.customData": [".vscode/tailwindcss.json"],
-  "cSpell.words": [
-    "UNPATCHED",
-    "browserslist",
-    "classlist",
-    "compat",
-    "copyindex",
-    "datepicker",
-    "devkit",
-    "enby",
-    "importeslint",
-    "instanceof",
-    "jasminewd",
-    "jsverse",
-    "keyup",
-    "messageformat",
-    "mousemove",
-    "ngcc",
-    "ngneat",
-    "pluralsight",
-    "readonly",
-    "serviceworker",
-    "sidenav",
-    "subdir",
-    "tailwindcss",
-    "transloco",
-    "tseslint",
-    "webcomponents"
+  "cSpell.customDictionaries": {
+    "project-words": {
+      "name": "project-words",
+      "path": "${workspaceRoot}/project-words.txt",
+      "description": "Words used in this project",
+      "addWords": true
+    },
+    "custom": true, // Enable the `custom` dictionary
+    "internal-terms": false // Disable the `internal-terms` dictionary
+  },
+  "cSpell.dictionaries": ["project-words"],
+  "cSpell.flagWords": ["hte"],
+  "cSpell.ignorePaths": [
+    "package-lock.json",
+    "node_modules",
+    "vscode-extension",
+    ".git/objects",
+    ".vscode",
+    ".vscode-insiders",
+    "project-words.txt"
   ]
 }
