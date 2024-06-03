@@ -1,21 +1,22 @@
 import globals from 'globals';
 import { FlatCompat } from '@eslint/eslintrc';
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import js from '@eslint/js';
+import ts from 'typescript-eslint';
 import angular from 'angular-eslint';
-import importeslint from 'eslint-plugin-import';
+import imports from 'eslint-plugin-import';
 // import rxjsLints from 'eslint-plugin-rxjs';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
 
 const __dirname = import.meta.dirname;
 const compat = new FlatCompat({
   baseDirectory: __dirname, // optional; default: process.cwd()
   resolvePluginsRelativeTo: __dirname, // optional
-  recommendedConfig: eslint.configs.recommended, // optional unless using "eslint:recommended"
-  allConfig: eslint.configs.all, // optional unless using "eslint:all"
+  recommendedConfig: js.configs.recommended, // optional unless using "eslint:recommended"
+  allConfig: js.configs.all, // optional unless using "eslint:all"
 });
 
-export default tseslint.config(
+export default ts.config(
   {
     languageOptions: {
       globals: {
@@ -34,7 +35,22 @@ export default tseslint.config(
   {
     ignores: ['.angular', 'node_modules', '.vscode'],
   },
-  eslint.configs.recommended,
+  {
+    extends: [
+      js.configs.recommended,
+      cspellESLintPluginRecommended,
+      eslintPluginPrettierRecommended,
+    ],
+    rules: {
+      '@cspell/spellchecker': [
+        'warn',
+        {
+          checkComments: false,
+          // autoFix: true,
+        },
+      ],
+    },
+  },
   {
     files: ['**/*.ts', '**/*.tsx'],
     settings: {
@@ -42,13 +58,12 @@ export default tseslint.config(
       'import/internal-regex': '^src/',
     },
     extends: [
-      ...tseslint.configs.strictTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked,
+      ...ts.configs.strictTypeChecked,
+      ...ts.configs.stylisticTypeChecked,
       ...angular.configs.tsRecommended,
-      ...compat.config(importeslint.configs.recommended),
-      ...compat.config(importeslint.configs.typescript),
+      ...compat.config(imports.configs.recommended),
+      ...compat.config(imports.configs.typescript),
       // ...compat.config(rxjsLints.configs.recommended),
-      eslintPluginPrettierRecommended,
     ],
     processor: angular.processInlineTemplates,
     rules: {
