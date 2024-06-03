@@ -7,9 +7,6 @@
     // Most Angular extensions you'll ever need.
     "johnpapa.angular-essentials",
 
-    // Syntax highlighting for browserslist file.
-    "webben.browserslist",
-
     // Spellchecking.
     "streetsidesoftware.code-spell-checker",
 
@@ -23,6 +20,12 @@
     "gruntfuggly.todo-tree",
 
     // Consistent markdown style.
-    "davidanson.vscode-markdownlint"
+    "davidanson.vscode-markdownlint",
+
+    // Tailwind CSS integration.
+    "bradlc.vscode-tailwindcss",
+
+    // Consistent editor settings.
+    "editorconfig.editorconfig"
   ]
 }
