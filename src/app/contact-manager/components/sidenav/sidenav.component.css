@@ -1,4 +1,0 @@
-/* Tailwind doesn't appear to detect routerLinkActive contents, so just make a custom class. */
-.active {
-  @apply !text-[#3f51b5];
-}

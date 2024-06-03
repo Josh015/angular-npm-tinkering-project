@@ -2,11 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  height: 100%;
+html {
+  @apply h-full;
 }
+
 body {
-  margin: 0;
+  @apply m-0 h-full;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+a.active {
+  @apply !text-[#3f51b5];
+}
+
+.dark-theme {
+  a.active {
+    @apply !text-[#c2185b];
+  }
 }
