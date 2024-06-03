@@ -23,3 +23,7 @@ yarn start
 ## Screenshot
 
 ![Angular NPM Tinkering Project Preview](screenshots/preview.png)
+
+## Known Issues
+
+- Node 20 LTS is the maximum supported version since later versions have a bug that break tailwindcss configs that use Typescript.

@@ -75,6 +75,10 @@ export default ts.config(
       ],
       '@typescript-eslint/unbound-method': 'off',
 
+      // Tailwind fixes
+      'import/no-named-as-default': 'off',
+      'import/no-named-as-default-member': 'off',
+
       // Preferences
       '@angular-eslint/prefer-on-push-component-change-detection': ['error'],
       '@typescript-eslint/restrict-template-expressions': 'off',

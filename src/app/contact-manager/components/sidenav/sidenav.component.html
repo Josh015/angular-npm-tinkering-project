@@ -7,8 +7,8 @@
   <mat-sidenav
     #sidenav
     class="mat-elevation-z10 w-[240px]"
-    [opened]="!isScreenSmall()"
-    [mode]="isScreenSmall() ? 'over' : 'side'"
+    [opened]="!isSmallScreen()"
+    [mode]="isSmallScreen() ? 'over' : 'side'"
   >
     <mat-toolbar color="primary">
       {{ 'ContactManager.Sidenav.Title' | transloco }}
