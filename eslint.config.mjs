@@ -18,6 +18,9 @@ const compat = new FlatCompat({
 
 export default ts.config(
   {
+    ignores: ['.angular', 'node_modules', '.vscode'],
+  },
+  {
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -31,9 +34,6 @@ export default ts.config(
         tsconfigRootDir: __dirname,
       },
     },
-  },
-  {
-    ignores: ['.angular', 'node_modules', '.vscode'],
   },
   {
     extends: [
@@ -52,7 +52,7 @@ export default ts.config(
     },
   },
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ['**/*.ts'],
     settings: {
       // Manually add "src/" directory to import plugin's "internal" group
       'import/internal-regex': '^src/',
