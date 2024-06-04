@@ -5,7 +5,10 @@ import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCard } from '@angular/material/card';
 import { MatCardHarness } from '@angular/material/card/testing';
-import { MatIconHarness } from '@angular/material/icon/testing';
+import {
+  MatIconHarness,
+  MatIconTestingModule,
+} from '@angular/material/icon/testing';
 import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 import { By } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -37,7 +40,11 @@ describe('MainContentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [getTranslocoModule(), MainContentComponent],
+      imports: [
+        getTranslocoModule(),
+        MainContentComponent,
+        MatIconTestingModule,
+      ],
       providers: [
         provideAnimationsAsync(),
         { provide: ActivatedRoute, useValue: activatedRoute },
