@@ -17,6 +17,7 @@ yarn start
 - [Lodash](https://lodash.com/)
 - [messageformat](https://messageformat.github.io/messageformat/)
 - [Prettier](https://prettier.io/)
+- [Spectator](https://ngneat.github.io/spectator/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Transloco](https://jsverse.github.io/transloco/)
 - [Yarn](https://yarnpkg.com/)

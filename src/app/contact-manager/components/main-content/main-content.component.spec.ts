@@ -10,10 +10,10 @@ import {
   MatIconTestingModule,
 } from '@angular/material/icon/testing';
 import { MatTabGroupHarness } from '@angular/material/tabs/testing';
-import { By } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
+import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { sample } from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 
@@ -26,7 +26,7 @@ import { getTranslocoModule } from 'src/app/testing';
 
 describe('MainContentComponent', () => {
   let loader: HarnessLoader;
-  let component: MainContentComponent;
+  let spectator: Spectator<MainContentComponent>;
   let fixture: ComponentFixture<MainContentComponent>;
   let translocoService: TranslocoService;
   const params = new BehaviorSubject<Params>({});
@@ -37,30 +37,26 @@ describe('MainContentComponent', () => {
   const userService = jasmine.createSpyObj<UserService>([], {
     data: usersData,
   });
+  const createComponent = createComponentFactory({
+    component: MainContentComponent,
+    declareComponent: false,
+    imports: [getTranslocoModule(), MainContentComponent, MatIconTestingModule],
+    providers: [
+      provideAnimationsAsync(),
+      { provide: ActivatedRoute, useValue: activatedRoute },
+      { provide: UserService, useValue: userService },
+    ],
+  });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        getTranslocoModule(),
-        MainContentComponent,
-        MatIconTestingModule,
-      ],
-      providers: [
-        provideAnimationsAsync(),
-        { provide: ActivatedRoute, useValue: activatedRoute },
-        { provide: UserService, useValue: userService },
-      ],
-    }).compileComponents();
+  beforeEach(() => {
+    spectator = createComponent();
     translocoService = TestBed.inject(TranslocoService);
-
-    fixture = TestBed.createComponent(MainContentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture = spectator.fixture;
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
   it('should create the main-content', () => {
-    expect(component).toBeTruthy();
+    expect(spectator).toBeTruthy();
   });
 
   describe(`Empty Space`, () => {
@@ -79,31 +75,24 @@ describe('MainContentComponent', () => {
       params.next({ [MainContentComponent.userIdParam]: 1 });
     });
 
-    afterEach(async () => {
-      fixture.detectChanges();
-      await fixture.whenRenderingDone();
-
-      const element = fixture.debugElement.query(By.css('*'));
-
-      expect(element).toBeFalsy();
+    afterEach(() => {
+      spectator.detectChanges();
+      expect(spectator.query('*')).toBeFalsy();
     });
   });
 
   describe('User Card', () => {
     let user: User;
 
-    beforeEach(async () => {
+    beforeEach(() => {
       user = sample(USERS_MOCK)!;
       usersData.set(USERS_MOCK);
       params.next({ [MainContentComponent.userIdParam]: user.id });
-      fixture.detectChanges();
-      await fixture.whenRenderingDone();
+      spectator.detectChanges();
     });
 
     it(`should be visible when the route has a valid user ID`, () => {
-      const element = fixture.debugElement.query(By.directive(MatCard));
-
-      expect(element).toBeTruthy();
+      expect(spectator.query(MatCard)).toBeTruthy();
     });
 
     it(`should have a title with the user's name and gender`, async () => {
@@ -136,10 +125,10 @@ describe('MainContentComponent', () => {
     });
 
     it(`should have a "Bio" tab that contains the user's biography info`, async () => {
+      const matTabGroup = await loader.getHarness(MatTabGroupHarness);
       const label = translocoService.translate(
         'ContactManager.MainContent.Tabs.Bio',
       );
-      const matTabGroup = await loader.getHarness(MatTabGroupHarness);
 
       await matTabGroup.selectTab({ label });
 
@@ -150,17 +139,17 @@ describe('MainContentComponent', () => {
     });
 
     it(`should have a "Notes" tab with the user's notes`, async () => {
+      const matTabGroup = await loader.getHarness(MatTabGroupHarness);
       const label = translocoService.translate(
         'ContactManager.MainContent.Tabs.Notes',
       );
-      const matTabGroup = await loader.getHarness(MatTabGroupHarness);
 
       await matTabGroup.selectTab({ label });
 
-      const element = fixture.debugElement.query(By.directive(NotesComponent));
-      const component = element.context as NotesComponent;
+      const component = spectator.query(NotesComponent);
 
-      expect(component.notes).toEqual(user.notes);
+      expect(component).toBeTruthy();
+      expect(component?.notes).toEqual(user.notes);
     });
   });
 });
