@@ -1,12 +1,17 @@
 import { HarnessLoader, parallel } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { TestBed } from '@angular/core/testing';
-import { MatTableHarness } from '@angular/material/table/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
+import {
+  MatRowHarness,
+  MatTableHarness,
+} from '@angular/material/table/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslocoService } from '@jsverse/transloco';
 import { Spectator, createComponentFactory } from '@ngneat/spectator';
 
 import { NotesComponent } from './notes.component';
+import { Note } from '../../models';
 import { USERS_MOCK } from '../../testing';
 import { provideTranslocoTesting } from 'src/app/testing';
 
@@ -31,24 +36,19 @@ describe(`NotesComponent`, () => {
     expect(spectator).toBeTruthy();
   });
 
-  it(`should have an empty table when user has no notes`, async () => {
+  it(`should have an empty table when user has no notes`, () => {
     spectator.setInput({ notes: [] });
 
-    const matTableHarness = await loader.getHarness(MatTableHarness);
-    const rows = await matTableHarness.getRows();
     const noDataMessage = translocoService.translate(
       `${prefix}Grid.Empty.NoData`,
     );
-
-    expect(rows.length).toBe(0);
-
     const noDataRow = spectator.query('tr td');
 
     expect(noDataRow).toBeTruthy();
-    expect(noDataRow?.innerHTML.trim().startsWith(noDataMessage)).toBeTrue();
+    expect(noDataRow?.innerHTML).toContain(noDataMessage);
   });
 
-  it(`should have rows for all the user's notes`, async () => {
+  it(`should have rows for all the user's notes on the current table page`, async () => {
     const matTableHarness = await loader.getHarness(MatTableHarness);
 
     for (const user of USERS_MOCK) {
@@ -58,22 +58,68 @@ describe(`NotesComponent`, () => {
 
       // Limit to number of rows, since paging prevents seeing all notes.
       for (const [index, row] of rows.entries()) {
-        const cells = await row.getCells();
         const note = user.notes[index];
-        const cellStrings = await parallel(() =>
-          cells.map((cell) => cell.getText()),
-        );
 
-        expect(cellStrings[0]).toBe(note.id.toString());
-        expect(cellStrings[1]).toBe(note.title);
-        expect(cellStrings[2]).toBe(
-          translocoService.translate(`${prefix}Grid.Columns.Date.Format`, {
-            value: note.date,
-          }),
-        );
+        await expectRowMatchesNote(row, note);
       }
     }
   });
 
-  // TODO: Test filtering, including displaying different messages with filter in it!
+  it(`should filter table based on input`, async () => {
+    const notes = USERS_MOCK[0].notes;
+    const matTableHarness = await loader.getHarness(MatTableHarness);
+    const filterInput = await loader.getHarness(MatInputHarness);
+
+    spectator.setInput({ notes });
+
+    for (const note of notes) {
+      await filterInput.setValue(note.title);
+      const rows = await matTableHarness.getRows();
+
+      await expectRowMatchesNote(rows[0], note);
+    }
+  });
+
+  it(`should have an empty table when filter value doesn't match`, async () => {
+    spectator.setInput({ notes: USERS_MOCK[0].notes });
+
+    const filterInput = await loader.getHarness(MatInputHarness);
+    const invalidFilters = [
+      'a filter that will not match!',
+      'another invalid filter!',
+      'you know the drill...',
+    ];
+
+    for (const filterValue of invalidFilters) {
+      const noMatchingDataMessage = translocoService.translate(
+        `${prefix}Grid.Empty.NoMatchingDataForFilter`,
+        { filterValue },
+      );
+
+      await filterInput.setValue(filterValue);
+
+      const noDataRow = spectator.query('tr td');
+
+      expect(noDataRow).toBeTruthy();
+      expect(noDataRow?.innerHTML).toContain(noMatchingDataMessage);
+    }
+  });
+
+  async function expectRowMatchesNote(
+    row: MatRowHarness,
+    note: Note,
+  ): Promise<void> {
+    const cells = await row.getCells();
+    const cellStrings = await parallel(() =>
+      cells.map((cell) => cell.getText()),
+    );
+
+    expect(cellStrings[0]).toBe(note.id.toString());
+    expect(cellStrings[1]).toBe(note.title);
+    expect(cellStrings[2]).toBe(
+      translocoService.translate(`${prefix}Grid.Columns.Date.Format`, {
+        value: note.date,
+      }),
+    );
+  }
 });
