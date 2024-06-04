@@ -22,7 +22,7 @@ import { User } from '../../models';
 import { UserService } from '../../services/user.service';
 import { USERS_MOCK } from '../../testing';
 import { NotesComponent } from '../notes/notes.component';
-import { getTranslocoModule } from 'src/app/testing';
+import { provideTranslocoTesting } from 'src/app/testing';
 
 describe('MainContentComponent', () => {
   let loader: HarnessLoader;
@@ -39,9 +39,10 @@ describe('MainContentComponent', () => {
   const createComponent = createComponentFactory({
     component: MainContentComponent,
     declareComponent: false,
-    imports: [getTranslocoModule(), MatIconTestingModule],
+    imports: [MatIconTestingModule],
     providers: [
       provideAnimationsAsync(),
+      provideTranslocoTesting(),
       { provide: ActivatedRoute, useValue: activatedRoute },
       { provide: UserService, useValue: userService },
     ],

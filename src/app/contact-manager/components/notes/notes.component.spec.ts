@@ -8,7 +8,7 @@ import { Spectator, createComponentFactory } from '@ngneat/spectator';
 
 import { NotesComponent } from './notes.component';
 import { USERS_MOCK } from '../../testing';
-import { getTranslocoModule } from 'src/app/testing';
+import { provideTranslocoTesting } from 'src/app/testing';
 
 describe(`NotesComponent`, () => {
   let loader: HarnessLoader;
@@ -17,8 +17,7 @@ describe(`NotesComponent`, () => {
   const createComponent = createComponentFactory({
     component: NotesComponent,
     declareComponent: false,
-    imports: [getTranslocoModule()],
-    providers: [provideAnimationsAsync()],
+    providers: [provideTranslocoTesting(), provideAnimationsAsync()],
   });
   // let user: User;
 
