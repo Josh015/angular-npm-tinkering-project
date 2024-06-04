@@ -28,6 +28,7 @@ describe('MainContentComponent', () => {
   let loader: HarnessLoader;
   let spectator: Spectator<MainContentComponent>;
   let translocoService: TranslocoService;
+  const prefix = 'ContactManager.MainContent.';
   const params = new BehaviorSubject<Params>({});
   const usersData = signal<User[]>([]);
   const activatedRoute = jasmine.createSpyObj<ActivatedRoute>([], {
@@ -98,7 +99,7 @@ describe('MainContentComponent', () => {
       const matCard = await loader.getHarness(MatCardHarness);
       const title = await matCard.getTitleText();
       const nameAndGender = translocoService.translate(
-        'ContactManager.MainContent.Title.NameAndGender',
+        `${prefix}Title.NameAndGender`,
         user,
       );
 
@@ -109,7 +110,7 @@ describe('MainContentComponent', () => {
       const matCard = await loader.getHarness(MatCardHarness);
       const subTitle = await matCard.getSubtitleText();
       const birthday = translocoService.translate(
-        'ContactManager.MainContent.SubTitle.Birthday',
+        `${prefix}SubTitle.Birthday`,
         user,
       );
 
@@ -125,9 +126,7 @@ describe('MainContentComponent', () => {
 
     it(`should have a "Bio" tab that contains the user's biography info`, async () => {
       const matTabGroup = await loader.getHarness(MatTabGroupHarness);
-      const label = translocoService.translate(
-        'ContactManager.MainContent.Tabs.Bio',
-      );
+      const label = translocoService.translate(`${prefix}Tabs.Bio`);
 
       await matTabGroup.selectTab({ label });
 
@@ -139,9 +138,7 @@ describe('MainContentComponent', () => {
 
     it(`should have a "Notes" tab with the user's notes`, async () => {
       const matTabGroup = await loader.getHarness(MatTabGroupHarness);
-      const label = translocoService.translate(
-        'ContactManager.MainContent.Tabs.Notes',
-      );
+      const label = translocoService.translate(`${prefix}Tabs.Notes`);
 
       await matTabGroup.selectTab({ label });
 

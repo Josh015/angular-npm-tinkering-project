@@ -14,12 +14,12 @@ describe(`NotesComponent`, () => {
   let loader: HarnessLoader;
   let spectator: Spectator<NotesComponent>;
   let translocoService: TranslocoService;
+  const prefix = 'ContactManager.Notes.';
   const createComponent = createComponentFactory({
     component: NotesComponent,
     declareComponent: false,
     providers: [provideTranslocoTesting(), provideAnimationsAsync()],
   });
-  // let user: User;
 
   beforeEach(() => {
     spectator = createComponent();
@@ -36,10 +36,16 @@ describe(`NotesComponent`, () => {
 
     const matTableHarness = await loader.getHarness(MatTableHarness);
     const rows = await matTableHarness.getRows();
+    const noDataMessage = translocoService.translate(
+      `${prefix}Grid.Empty.NoData`,
+    );
 
     expect(rows.length).toBe(0);
 
-    // TODO: How to get "no data" row and check the message?
+    const noDataRow = spectator.query('tr td');
+
+    expect(noDataRow).toBeTruthy();
+    expect(noDataRow?.innerHTML.trim().startsWith(noDataMessage)).toBeTrue();
   });
 
   it(`should have rows for all the user's notes`, async () => {
@@ -61,10 +67,9 @@ describe(`NotesComponent`, () => {
         expect(cellStrings[0]).toBe(note.id.toString());
         expect(cellStrings[1]).toBe(note.title);
         expect(cellStrings[2]).toBe(
-          translocoService.translate(
-            'ContactManager.Notes.Grid.Columns.Date.Format',
-            { value: note.date },
-          ),
+          translocoService.translate(`${prefix}Grid.Columns.Date.Format`, {
+            value: note.date,
+          }),
         );
       }
     }
