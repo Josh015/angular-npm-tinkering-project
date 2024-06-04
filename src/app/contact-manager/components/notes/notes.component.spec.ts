@@ -113,13 +113,15 @@ describe(`NotesComponent`, () => {
     const cellStrings = await parallel(() =>
       cells.map((cell) => cell.getText())
     );
+    const noteDate = translocoService.translate(
+      `${prefix}Grid.Columns.Date.Format`,
+      {
+        value: note.date
+      }
+    );
 
     expect(cellStrings[0]).toBe(note.id.toString());
     expect(cellStrings[1]).toBe(note.title);
-    expect(cellStrings[2]).toBe(
-      translocoService.translate(`${prefix}Grid.Columns.Date.Format`, {
-        value: note.date
-      })
-    );
+    expect(cellStrings[2]).toBe(noteDate);
   }
 });
