@@ -15,8 +15,10 @@ import { BehaviorSubject } from 'rxjs';
 import { MainContentComponent } from './main-content.component';
 import { User } from '../../models';
 import { UserService } from '../../services/user.service';
+import { USERS_MOCK } from '../../testing';
 import { NotesComponent } from '../notes/notes.component';
 import { getTranslocoModule } from 'src/app/testing';
+import { getRandomArrayElement } from 'src/app/utils';
 
 describe('MainContentComponent', () => {
   let loader: HarnessLoader;
@@ -31,20 +33,6 @@ describe('MainContentComponent', () => {
   const userService = jasmine.createSpyObj<UserService>([], {
     data: usersData,
   });
-  const mockUsers: User[] = [
-    {
-      id: 1,
-      name: 'test',
-      birthDate: new Date(),
-      avatar: 'svg-1',
-      bio: 'A little about myself.',
-      gender: 'male',
-      notes: [
-        { id: 1, date: new Date(), title: 'test note 1' },
-        { id: 2, date: new Date(), title: 'test note 2' },
-      ],
-    },
-  ];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -74,7 +62,7 @@ describe('MainContentComponent', () => {
     });
 
     it(`should be shown when the route has an invalid user ID`, () => {
-      usersData.set(mockUsers);
+      usersData.set(USERS_MOCK);
       params.next({ [MainContentComponent.userIdParam]: -1 });
     });
 
@@ -94,10 +82,11 @@ describe('MainContentComponent', () => {
   });
 
   describe('User Card', () => {
-    const user = mockUsers[0];
+    let user: User;
 
     beforeEach(async () => {
-      usersData.set(mockUsers);
+      user = getRandomArrayElement(USERS_MOCK);
+      usersData.set(USERS_MOCK);
       params.next({ [MainContentComponent.userIdParam]: user.id });
       fixture.detectChanges();
       await fixture.whenRenderingDone();
