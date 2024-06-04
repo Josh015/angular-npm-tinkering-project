@@ -39,4 +39,4 @@ export const USERS_MOCK: User[] = [
       { id: 8, date: new Date(), title: 'test note 8' },
     ],
   },
-];
+] as const;
