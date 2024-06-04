@@ -73,14 +73,14 @@ describe('MainContentComponent', () => {
       params.next({});
     });
 
-    it(`should be shown when the route has a user ID but the component has no user data`, () => {
-      usersData.set([]);
-      params.next({ [MainContentComponent.userIdParam]: 1 });
-    });
-
     it(`should be shown when the route has an invalid user ID`, () => {
       usersData.set(mockUsers);
       params.next({ [MainContentComponent.userIdParam]: -1 });
+    });
+
+    it(`should be shown when the route has a user ID but the component has no user data`, () => {
+      usersData.set([]);
+      params.next({ [MainContentComponent.userIdParam]: 1 });
     });
 
     afterEach(async () => {
@@ -109,7 +109,7 @@ describe('MainContentComponent', () => {
       expect(element).toBeTruthy();
     });
 
-    it(`should have a card title with the user's name and gender`, async () => {
+    it(`should have a title with the user's name and gender`, async () => {
       const matCard = await loader.getHarness(MatCardHarness);
       const title = await matCard.getTitleText();
       const nameAndGender = translocoService.translate(
@@ -120,7 +120,7 @@ describe('MainContentComponent', () => {
       expect(title).toBe(nameAndGender);
     });
 
-    it(`should have a card title with the user's birthday`, async () => {
+    it(`should have a subtitle with the user's birthday`, async () => {
       const matCard = await loader.getHarness(MatCardHarness);
       const subTitle = await matCard.getSubtitleText();
       const birthday = translocoService.translate(
