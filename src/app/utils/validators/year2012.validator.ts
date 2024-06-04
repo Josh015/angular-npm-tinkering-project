@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export const year2012Validator: ValidatorFn = (
-  control: AbstractControl,
+  control: AbstractControl
 ): ValidationErrors | null => {
   const date = control.value as Date | null;
 
@@ -15,6 +15,6 @@ export const year2012Validator: ValidatorFn = (
   }
 
   return {
-    year2012: true,
+    year2012: true
   };
 };

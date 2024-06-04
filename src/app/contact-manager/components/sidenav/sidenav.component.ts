@@ -5,7 +5,7 @@ import {
   Component,
   inject,
   signal,
-  viewChild,
+  viewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -13,7 +13,7 @@ import {
   Router,
   RouterLink,
   RouterLinkActive,
-  RouterOutlet,
+  RouterOutlet
 } from '@angular/router';
 import { TranslocoPipe } from '@jsverse/transloco';
 import tailwindConfig from 'tailwind.config';
@@ -36,8 +36,8 @@ const fullConfig = resolveConfig(tailwindConfig);
     RouterLinkActive,
     RouterOutlet,
     ToolbarComponent,
-    TranslocoPipe,
-  ],
+    TranslocoPipe
+  ]
 })
 export class SidenavComponent {
   private readonly breakpointObserver = inject(BreakpointObserver);

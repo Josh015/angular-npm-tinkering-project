@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   const createComponent = createComponentFactory({
     component: AppComponent,
-    declareComponent: false,
+    declareComponent: false
   });
 
   it('should create the app', () => {

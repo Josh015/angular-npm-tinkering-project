@@ -7,7 +7,7 @@ import { MatCard } from '@angular/material/card';
 import { MatCardHarness } from '@angular/material/card/testing';
 import {
   MatIconHarness,
-  MatIconTestingModule,
+  MatIconTestingModule
 } from '@angular/material/icon/testing';
 import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -32,10 +32,10 @@ describe('MainContentComponent', () => {
   const params = new BehaviorSubject<Params>({});
   const usersData = signal<User[]>([]);
   const activatedRoute = jasmine.createSpyObj<ActivatedRoute>([], {
-    params: params,
+    params: params
   });
   const userService = jasmine.createSpyObj<UserService>([], {
-    data: usersData,
+    data: usersData
   });
   const createComponent = createComponentFactory({
     component: MainContentComponent,
@@ -45,8 +45,8 @@ describe('MainContentComponent', () => {
       provideAnimationsAsync(),
       provideTranslocoTesting(),
       { provide: ActivatedRoute, useValue: activatedRoute },
-      { provide: UserService, useValue: userService },
-    ],
+      { provide: UserService, useValue: userService }
+    ]
   });
 
   beforeEach(() => {
@@ -100,7 +100,7 @@ describe('MainContentComponent', () => {
       const title = await matCard.getTitleText();
       const nameAndGender = translocoService.translate(
         `${prefix}Title.NameAndGender`,
-        user,
+        user
       );
 
       expect(title).toBe(nameAndGender);
@@ -111,7 +111,7 @@ describe('MainContentComponent', () => {
       const subTitle = await matCard.getSubtitleText();
       const birthday = translocoService.translate(
         `${prefix}SubTitle.Birthday`,
-        user,
+        user
       );
 
       expect(subTitle).toBe(birthday);

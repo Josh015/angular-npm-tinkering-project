@@ -13,12 +13,12 @@ const compat = new FlatCompat({
   baseDirectory: __dirname, // optional; default: process.cwd()
   resolvePluginsRelativeTo: __dirname, // optional
   recommendedConfig: js.configs.recommended, // optional unless using "eslint:recommended"
-  allConfig: js.configs.all, // optional unless using "eslint:all"
+  allConfig: js.configs.all // optional unless using "eslint:all"
 });
 
 export default ts.config(
   {
-    ignores: ['.angular', 'node_modules', '.vscode'],
+    ignores: ['.angular', 'coverage', 'node_modules', '.vscode']
   },
   {
     languageOptions: {
@@ -26,39 +26,39 @@ export default ts.config(
         ...globals.browser,
         ...globals.jasmine,
         ...globals.jquery,
-        ...globals.node,
+        ...globals.node
       },
       parserOptions: {
         project: true,
-        tsconfigRootDir: __dirname,
-      },
-    },
+        tsconfigRootDir: __dirname
+      }
+    }
   },
   {
     extends: [
       js.configs.recommended,
       cspellESLintPluginRecommended,
-      eslintPluginPrettierRecommended,
-    ],
+      eslintPluginPrettierRecommended
+    ]
   },
   {
     files: ['**/*.mjs'],
     rules: {
-      'sort-imports': 'error',
-    },
+      'sort-imports': 'error'
+    }
   },
   {
     files: ['**/*.ts'],
     settings: {
       // Manually add "src/" directory to import plugin's "internal" group
-      'import/internal-regex': '^src/',
+      'import/internal-regex': '^src/'
     },
     extends: [
       ...ts.configs.strictTypeChecked,
       ...ts.configs.stylisticTypeChecked,
       ...angular.configs.tsRecommended,
       ...compat.config(imports.configs.recommended),
-      ...compat.config(imports.configs.typescript),
+      ...compat.config(imports.configs.typescript)
       // ...compat.config(rxjsLints.configs.recommended),
     ],
     processor: angular.processInlineTemplates,
@@ -66,11 +66,11 @@ export default ts.config(
       // Angular fixes
       '@typescript-eslint/explicit-function-return-type': [
         'error',
-        { allowExpressions: true },
+        { allowExpressions: true }
       ],
       '@typescript-eslint/no-extraneous-class': [
         'error',
-        { allowWithDecorator: true },
+        { allowWithDecorator: true }
       ],
       '@typescript-eslint/unbound-method': 'off',
 
@@ -90,20 +90,20 @@ export default ts.config(
           selector: 'default',
           format: ['camelCase'],
           leadingUnderscore: 'allow',
-          trailingUnderscore: 'forbid',
+          trailingUnderscore: 'forbid'
         },
         {
           selector: 'variable',
-          format: ['camelCase', 'UPPER_CASE'],
+          format: ['camelCase', 'UPPER_CASE']
         },
         {
           selector: 'typeLike',
-          format: ['PascalCase'],
+          format: ['PascalCase']
         },
         {
           selector: 'enumMember',
-          format: ['PascalCase'],
-        },
+          format: ['PascalCase']
+        }
       ],
       'import/no-unresolved': 'off',
       'import/order': [
@@ -119,18 +119,18 @@ export default ts.config(
             // Misc.
             'type',
             'object',
-            'unknown',
+            'unknown'
           ],
           'newlines-between': 'always',
           alphabetize: {
             order: 'asc',
-            caseInsensitive: true,
-          },
-        },
+            caseInsensitive: true
+          }
+        }
       ],
 
       // RxJS fixes.
-      'import/namespace': 'off',
+      'import/namespace': 'off'
       // 'rxjs/finnish': [
       //   'error',
       //   {
@@ -152,17 +152,17 @@ export default ts.config(
       // 'rxjs/no-compat': ['error'],
       // 'rxjs/no-exposed-subjects': ['error'],
       // 'rxjs/no-nested-subscribe': ['off'],
-    },
+    }
   },
   {
     files: ['**/*.component.html'],
     extends: [
       ...angular.configs.templateRecommended,
-      ...angular.configs.templateAccessibility,
+      ...angular.configs.templateAccessibility
     ],
     rules: {
       '@angular-eslint/template/attributes-order': 'warn',
-      '@angular-eslint/template/prefer-self-closing-tags': 'warn',
-    },
-  },
+      '@angular-eslint/template/prefer-self-closing-tags': 'warn'
+    }
+  }
 );

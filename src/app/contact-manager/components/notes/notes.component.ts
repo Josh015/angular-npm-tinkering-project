@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  viewChild,
+  viewChild
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -18,7 +18,7 @@ import { MaterialModule } from 'src/app/shared';
   templateUrl: './notes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MaterialModule, TranslocoDirective],
+  imports: [MaterialModule, TranslocoDirective]
 })
 export class NotesComponent implements AfterViewInit {
   private readonly sort = viewChild.required(MatSort);

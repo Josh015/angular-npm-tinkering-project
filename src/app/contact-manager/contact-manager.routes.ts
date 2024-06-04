@@ -12,11 +12,11 @@ export const routes: Routes = [
     children: [
       {
         path: `:${MainContentComponent.userIdParam}`,
-        component: MainContentComponent,
+        component: MainContentComponent
       },
-      { path: '', component: MainContentComponent },
-    ],
+      { path: '', component: MainContentComponent }
+    ]
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: '' }
 ];
 export default routes;

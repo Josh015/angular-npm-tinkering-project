@@ -4,7 +4,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TranslocoDirective } from '@jsverse/transloco';
@@ -23,8 +23,8 @@ import { y2kValidator, year2012Validator } from 'src/app/utils';
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-    TranslocoDirective,
-  ],
+    TranslocoDirective
+  ]
 })
 export class NewContactDialogComponent {
   static readonly nameMaxLength = 20;
@@ -42,25 +42,25 @@ export class NewContactDialogComponent {
     birthDate: new FormControl<Date | null>(null, [
       Validators.required,
       y2kValidator,
-      year2012Validator,
+      year2012Validator
     ]),
     gender: new FormControl<Gender | null>(null, [Validators.required]),
     name: new FormControl<string>('', [
       Validators.required,
-      Validators.maxLength(NewContactDialogComponent.nameMaxLength),
+      Validators.maxLength(NewContactDialogComponent.nameMaxLength)
     ]),
     avatar: new FormControl<Avatar | null>(null, [Validators.required]),
     bio: new FormControl<string>('', [
-      Validators.maxLength(NewContactDialogComponent.bioMaxLength),
+      Validators.maxLength(NewContactDialogComponent.bioMaxLength)
     ]),
-    notes: new FormControl<Note[]>([]),
+    notes: new FormControl<Note[]>([])
   });
 
   protected async save(): Promise<void> {
     if (this.formGroup.valid) {
       try {
         const user = await this.userService.create(
-          this.formGroup.getRawValue() as User,
+          this.formGroup.getRawValue() as User
         );
 
         this.dismiss(user);

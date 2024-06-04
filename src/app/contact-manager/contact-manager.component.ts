@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  OnInit,
+  OnInit
 } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -15,7 +15,7 @@ import { UserService } from './services/user.service';
   template: '<app-sidenav />',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [SidenavComponent],
+  imports: [SidenavComponent]
 })
 export class ContactManagerComponent implements OnInit {
   private readonly iconRegistry = inject(MatIconRegistry);
@@ -24,7 +24,7 @@ export class ContactManagerComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.iconRegistry.addSvgIconSet(
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg'),
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg')
     );
 
     await this.userService.fetch();

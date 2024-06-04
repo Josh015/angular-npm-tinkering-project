@@ -32,8 +32,8 @@ export class UserService {
         delay(UserService.fetchDelayMilliseconds),
         finalize(() => {
           this._loading.set(false);
-        }),
-      ),
+        })
+      )
     );
   }
 
@@ -55,8 +55,8 @@ export class UserService {
         }),
         finalize(() => {
           this._loading.set(false);
-        }),
-      ),
+        })
+      )
     );
   }
 }

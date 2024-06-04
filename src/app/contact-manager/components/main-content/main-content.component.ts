@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  inject,
+  inject
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +17,7 @@ import { MaterialModule } from 'src/app/shared';
   templateUrl: './main-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MaterialModule, NotesComponent, TranslocoDirective],
+  imports: [MaterialModule, NotesComponent, TranslocoDirective]
 })
 export class MainContentComponent {
   static readonly userIdParam = 'userId';

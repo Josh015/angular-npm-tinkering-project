@@ -9,7 +9,7 @@ type ExcludeFunctionPropertyNames<T> = MarkFunctionProperties<T>[keyof T];
 type ExcludeFunctions<T> = Pick<T, ExcludeFunctionPropertyNames<T>>;
 export type NgChanges<
   Component,
-  Props = ExcludeFunctions<Component>,
+  Props = ExcludeFunctions<Component>
 > = Partial<{
   [Key in keyof Props]: {
     previousValue: Props[Key];

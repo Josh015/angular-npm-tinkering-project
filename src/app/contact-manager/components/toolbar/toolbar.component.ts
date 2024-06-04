@@ -2,13 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  output,
+  output
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {
   MatSnackBar,
   MatSnackBarRef,
-  SimpleSnackBar,
+  SimpleSnackBar
 } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
@@ -22,7 +22,7 @@ import { MaterialModule } from 'src/app/shared';
   templateUrl: './toolbar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MaterialModule, TranslocoDirective],
+  imports: [MaterialModule, TranslocoDirective]
 })
 export class ToolbarComponent {
   private readonly dialog = inject(MatDialog);
@@ -36,14 +36,14 @@ export class ToolbarComponent {
 
   protected openAddContactDialog(): void {
     const dialogRef = this.dialog.open(NewContactDialogComponent, {
-      width: '450px',
+      width: '450px'
     });
 
     dialogRef.afterClosed().subscribe((result: User | null) => {
       if (result) {
         const snackBar: Record<string, string> =
           this.translocoService.translateObject(
-            'ContactManager.Toolbar.SnackBar',
+            'ContactManager.Toolbar.SnackBar'
           );
 
         this.openSnackBar(snackBar['Message'], snackBar['Action'])
@@ -57,10 +57,10 @@ export class ToolbarComponent {
 
   protected openSnackBar(
     message: string,
-    action: string,
+    action: string
   ): MatSnackBarRef<SimpleSnackBar> {
     return this.snackBar.open(message, action, {
-      duration: 5000,
+      duration: 5000
     });
   }
 }

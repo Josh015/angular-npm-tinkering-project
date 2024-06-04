@@ -3,7 +3,7 @@
 import { importProvidersFrom } from '@angular/core';
 import {
   TranslocoTestingModule,
-  TranslocoTestingOptions,
+  TranslocoTestingOptions
 } from '@jsverse/transloco';
 import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat';
 
@@ -20,12 +20,12 @@ export function provideTranslocoTesting(options: TranslocoTestingOptions = {}) {
           fallbackLang: 'en',
           // Remove this option if your application doesn't support changing language in runtime.
           reRenderOnLangChange: true,
-          prodMode: false,
+          prodMode: false
         },
         preloadLangs: true,
-        ...options,
-      }),
+        ...options
+      })
     ),
-    provideTranslocoMessageformat(),
+    provideTranslocoMessageformat()
   ];
 }

@@ -4,7 +4,7 @@ import { TestBed } from '@angular/core/testing';
 import { MatInputHarness } from '@angular/material/input/testing';
 import {
   MatRowHarness,
-  MatTableHarness,
+  MatTableHarness
 } from '@angular/material/table/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslocoService } from '@jsverse/transloco';
@@ -23,7 +23,7 @@ describe(`NotesComponent`, () => {
   const createComponent = createComponentFactory({
     component: NotesComponent,
     declareComponent: false,
-    providers: [provideTranslocoTesting(), provideAnimationsAsync()],
+    providers: [provideTranslocoTesting(), provideAnimationsAsync()]
   });
 
   beforeEach(() => {
@@ -40,7 +40,7 @@ describe(`NotesComponent`, () => {
     spectator.setInput({ notes: [] });
 
     const noDataMessage = translocoService.translate(
-      `${prefix}Grid.Empty.NoData`,
+      `${prefix}Grid.Empty.NoData`
     );
     const noDataRow = spectator.query('tr td');
 
@@ -87,13 +87,13 @@ describe(`NotesComponent`, () => {
     const invalidFilters = [
       'a filter that will not match!',
       'another invalid filter!',
-      'you know the drill...',
+      'you know the drill...'
     ];
 
     for (const filterValue of invalidFilters) {
       const noMatchingDataMessage = translocoService.translate(
         `${prefix}Grid.Empty.NoMatchingDataForFilter`,
-        { filterValue },
+        { filterValue }
       );
 
       await filterInput.setValue(filterValue);
@@ -107,19 +107,19 @@ describe(`NotesComponent`, () => {
 
   async function expectRowMatchesNote(
     row: MatRowHarness,
-    note: Note,
+    note: Note
   ): Promise<void> {
     const cells = await row.getCells();
     const cellStrings = await parallel(() =>
-      cells.map((cell) => cell.getText()),
+      cells.map((cell) => cell.getText())
     );
 
     expect(cellStrings[0]).toBe(note.id.toString());
     expect(cellStrings[1]).toBe(note.title);
     expect(cellStrings[2]).toBe(
       translocoService.translate(`${prefix}Grid.Columns.Date.Format`, {
-        value: note.date,
-      }),
+        value: note.date
+      })
     );
   }
 });

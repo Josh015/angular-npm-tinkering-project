@@ -6,7 +6,7 @@ import {
   PreloadAllModules,
   provideRouter,
   //withDebugTracing,
-  withPreloading,
+  withPreloading
 } from '@angular/router';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat';
@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
       ? provideRouter(routes)
       : provideRouter(
           routes,
-          withPreloading(PreloadAllModules),
+          withPreloading(PreloadAllModules)
           //withDebugTracing(),
         ),
 
@@ -34,10 +34,10 @@ export const appConfig: ApplicationConfig = {
         fallbackLang: 'en',
         // Remove this option if your application doesn't support changing language in runtime.
         reRenderOnLangChange: true,
-        prodMode: !isDevMode(),
+        prodMode: !isDevMode()
       },
-      loader: TranslocoHttpLoader,
+      loader: TranslocoHttpLoader
     }),
-    provideTranslocoMessageformat(), // Must come AFTER provideTransloco()!
-  ],
+    provideTranslocoMessageformat() // Must come AFTER provideTransloco()!
+  ]
 };
