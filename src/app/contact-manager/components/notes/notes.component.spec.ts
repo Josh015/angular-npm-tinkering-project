@@ -27,7 +27,7 @@ describe(`NotesComponent`, () => {
     translocoService = TestBed.inject(TranslocoService);
   });
 
-  it(`should create the notes`, () => {
+  it(`should create the component`, () => {
     expect(spectator).toBeTruthy();
   });
 

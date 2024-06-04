@@ -54,7 +54,7 @@ describe('MainContentComponent', () => {
     loader = TestbedHarnessEnvironment.loader(spectator.fixture);
   });
 
-  it('should create the main-content', () => {
+  it('should create the component', () => {
     expect(spectator).toBeTruthy();
   });
 
@@ -69,7 +69,7 @@ describe('MainContentComponent', () => {
       params.next({ [MainContentComponent.userIdParam]: -1 });
     });
 
-    it(`should be shown when the route has a user ID but the component has no user data`, () => {
+    it(`should be shown when the route has a user ID but there's no user data`, () => {
       usersData.set([]);
       params.next({ [MainContentComponent.userIdParam]: 1 });
     });
