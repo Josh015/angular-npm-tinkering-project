@@ -2,7 +2,7 @@
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { signal } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { MatCard } from '@angular/material/card';
 import { MatCardHarness } from '@angular/material/card/testing';
 import {
@@ -27,7 +27,6 @@ import { getTranslocoModule } from 'src/app/testing';
 describe('MainContentComponent', () => {
   let loader: HarnessLoader;
   let spectator: Spectator<MainContentComponent>;
-  let fixture: ComponentFixture<MainContentComponent>;
   let translocoService: TranslocoService;
   const params = new BehaviorSubject<Params>({});
   const usersData = signal<User[]>([]);
@@ -51,8 +50,7 @@ describe('MainContentComponent', () => {
   beforeEach(() => {
     spectator = createComponent();
     translocoService = TestBed.inject(TranslocoService);
-    fixture = spectator.fixture;
-    loader = TestbedHarnessEnvironment.loader(fixture);
+    loader = TestbedHarnessEnvironment.loader(spectator.fixture);
   });
 
   it('should create the main-content', () => {
