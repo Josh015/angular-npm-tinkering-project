@@ -29,13 +29,13 @@ describe('MainContentComponent', () => {
   let spectator: Spectator<MainContentComponent>;
   let translocoService: TranslocoService;
   const prefix = 'ContactManager.MainContent.';
-  const params = new BehaviorSubject<Params>({});
-  const usersData = signal<User[]>([]);
+  const activatedRouteParams = new BehaviorSubject<Params>({});
+  const userServiceData = signal<User[]>([]);
   const activatedRoute = jasmine.createSpyObj<ActivatedRoute>([], {
-    params: params
+    params: activatedRouteParams
   });
   const userService = jasmine.createSpyObj<UserService>([], {
-    data: usersData
+    data: userServiceData
   });
   const createComponent = createComponentFactory({
     component: MainContentComponent,
@@ -61,18 +61,18 @@ describe('MainContentComponent', () => {
 
   describe(`Empty Space`, () => {
     it(`should be shown when the route has no user ID`, () => {
-      usersData.set([]);
-      params.next({});
+      userServiceData.set([]);
+      activatedRouteParams.next({});
     });
 
     it(`should be shown when the route has an invalid user ID`, () => {
-      usersData.set(USERS_MOCK);
-      params.next({ [MainContentComponent.userIdParam]: -1 });
+      userServiceData.set(USERS_MOCK);
+      activatedRouteParams.next({ [MainContentComponent.userIdParam]: -1 });
     });
 
     it(`should be shown when the route has a user ID but there's no user data`, () => {
-      usersData.set([]);
-      params.next({ [MainContentComponent.userIdParam]: 1 });
+      userServiceData.set([]);
+      activatedRouteParams.next({ [MainContentComponent.userIdParam]: 1 });
     });
 
     afterEach(() => {
@@ -86,8 +86,10 @@ describe('MainContentComponent', () => {
 
     beforeEach(() => {
       user = sample(USERS_MOCK)!;
-      usersData.set(USERS_MOCK);
-      params.next({ [MainContentComponent.userIdParam]: user.id });
+      userServiceData.set(USERS_MOCK);
+      activatedRouteParams.next({
+        [MainContentComponent.userIdParam]: user.id
+      });
       spectator.detectChanges();
     });
 
