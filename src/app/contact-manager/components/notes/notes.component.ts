@@ -31,6 +31,9 @@ export class NotesComponent implements AfterViewInit {
   set notes(value: Note[]) {
     this.dataSource.data = value;
   }
+  get notes(): Note[] {
+    return this.dataSource.data;
+  }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort();

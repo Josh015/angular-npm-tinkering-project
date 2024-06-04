@@ -1,18 +1,27 @@
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCardHarness } from '@angular/material/card/testing';
+import { MatIconHarness } from '@angular/material/icon/testing';
+import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 import { By } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ActivatedRoute, Params } from '@angular/router';
+import { TranslocoService } from '@jsverse/transloco';
 import { BehaviorSubject } from 'rxjs';
 
 import { MainContentComponent } from './main-content.component';
 import { User } from '../../models';
 import { UserService } from '../../services/user.service';
+// import { NotesComponent } from '../notes/notes.component';
 import { getTranslocoModule } from 'src/app/testing';
 
 describe('MainContentComponent', () => {
+  let loader: HarnessLoader;
   let component: MainContentComponent;
   let fixture: ComponentFixture<MainContentComponent>;
+  let translocoService: TranslocoService;
   const params = new BehaviorSubject<Params>({});
   const usersData = signal<User[]>([]);
   const activatedRoute = jasmine.createSpyObj<ActivatedRoute>([], {
@@ -27,9 +36,12 @@ describe('MainContentComponent', () => {
       name: 'test',
       birthDate: new Date(),
       avatar: 'svg-1',
-      bio: '',
+      bio: 'A little about myself.',
       gender: 'male',
-      notes: [],
+      notes: [
+        { id: 1, date: new Date(), title: 'test note 1' },
+        { id: 2, date: new Date(), title: 'test note 2' },
+      ],
     },
   ];
 
@@ -42,65 +54,102 @@ describe('MainContentComponent', () => {
         { provide: UserService, useValue: userService },
       ],
     }).compileComponents();
+    translocoService = TestBed.inject(TranslocoService);
 
     fixture = TestBed.createComponent(MainContentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
-  it('should create the notes', () => {
+  it('should create the main-content', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should not have a mat-card when the route has no user ID`, async () => {
-    usersData.set([]);
-    params.next({});
-    fixture.detectChanges();
-    await fixture.whenRenderingDone();
+  describe(`Empty`, () => {
+    it(`should not have any content when the route has no user ID`, () => {
+      usersData.set([]);
+      params.next({});
+    });
 
-    const debugElement = fixture.debugElement.query(By.css('mat-card'));
+    it(`should not have any content when the route has a user ID but the component has no user data`, () => {
+      usersData.set([]);
+      params.next({ [MainContentComponent.userIdParam]: 1 });
+    });
 
-    expect(debugElement).toBeFalsy();
+    it(`should not have any content when the route has an invalid user ID`, () => {
+      usersData.set(mockUsers);
+      params.next({ [MainContentComponent.userIdParam]: -1 });
+    });
+
+    afterEach(async () => {
+      fixture.detectChanges();
+      await fixture.whenRenderingDone();
+
+      const element = fixture.debugElement.query(By.css('*'));
+
+      expect(element).toBeFalsy();
+    });
   });
 
-  it(`should not have a mat-card when the route has a user ID but the component has no user data`, async () => {
-    usersData.set([]);
-    params.next({ [MainContentComponent.userIdParam]: 1 });
-    fixture.detectChanges();
-    await fixture.whenRenderingDone();
+  describe('User Card', () => {
+    const user = mockUsers[0];
 
-    const debugElement = fixture.debugElement.query(By.css('mat-card'));
+    beforeEach(async () => {
+      usersData.set(mockUsers);
+      params.next({ [MainContentComponent.userIdParam]: user.id });
+      fixture.detectChanges();
+      await fixture.whenRenderingDone();
+    });
 
-    expect(debugElement).toBeFalsy();
+    it(`should have a card title with the user's name and gender`, async () => {
+      const matCard = await loader.getHarness(MatCardHarness);
+      const title = await matCard.getTitleText();
+      const nameAndGender = translocoService.translate(
+        'ContactManager.MainContent.Title.NameAndGender',
+        user,
+      );
+
+      expect(title).toBe(nameAndGender);
+    });
+
+    it(`should have a card title with the user's birthday`, async () => {
+      const matCard = await loader.getHarness(MatCardHarness);
+      const subTitle = await matCard.getSubtitleText();
+      const birthday = translocoService.translate(
+        'ContactManager.MainContent.SubTitle.Birthday',
+        user,
+      );
+
+      expect(subTitle).toBe(birthday);
+    });
+
+    it(`should have an icon displaying the user's avatar`, async () => {
+      const matIconHarness = await loader.getHarness(MatIconHarness);
+      const name = await matIconHarness.getName();
+
+      expect(name).toBe(user.avatar);
+    });
+
+    it(`should have a "Bio" tab that contains the user's biography info`, async () => {
+      const label = translocoService.translate(
+        'ContactManager.MainContent.Tabs.Bio',
+      );
+      const matTabGroup = await loader.getHarness(MatTabGroupHarness);
+
+      await matTabGroup.selectTab({ label });
+
+      const selectedTab = await matTabGroup.getSelectedTab();
+      const tabContent = await selectedTab.getTextContent();
+
+      expect(tabContent).toBe(user.bio);
+    });
+
+    // it(`should have a notes component with the user's notes`, () => {
+    //   const element = fixture.debugElement.query(By.directive(NotesComponent));
+    //   const component = element.context as NotesComponent;
+
+    //   expect(component.notes).toEqual(user.notes);
+    // });
   });
-
-  it(`should not have a mat-card when the route has an invalid user ID`, async () => {
-    usersData.set(mockUsers);
-    params.next({ [MainContentComponent.userIdParam]: -1 });
-    fixture.detectChanges();
-    await fixture.whenRenderingDone();
-
-    const debugElement = fixture.debugElement.query(By.css('mat-card'));
-
-    expect(debugElement).toBeFalsy();
-  });
-
-  it(`should have a mat-card when the route has valid user ID`, async () => {
-    usersData.set(mockUsers);
-    params.next({ [MainContentComponent.userIdParam]: mockUsers[0].id });
-    fixture.detectChanges();
-    await fixture.whenRenderingDone();
-
-    const debugElement = fixture.debugElement.query(By.css('mat-card'));
-
-    expect(debugElement).toBeTruthy();
-    expect(debugElement.nativeElement).toBeTruthy();
-  });
-
-  // it('should render the title', () => {
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('.content span')?.textContent).toContain(
-  //     'demo-angular-jest app is running!',
-  //   );
-  // });
 });
