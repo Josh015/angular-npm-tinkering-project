@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { signal } from '@angular/core';
@@ -10,6 +11,7 @@ import { By } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ActivatedRoute, Params } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
+import { sample } from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 
 import { MainContentComponent } from './main-content.component';
@@ -18,7 +20,6 @@ import { UserService } from '../../services/user.service';
 import { USERS_MOCK } from '../../testing';
 import { NotesComponent } from '../notes/notes.component';
 import { getTranslocoModule } from 'src/app/testing';
-import { getRandomArrayElement } from 'src/app/utils';
 
 describe('MainContentComponent', () => {
   let loader: HarnessLoader;
@@ -85,7 +86,7 @@ describe('MainContentComponent', () => {
     let user: User;
 
     beforeEach(async () => {
-      user = getRandomArrayElement(USERS_MOCK);
+      user = sample(USERS_MOCK)!;
       usersData.set(USERS_MOCK);
       params.next({ [MainContentComponent.userIdParam]: user.id });
       fixture.detectChanges();

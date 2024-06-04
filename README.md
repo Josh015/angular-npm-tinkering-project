@@ -14,6 +14,7 @@ yarn start
 - [Angular](https://angular.dev/)
 - [Angular Material](https://material.angular.io/)
 - [ESLint](https://eslint.org/)
+- [Lodash](https://lodash.com/)
 - [messageformat](https://messageformat.github.io/messageformat/)
 - [Prettier](https://prettier.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
