@@ -40,7 +40,7 @@ describe('MainContentComponent', () => {
   const createComponent = createComponentFactory({
     component: MainContentComponent,
     declareComponent: false,
-    imports: [getTranslocoModule(), MainContentComponent, MatIconTestingModule],
+    imports: [getTranslocoModule(), MatIconTestingModule],
     providers: [
       provideAnimationsAsync(),
       { provide: ActivatedRoute, useValue: activatedRoute },
