@@ -2,6 +2,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatCard } from '@angular/material/card';
 import { MatCardHarness } from '@angular/material/card/testing';
 import { MatIconHarness } from '@angular/material/icon/testing';
 import { MatTabGroupHarness } from '@angular/material/tabs/testing';
@@ -14,7 +15,7 @@ import { BehaviorSubject } from 'rxjs';
 import { MainContentComponent } from './main-content.component';
 import { User } from '../../models';
 import { UserService } from '../../services/user.service';
-// import { NotesComponent } from '../notes/notes.component';
+import { NotesComponent } from '../notes/notes.component';
 import { getTranslocoModule } from 'src/app/testing';
 
 describe('MainContentComponent', () => {
@@ -66,18 +67,18 @@ describe('MainContentComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe(`Empty`, () => {
-    it(`should not have any content when the route has no user ID`, () => {
+  describe(`Empty Space`, () => {
+    it(`should be shown when the route has no user ID`, () => {
       usersData.set([]);
       params.next({});
     });
 
-    it(`should not have any content when the route has a user ID but the component has no user data`, () => {
+    it(`should be shown when the route has a user ID but the component has no user data`, () => {
       usersData.set([]);
       params.next({ [MainContentComponent.userIdParam]: 1 });
     });
 
-    it(`should not have any content when the route has an invalid user ID`, () => {
+    it(`should be shown when the route has an invalid user ID`, () => {
       usersData.set(mockUsers);
       params.next({ [MainContentComponent.userIdParam]: -1 });
     });
@@ -100,6 +101,12 @@ describe('MainContentComponent', () => {
       params.next({ [MainContentComponent.userIdParam]: user.id });
       fixture.detectChanges();
       await fixture.whenRenderingDone();
+    });
+
+    it(`should be visible when the route has a valid user ID`, () => {
+      const element = fixture.debugElement.query(By.directive(MatCard));
+
+      expect(element).toBeTruthy();
     });
 
     it(`should have a card title with the user's name and gender`, async () => {
@@ -145,11 +152,18 @@ describe('MainContentComponent', () => {
       expect(tabContent).toBe(user.bio);
     });
 
-    // it(`should have a notes component with the user's notes`, () => {
-    //   const element = fixture.debugElement.query(By.directive(NotesComponent));
-    //   const component = element.context as NotesComponent;
+    it(`should have a "Notes" tab with the user's notes`, async () => {
+      const label = translocoService.translate(
+        'ContactManager.MainContent.Tabs.Notes',
+      );
+      const matTabGroup = await loader.getHarness(MatTabGroupHarness);
 
-    //   expect(component.notes).toEqual(user.notes);
-    // });
+      await matTabGroup.selectTab({ label });
+
+      const element = fixture.debugElement.query(By.directive(NotesComponent));
+      const component = element.context as NotesComponent;
+
+      expect(component.notes).toEqual(user.notes);
+    });
   });
 });
