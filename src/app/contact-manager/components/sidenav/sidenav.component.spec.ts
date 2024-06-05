@@ -1,12 +1,18 @@
 import { Dir } from '@angular/cdk/bidi';
-import { HarnessLoader } from '@angular/cdk/testing';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { HarnessLoader, parallel } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { signal } from '@angular/core';
-import { MatIconTestingModule } from '@angular/material/icon/testing';
+import {
+  MatIconHarness,
+  MatIconTestingModule
+} from '@angular/material/icon/testing';
+import { MatNavListHarness } from '@angular/material/list/testing';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSidenavHarness } from '@angular/material/sidenav/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
+import { BehaviorSubject } from 'rxjs';
 
 import { SidenavComponent } from './sidenav.component';
 import { USER_ID_PARAM, User } from '../../models';
@@ -21,6 +27,13 @@ describe(`SidenavComponent`, () => {
   // let translocoService: TranslocoService;
   const userServiceLoading = signal(false);
   const userServiceData = signal<User[]>([]);
+  const breakpointState = new BehaviorSubject<BreakpointState>({
+    matches: false,
+    breakpoints: {}
+  });
+  const breakpointObserver = jasmine.createSpyObj<BreakpointObserver>([
+    'observe'
+  ]);
   const createComponent = createRoutingFactory({
     component: SidenavComponent,
     declareComponent: false,
@@ -46,11 +59,16 @@ describe(`SidenavComponent`, () => {
           data: userServiceData,
           loading: userServiceLoading
         })
+      },
+      {
+        provide: BreakpointObserver,
+        useValue: breakpointObserver
       }
     ]
   });
 
   beforeEach(() => {
+    breakpointObserver.observe.and.returnValue(breakpointState);
     spectator = createComponent();
     // translocoService = spectator.inject(TranslocoService);
     loader = TestbedHarnessEnvironment.loader(spectator.fixture);
@@ -123,44 +141,119 @@ describe(`SidenavComponent`, () => {
   });
 
   describe(`Sidenav`, () => {
-    it(`should be open by default`, async () => {
-      const sidenavHarness = await loader.getHarness(MatSidenavHarness);
-      const isOpen = await sidenavHarness.isOpen();
+    describe(`Small Screen`, () => {
+      beforeEach(() => {
+        breakpointState.next({
+          matches: true,
+          breakpoints: {}
+        });
+        spectator.detectChanges();
+      });
 
-      expect(isOpen).toBeTrue();
+      it(`should have a mode of 'over'`, async () => {
+        const sidenavHarness = await loader.getHarness(MatSidenavHarness);
+        const mode = await sidenavHarness.getMode();
+
+        expect(mode).toBe('over');
+      });
+
+      it(`should be closed by default`, async () => {
+        const sidenavHarness = await loader.getHarness(MatSidenavHarness);
+        const isOpen = await sidenavHarness.isOpen();
+
+        expect(isOpen).toBeFalse();
+      });
+
+      // it(`should switch to closed when toolbar fires toggleSidenav event`, async () => {
+      //   const appToolbar = spectator.query(ToolbarComponent);
+
+      //   appToolbar?.toggleSidenav.emit();
+      //   spectator.detectChanges();
+
+      //   const sidenavHarness = await loader.getHarness(MatSidenavHarness);
+      //   const isOpen = await sidenavHarness.isOpen();
+
+      //   expect(isOpen).toBeTrue();
+      // });
+
+      // it(`should switch back to open when toolbar fires two toggleSidenav events`, async () => {
+      //   const appToolbar = spectator.query(ToolbarComponent);
+
+      //   appToolbar?.toggleSidenav.emit();
+      //   appToolbar?.toggleSidenav.emit();
+      //   spectator.detectChanges();
+
+      //   const sidenavHarness = await loader.getHarness(MatSidenavHarness);
+      //   const isOpen = await sidenavHarness.isOpen();
+
+      //   expect(isOpen).toBeTrue();
+      // });
+
+      // TODO: Should close when screen is small, and router event occurs.
     });
 
-    it(`should switch to closed when toolbar fires toggleSidenav event`, async () => {
-      const appToolbar = spectator.query(ToolbarComponent);
+    describe(`Large Screen`, () => {
+      beforeEach(() => {
+        breakpointState.next({
+          matches: false,
+          breakpoints: {}
+        });
+        spectator.detectChanges();
+      });
 
-      appToolbar?.toggleSidenav.emit();
-      spectator.detectChanges();
+      it(`should have a mode of 'side'`, async () => {
+        const sidenavHarness = await loader.getHarness(MatSidenavHarness);
+        const mode = await sidenavHarness.getMode();
 
-      const sidenavHarness = await loader.getHarness(MatSidenavHarness);
-      const isOpen = await sidenavHarness.isOpen();
+        expect(mode).toBe('side');
+      });
 
-      expect(isOpen).toBeFalse();
+      it(`should be open by default`, async () => {
+        const sidenavHarness = await loader.getHarness(MatSidenavHarness);
+        const isOpen = await sidenavHarness.isOpen();
+
+        expect(isOpen).toBeTrue();
+      });
+
+      it(`should switch to closed when toolbar fires toggleSidenav event`, async () => {
+        const appToolbar = spectator.query(ToolbarComponent);
+
+        appToolbar?.toggleSidenav.emit();
+        spectator.detectChanges();
+
+        const sidenavHarness = await loader.getHarness(MatSidenavHarness);
+        const isOpen = await sidenavHarness.isOpen();
+
+        expect(isOpen).toBeFalse();
+      });
+
+      it(`should switch back to open when toolbar fires two toggleSidenav events`, async () => {
+        const appToolbar = spectator.query(ToolbarComponent);
+
+        appToolbar?.toggleSidenav.emit();
+        appToolbar?.toggleSidenav.emit();
+        spectator.detectChanges();
+
+        const sidenavHarness = await loader.getHarness(MatSidenavHarness);
+        const isOpen = await sidenavHarness.isOpen();
+
+        expect(isOpen).toBeTrue();
+      });
     });
-
-    it(`should switch back to open when toolbar fires two toggleSidenav events`, async () => {
-      const appToolbar = spectator.query(ToolbarComponent);
-
-      appToolbar?.toggleSidenav.emit();
-      appToolbar?.toggleSidenav.emit();
-      spectator.detectChanges();
-
-      const sidenavHarness = await loader.getHarness(MatSidenavHarness);
-      const isOpen = await sidenavHarness.isOpen();
-
-      expect(isOpen).toBeTrue();
-    });
-
-    // TODO: Should close when screen is small, and router event occurs.
   });
 
-  // TODO: mat-sidenav mode based on breakpoint observer.
-
   describe(`Nav List`, () => {
+    it(`should be empty when there are no users`, async () => {
+      userServiceLoading.set(false);
+      userServiceData.set([]);
+      spectator.detectChanges();
+
+      const navList = await loader.getHarness(MatNavListHarness);
+      const navListItemHarnesses = await navList.getItems();
+
+      expect(navListItemHarnesses.length).toBe(0);
+    });
+
     describe(`Loading Spinner`, () => {
       it(`should be hidden when users aren't loading`, () => {
         userServiceLoading.set(false);
@@ -191,29 +284,32 @@ describe(`SidenavComponent`, () => {
         spectator.detectChanges();
       });
 
-      // it(`should be active when they're anchor is active`, async () => {
-      //   const navList = await loader.getHarness(MatNavListHarness);
-      //   const navListItemHarnesses = await navList.getItems();
-
-      //   for (const item of navListItemHarnesses) {
-      //     const isActivated = await item.isActivated();
-
-      //     expect(isActivated).toBeFalse();
-      //   }
-      // });
+      // TODO: mat-nav-list with users data.
+      // TODO: mat-list-item is/isn't have "activated" based on route.
+      // TODO: clicking mat-list-item redirects to it's user's ID route.
 
       describe(`Anchors`, () => {
-        it(`should not have active anchors by default`, () => {
-          const anchors = spectator.queryAll('a');
+        let anchors: HTMLAnchorElement[];
 
+        beforeEach(() => {
+          anchors = spectator.queryAll('mat-nav-list mat-nav-list-item a');
+        });
+
+        it(`should have user name as text`, () => {
+          for (const [index, anchor] of anchors.entries()) {
+            const user = USERS_MOCK[index];
+
+            expect(anchor).toHaveText(user.name);
+          }
+        });
+
+        it(`should not have active anchors by default`, () => {
           for (const anchor of anchors) {
             expect(anchor).not.toHaveClass('active');
           }
         });
 
         it(`should become active when anchor is clicked`, async () => {
-          const anchors = spectator.queryAll('a');
-
           for (const anchor of anchors) {
             spectator.click(anchor);
             await spectator.fixture.whenStable();
@@ -221,15 +317,27 @@ describe(`SidenavComponent`, () => {
             expect(anchor).toHaveClass('active');
           }
         });
+
+        // TODO: Should become active after navigating to corresponding route.
+        // TODO: clicking anchor redirects to it's user's ID route.
       });
 
-      // TODO: mat-nav-list with users data.
-      // TODO: mat-list-item is/isn't have "activated" based on route.
-      // TODO: anchor has/doesn't have "active" class based on route.
-      // TODO: clicking mat-list-item redirects to it's user's ID route.
-      // TODO: clicking anchor redirects to it's user's ID route.
-      // TODO: anchor displays user name.
-      // TODO: icon is user avatar.
+      it(`should have icons corresponding to users' avatars`, async () => {
+        const navListHarness = await loader.getHarness(MatNavListHarness);
+        const navListItemHarnesses = await navListHarness.getItems();
+        const iconHarnesses = await parallel(() =>
+          navListItemHarnesses.map((h) => h.getHarness(MatIconHarness))
+        );
+        const iconNames = await parallel(() =>
+          iconHarnesses.map((h) => h.getName())
+        );
+
+        for (const [index, iconName] of iconNames.entries()) {
+          const user = USERS_MOCK[index];
+
+          expect(iconName).toBe(user.avatar);
+        }
+      });
     });
   });
 });
