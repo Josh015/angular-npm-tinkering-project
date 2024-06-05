@@ -45,7 +45,7 @@ describe(`NotesComponent`, () => {
     const noDataRow = spectator.query('tr td');
 
     expect(noDataRow).toBeTruthy();
-    expect(noDataRow?.innerHTML).toContain(noDataMessage);
+    expect(noDataRow).toHaveText(noDataMessage);
   });
 
   it(`should have rows for all the user's notes on the current table page`, async () => {
@@ -101,7 +101,7 @@ describe(`NotesComponent`, () => {
       const noDataRow = spectator.query('tr td');
 
       expect(noDataRow).toBeTruthy();
-      expect(noDataRow?.innerHTML).toContain(noMatchingDataMessage);
+      expect(noDataRow).toHaveText(noMatchingDataMessage);
     }
   });
 
