@@ -19,13 +19,14 @@ import { USER_ID_PARAM, User } from '../../models';
 import { UserService } from '../../services/user.service';
 import { USERS_MOCK } from '../../testing';
 import { NotesComponent } from '../notes/notes.component';
-import { provideTranslocoTesting } from 'src/app/testing';
+import { randomizedSubArray, provideTranslocoTesting } from 'src/app/testing';
 
 describe(`MainContentComponent`, () => {
   let loader: HarnessLoader;
   let spectator: SpectatorRouting<MainContentComponent>;
   let translocoService: TranslocoService;
   const prefix = 'ContactManager.MainContent.';
+  const usersData = randomizedSubArray(USERS_MOCK);
   const userServiceData = signal<User[]>([]);
   const createComponent = createRoutingFactory({
     component: MainContentComponent,
@@ -56,12 +57,12 @@ describe(`MainContentComponent`, () => {
 
   describe(`Empty Space`, () => {
     it(`should be shown when the route has no user ID`, () => {
-      userServiceData.set(USERS_MOCK);
+      userServiceData.set(usersData);
       spectator.setRouteParam(USER_ID_PARAM, '');
     });
 
     it(`should be shown when the route has an invalid user ID`, () => {
-      userServiceData.set(USERS_MOCK);
+      userServiceData.set(usersData);
       spectator.setRouteParam(USER_ID_PARAM, '-1');
     });
 
@@ -80,8 +81,8 @@ describe(`MainContentComponent`, () => {
     let user: User;
 
     beforeEach(() => {
-      user = sample(USERS_MOCK)!;
-      userServiceData.set(USERS_MOCK);
+      user = sample(usersData)!;
+      userServiceData.set(usersData);
       spectator.setRouteParam(USER_ID_PARAM, `${user.id}`);
       spectator.detectChanges();
     });

@@ -12,13 +12,14 @@ import { Spectator, createComponentFactory } from '@ngneat/spectator';
 import { NotesComponent } from './notes.component';
 import { Note } from '../../models';
 import { USERS_MOCK } from '../../testing';
-import { provideTranslocoTesting } from 'src/app/testing';
+import { randomizedSubArray, provideTranslocoTesting } from 'src/app/testing';
 
 describe(`NotesComponent`, () => {
   let loader: HarnessLoader;
   let spectator: Spectator<NotesComponent>;
   let translocoService: TranslocoService;
   const prefix = 'ContactManager.Notes.';
+  const usersData = randomizedSubArray(USERS_MOCK);
   const createComponent = createComponentFactory({
     component: NotesComponent,
     declareComponent: false,
@@ -50,14 +51,16 @@ describe(`NotesComponent`, () => {
   it(`should have rows for all the user's notes on the current table page`, async () => {
     const matTableHarness = await loader.getHarness(MatTableHarness);
 
-    for (const user of USERS_MOCK) {
-      spectator.setInput({ notes: user.notes });
+    for (const user of usersData) {
+      const notes = randomizedSubArray(user.notes);
+
+      spectator.setInput({ notes });
 
       const rows = await matTableHarness.getRows();
 
       // Limit to number of rows, since paging prevents seeing all notes.
       for (const [index, row] of rows.entries()) {
-        const note = user.notes[index];
+        const note = notes[index];
 
         await expectRowMatchesNote(row, note);
       }
@@ -65,7 +68,7 @@ describe(`NotesComponent`, () => {
   });
 
   it(`should filter table based on input`, async () => {
-    const notes = USERS_MOCK[0].notes;
+    const notes = randomizedSubArray(usersData[0].notes);
     const matTableHarness = await loader.getHarness(MatTableHarness);
     const filterInput = await loader.getHarness(MatInputHarness);
 
@@ -80,7 +83,9 @@ describe(`NotesComponent`, () => {
   });
 
   it(`should have an empty table when filter value doesn't match`, async () => {
-    spectator.setInput({ notes: USERS_MOCK[0].notes });
+    const notes = randomizedSubArray(usersData[0].notes);
+
+    spectator.setInput({ notes });
 
     const filterInput = await loader.getHarness(MatInputHarness);
     const invalidFilters = [

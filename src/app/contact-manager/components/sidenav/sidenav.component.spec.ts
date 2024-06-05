@@ -20,12 +20,13 @@ import { USER_ID_PARAM, User } from '../../models';
 import { UserService } from '../../services/user.service';
 import { USERS_MOCK } from '../../testing';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
-import { provideTranslocoTesting } from 'src/app/testing';
+import { provideTranslocoTesting, randomizedSubArray } from 'src/app/testing';
 
 describe(`SidenavComponent`, () => {
   let loader: HarnessLoader;
   let spectator: SpectatorRouting<SidenavComponent>;
   // let translocoService: TranslocoService;
+  const usersData = randomizedSubArray(USERS_MOCK);
   const userServiceLoading = signal(false);
   const userServiceData = signal<User[]>([]);
   const breakpointState = new BehaviorSubject<BreakpointState>({
@@ -278,9 +279,9 @@ describe(`SidenavComponent`, () => {
       // let user: User;
 
       beforeEach(() => {
-        // user = shuffle(USERS_MOCK);
+        // user = shuffle(usersData);
         userServiceLoading.set(false);
-        userServiceData.set(USERS_MOCK);
+        userServiceData.set(usersData);
         spectator.detectChanges();
       });
 
@@ -295,7 +296,7 @@ describe(`SidenavComponent`, () => {
         );
 
         for (const [index, iconName] of iconNames.entries()) {
-          const user = USERS_MOCK[index];
+          const user = usersData[index];
 
           expect(iconName).toBe(user.avatar);
         }
@@ -345,7 +346,7 @@ describe(`SidenavComponent`, () => {
 
         it(`should have user name as text`, () => {
           for (const [index, anchor] of anchors.entries()) {
-            const user = USERS_MOCK[index];
+            const user = usersData[index];
 
             expect(anchor).toHaveText(user.name);
           }
@@ -372,7 +373,7 @@ describe(`SidenavComponent`, () => {
           const routerLinks = spectator.queryAll(RouterLink);
 
           for (const [index, routerLink] of routerLinks.entries()) {
-            const user = USERS_MOCK[index];
+            const user = usersData[index];
 
             expect(routerLink.href).toBe(`/contact-manager/${user.id}`);
           }
