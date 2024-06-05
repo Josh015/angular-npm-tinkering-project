@@ -30,7 +30,9 @@ export class MainContentComponent {
   protected readonly user = computed(() => {
     const params = this.params();
     const userId = !params ? 0 : +params[USER_ID_PARAM];
+    const users = this.userService.data();
+    const user = users.find((u) => u.id === userId);
 
-    return this.userService.data().find((u) => u.id === userId);
+    return user;
   });
 }
