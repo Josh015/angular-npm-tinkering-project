@@ -75,9 +75,7 @@ describe(`SidenavComponent`, () => {
 
   describe(`Theme`, () => {
     it(`should be light theme by default`, () => {
-      const sidenavContainer = spectator.query('mat-sidenav-container');
-
-      expect(sidenavContainer).not.toHaveClass('dark-theme');
+      expect('mat-sidenav-container').not.toHaveClass('dark-theme');
     });
 
     it(`should switch to dark theme when toolbar fires toggleTheme event`, () => {
@@ -86,9 +84,7 @@ describe(`SidenavComponent`, () => {
       appToolbar?.toggleTheme.emit();
       spectator.detectChanges();
 
-      const sidenavContainer = spectator.query('mat-sidenav-container');
-
-      expect(sidenavContainer).toHaveClass('dark-theme');
+      expect('mat-sidenav-container').toHaveClass('dark-theme');
     });
 
     it(`should switch back to light theme when toolbar fires two toggleTheme events`, () => {
@@ -98,9 +94,7 @@ describe(`SidenavComponent`, () => {
       appToolbar?.toggleTheme.emit();
       spectator.detectChanges();
 
-      const sidenavContainer = spectator.query('mat-sidenav-container');
-
-      expect(sidenavContainer).not.toHaveClass('dark-theme');
+      expect('mat-sidenav-container').not.toHaveClass('dark-theme');
     });
   });
 
@@ -242,10 +236,7 @@ describe(`SidenavComponent`, () => {
       userServiceLoading.set(false);
       userServiceData.set([]);
       spectator.detectChanges();
-
-      const navListContent = spectator.queryAll('mat-nav-list *');
-
-      expect(navListContent.length).toBe(0);
+      expect('mat-nav-list').toBeEmpty();
     });
 
     describe(`Loading Spinner`, () => {
@@ -338,23 +329,17 @@ describe(`SidenavComponent`, () => {
         });
 
         it(`should have user name as text`, () => {
-          for (const [index, anchor] of anchors.entries()) {
-            const user = usersData[index];
+          const userNames = usersData.map((u) => u.name);
 
-            expect(anchor).toHaveText(user.name);
-          }
+          expect(anchors).toHaveText(userNames);
         });
 
         it(`should not have active anchors by default`, () => {
-          for (const anchor of anchors) {
-            expect(anchor).not.toHaveClass('active');
-          }
+          expect(anchors).not.toHaveClass('active');
         });
 
         it(`should become active when anchor is clicked`, async () => {
           for (const anchor of anchors) {
-            expect(anchor).not.toHaveClass('active');
-
             spectator.click(anchor);
             await spectator.fixture.whenStable();
 
