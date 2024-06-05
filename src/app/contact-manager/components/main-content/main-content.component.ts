@@ -21,8 +21,6 @@ import { MaterialModule } from 'src/app/shared';
   imports: [MaterialModule, NotesComponent, TranslocoDirective]
 })
 export class MainContentComponent {
-  static readonly userIdParam = 'userId';
-
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
   private readonly params = toSignal(this.activatedRoute.params);
