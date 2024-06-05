@@ -9,6 +9,8 @@ import { random, sampleSize, shuffle } from 'lodash';
  * @returns {T[]} A randomized sub-array of `source`.
  */
 export function randomizedSubArray<T>(source: T[], minimumSize = 1): T[] {
+  minimumSize = Math.max(0, minimumSize);
+
   if (source.length <= 1) {
     return [...source];
   }
@@ -19,8 +21,5 @@ export function randomizedSubArray<T>(source: T[], minimumSize = 1): T[] {
     return shuffled;
   }
 
-  return sampleSize(
-    shuffled,
-    random(Math.max(0, minimumSize), shuffled.length)
-  );
+  return sampleSize(shuffled, random(minimumSize, shuffled.length));
 }
