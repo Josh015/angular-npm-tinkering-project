@@ -12,7 +12,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSidenavHarness } from '@angular/material/sidenav/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterLink } from '@angular/router';
-import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
+import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator/jest';
 import { MockProvider } from 'ng-mocks';
 import { BehaviorSubject } from 'rxjs';
 
@@ -156,7 +156,7 @@ describe(`SidenavComponent`, () => {
         const sidenavHarness = await loader.getHarness(MatSidenavHarness);
         const isOpen = await sidenavHarness.isOpen();
 
-        expect(isOpen).toBeFalse();
+        expect(isOpen).toBe(false);
       });
 
       // it(`should switch to closed when toolbar fires toggleSidenav event`, async () => {
@@ -168,7 +168,7 @@ describe(`SidenavComponent`, () => {
       //   const sidenavHarness = await loader.getHarness(MatSidenavHarness);
       //   const isOpen = await sidenavHarness.isOpen();
 
-      //   expect(isOpen).toBeTrue();
+      //   expect(isOpen).toBe(true);
       // });
 
       // it(`should switch back to open when toolbar fires two toggleSidenav events`, async () => {
@@ -181,7 +181,7 @@ describe(`SidenavComponent`, () => {
       //   const sidenavHarness = await loader.getHarness(MatSidenavHarness);
       //   const isOpen = await sidenavHarness.isOpen();
 
-      //   expect(isOpen).toBeTrue();
+      //   expect(isOpen).toBe(true);
       // });
 
       // TODO: Should close when screen is small, and router event occurs.
@@ -207,7 +207,7 @@ describe(`SidenavComponent`, () => {
         const sidenavHarness = await loader.getHarness(MatSidenavHarness);
         const isOpen = await sidenavHarness.isOpen();
 
-        expect(isOpen).toBeTrue();
+        expect(isOpen).toBe(true);
       });
 
       it(`should switch to closed when toolbar fires toggleSidenav event`, async () => {
@@ -219,7 +219,7 @@ describe(`SidenavComponent`, () => {
         const sidenavHarness = await loader.getHarness(MatSidenavHarness);
         const isOpen = await sidenavHarness.isOpen();
 
-        expect(isOpen).toBeFalse();
+        expect(isOpen).toBe(false);
       });
 
       it(`should switch back to open when toolbar fires two toggleSidenav events`, async () => {
@@ -232,7 +232,7 @@ describe(`SidenavComponent`, () => {
         const sidenavHarness = await loader.getHarness(MatSidenavHarness);
         const isOpen = await sidenavHarness.isOpen();
 
-        expect(isOpen).toBeTrue();
+        expect(isOpen).toBe(true);
       });
     });
   });
@@ -303,7 +303,7 @@ describe(`SidenavComponent`, () => {
         );
 
         for (const activatedListItem of activatedListItems) {
-          expect(activatedListItem).toBeFalse();
+          expect(activatedListItem).toBe(false);
         }
       });
 
@@ -316,14 +316,14 @@ describe(`SidenavComponent`, () => {
           const anchor = anchors[index];
           let isActivated = await listItemHarness.isActivated();
 
-          expect(isActivated).toBeFalse();
+          expect(isActivated).toBe(false);
 
           spectator.click(anchor);
           await spectator.fixture.whenStable();
 
           isActivated = await listItemHarness.isActivated();
 
-          expect(isActivated).toBeTrue();
+          expect(isActivated).toBe(true);
         }
       });
 

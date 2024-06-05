@@ -7,7 +7,7 @@ import {
 } from '@angular/material/table/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslocoService } from '@jsverse/transloco';
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
 
 import { NotesComponent } from './notes.component';
 import { Note } from '../../models';
