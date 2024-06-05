@@ -15,7 +15,7 @@ import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
 import { sample } from 'lodash';
 
 import { MainContentComponent } from './main-content.component';
-import { User } from '../../models';
+import { USER_ID_PARAM, User } from '../../models';
 import { UserService } from '../../services/user.service';
 import { USERS_MOCK } from '../../testing';
 import { NotesComponent } from '../notes/notes.component';
@@ -30,7 +30,7 @@ describe(`MainContentComponent`, () => {
   const createComponent = createRoutingFactory({
     component: MainContentComponent,
     declareComponent: false,
-    params: { [MainContentComponent.userIdParam]: '' },
+    params: { [USER_ID_PARAM]: '' },
     imports: [MatIconTestingModule],
     providers: [
       provideAnimationsAsync(),
@@ -57,17 +57,17 @@ describe(`MainContentComponent`, () => {
   describe(`Empty Space`, () => {
     it(`should be shown when the route has no user ID`, () => {
       userServiceData.set(USERS_MOCK);
-      spectator.setRouteParam(MainContentComponent.userIdParam, '');
+      spectator.setRouteParam(USER_ID_PARAM, '');
     });
 
     it(`should be shown when the route has an invalid user ID`, () => {
       userServiceData.set(USERS_MOCK);
-      spectator.setRouteParam(MainContentComponent.userIdParam, '-1');
+      spectator.setRouteParam(USER_ID_PARAM, '-1');
     });
 
     it(`should be shown when the route has no user data`, () => {
       userServiceData.set([]);
-      spectator.setRouteParam(MainContentComponent.userIdParam, '1');
+      spectator.setRouteParam(USER_ID_PARAM, '1');
     });
 
     afterEach(() => {
@@ -82,7 +82,7 @@ describe(`MainContentComponent`, () => {
     beforeEach(() => {
       user = sample(USERS_MOCK)!;
       userServiceData.set(USERS_MOCK);
-      spectator.setRouteParam(MainContentComponent.userIdParam, `${user.id}`);
+      spectator.setRouteParam(USER_ID_PARAM, `${user.id}`);
       spectator.detectChanges();
     });
 

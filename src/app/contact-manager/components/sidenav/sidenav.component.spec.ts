@@ -9,10 +9,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
 
 import { SidenavComponent } from './sidenav.component';
-import { User } from '../../models';
+import { USER_ID_PARAM, User } from '../../models';
 import { UserService } from '../../services/user.service';
 import { USERS_MOCK } from '../../testing';
-import { MainContentComponent } from '../main-content/main-content.component';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { provideTranslocoTesting } from 'src/app/testing';
 
@@ -25,7 +24,7 @@ describe(`SidenavComponent`, () => {
   const createComponent = createRoutingFactory({
     component: SidenavComponent,
     declareComponent: false,
-    params: { [MainContentComponent.userIdParam]: '' },
+    params: { [USER_ID_PARAM]: '' },
     stubsEnabled: false,
     routes: [
       {
@@ -33,7 +32,7 @@ describe(`SidenavComponent`, () => {
         component: SidenavComponent
       },
       {
-        path: `contact-manager/:${MainContentComponent.userIdParam}`,
+        path: `contact-manager/:${USER_ID_PARAM}`,
         component: SidenavComponent
       }
     ],

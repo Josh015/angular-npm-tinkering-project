@@ -8,6 +8,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
 
+import { USER_ID_PARAM } from '../../models';
 import { UserService } from '../../services/user.service';
 import { NotesComponent } from '../notes/notes.component';
 import { MaterialModule } from 'src/app/shared';
@@ -28,7 +29,7 @@ export class MainContentComponent {
 
   protected readonly user = computed(() => {
     const params = this.params();
-    const userId = !params ? 0 : +params[MainContentComponent.userIdParam];
+    const userId = !params ? 0 : +params[USER_ID_PARAM];
 
     return this.userService.data().find((u) => u.id === userId);
   });
