@@ -13,6 +13,7 @@ import { MatSidenavHarness } from '@angular/material/sidenav/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterLink } from '@angular/router';
 import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
+import { MockProvider } from 'ng-mocks';
 import { BehaviorSubject } from 'rxjs';
 
 import { SidenavComponent } from './sidenav.component';
@@ -33,9 +34,6 @@ describe(`SidenavComponent`, () => {
     matches: false,
     breakpoints: {}
   });
-  const breakpointObserver = jasmine.createSpyObj<BreakpointObserver>([
-    'observe'
-  ]);
   const createComponent = createRoutingFactory({
     component: SidenavComponent,
     declareComponent: false,
@@ -55,22 +53,17 @@ describe(`SidenavComponent`, () => {
     providers: [
       provideAnimationsAsync(),
       provideTranslocoTesting(),
-      {
-        provide: UserService,
-        useValue: jasmine.createSpyObj<UserService>([], {
-          data: userServiceData,
-          loading: userServiceLoading
-        })
-      },
-      {
-        provide: BreakpointObserver,
-        useValue: breakpointObserver
-      }
+      MockProvider(UserService, {
+        data: userServiceData,
+        loading: userServiceLoading
+      }),
+      MockProvider(BreakpointObserver, {
+        observe: () => breakpointState
+      })
     ]
   });
 
   beforeEach(() => {
-    breakpointObserver.observe.and.returnValue(breakpointState);
     spectator = createComponent();
     // translocoService = spectator.inject(TranslocoService);
     loader = TestbedHarnessEnvironment.loader(spectator.fixture);

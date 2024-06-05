@@ -13,6 +13,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { TranslocoService } from '@jsverse/transloco';
 import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
 import { sample } from 'lodash';
+import { MockProvider } from 'ng-mocks';
 
 import { MainContentComponent } from './main-content.component';
 import { USER_ID_PARAM, User } from '../../models';
@@ -36,12 +37,9 @@ describe(`MainContentComponent`, () => {
     providers: [
       provideAnimationsAsync(),
       provideTranslocoTesting(),
-      {
-        provide: UserService,
-        useValue: jasmine.createSpyObj<UserService>([], {
-          data: userServiceData
-        })
-      }
+      MockProvider(UserService, {
+        data: userServiceData
+      })
     ]
   });
 

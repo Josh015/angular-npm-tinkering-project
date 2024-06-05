@@ -16,6 +16,7 @@ yarn start
 - [ESLint](https://eslint.org/)
 - [Lodash](https://lodash.com/)
 - [messageformat](https://messageformat.github.io/messageformat/)
+- [ng-mocks](https://ng-mocks.sudo.eu/)
 - [Prettier](https://prettier.io/)
 - [Spectator](https://ngneat.github.io/spectator/)
 - [Tailwind CSS](https://tailwindcss.com/)
