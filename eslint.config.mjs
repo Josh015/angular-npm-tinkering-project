@@ -1,11 +1,11 @@
 import { FlatCompat } from '@eslint/eslintrc';
 import angular from 'angular-eslint';
-import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import cspellRecommended from '@cspell/eslint-plugin/recommended';
 import globals from 'globals';
 import imports from 'eslint-plugin-import';
 import js from '@eslint/js';
-// import rxjsLints from 'eslint-plugin-rxjs';
+import prettierRecommended from 'eslint-plugin-prettier/recommended';
+// import rxjs from 'eslint-plugin-rxjs';
 import ts from 'typescript-eslint';
 
 const __dirname = import.meta.dirname;
@@ -35,11 +35,7 @@ export default ts.config(
     }
   },
   {
-    extends: [
-      js.configs.recommended,
-      cspellESLintPluginRecommended,
-      eslintPluginPrettierRecommended
-    ]
+    extends: [js.configs.recommended, cspellRecommended, prettierRecommended]
   },
   {
     files: ['**/*.mjs'],
@@ -59,7 +55,7 @@ export default ts.config(
       ...angular.configs.tsRecommended,
       ...compat.config(imports.configs.recommended),
       ...compat.config(imports.configs.typescript)
-      // ...compat.config(rxjsLints.configs.recommended),
+      // ...compat.config(rxjs.configs.recommended),
     ],
     processor: angular.processInlineTemplates,
     rules: {
