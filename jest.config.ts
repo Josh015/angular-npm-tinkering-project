@@ -13,7 +13,6 @@ const config: Config = {
   testEnvironment: 'jsdom',
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-  globalSetup: 'jest-preset-angular/global-setup',
 
   // Allows tests to have imports with absolute paths.
   moduleDirectories: ['node_modules', '<rootDir>'],
