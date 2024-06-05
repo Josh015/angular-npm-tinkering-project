@@ -10,9 +10,10 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
+  testEnvironment: 'jsdom',
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-  testEnvironment: 'jsdom',
+  globalSetup: 'jest-preset-angular/global-setup',
 
   // Allows tests to have imports with absolute paths.
   moduleDirectories: ['node_modules', '<rootDir>'],
