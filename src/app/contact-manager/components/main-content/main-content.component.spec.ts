@@ -2,7 +2,6 @@
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { signal } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 import { MatCard } from '@angular/material/card';
 import { MatCardHarness } from '@angular/material/card/testing';
 import {
@@ -22,7 +21,7 @@ import { USERS_MOCK } from '../../testing';
 import { NotesComponent } from '../notes/notes.component';
 import { provideTranslocoTesting } from 'src/app/testing';
 
-describe('MainContentComponent', () => {
+describe(`MainContentComponent`, () => {
   let loader: HarnessLoader;
   let spectator: SpectatorRouting<MainContentComponent>;
   let translocoService: TranslocoService;
@@ -47,11 +46,11 @@ describe('MainContentComponent', () => {
 
   beforeEach(() => {
     spectator = createComponent();
-    translocoService = TestBed.inject(TranslocoService);
+    translocoService = spectator.inject(TranslocoService);
     loader = TestbedHarnessEnvironment.loader(spectator.fixture);
   });
 
-  it('should create the component', () => {
+  it(`should create the component`, () => {
     expect(spectator).toBeTruthy();
   });
 

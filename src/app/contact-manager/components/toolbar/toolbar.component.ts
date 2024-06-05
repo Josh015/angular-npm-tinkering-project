@@ -30,9 +30,9 @@ export class ToolbarComponent {
   private readonly router = inject(Router);
   private readonly translocoService = inject(TranslocoService);
 
-  protected readonly toggleSidenav = output();
-  protected readonly toggleTheme = output();
-  protected readonly toggleDir = output();
+  readonly toggleSidenav = output();
+  readonly toggleTheme = output();
+  readonly toggleDir = output();
 
   protected openAddContactDialog(): void {
     const dialogRef = this.dialog.open(NewContactDialogComponent, {
