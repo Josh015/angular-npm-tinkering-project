@@ -11,6 +11,7 @@ import { MatNavListHarness } from '@angular/material/list/testing';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSidenavHarness } from '@angular/material/sidenav/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { RouterLink } from '@angular/router';
 import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
 import { BehaviorSubject } from 'rxjs';
 
@@ -243,15 +244,14 @@ describe(`SidenavComponent`, () => {
   });
 
   describe(`Nav List`, () => {
-    it(`should be empty when there are no users`, async () => {
+    it(`should be empty when there are no users`, () => {
       userServiceLoading.set(false);
       userServiceData.set([]);
       spectator.detectChanges();
 
-      const navList = await loader.getHarness(MatNavListHarness);
-      const navListItemHarnesses = await navList.getItems();
+      const navListContent = spectator.queryAll('mat-nav-list *');
 
-      expect(navListItemHarnesses.length).toBe(0);
+      expect(navListContent.length).toBe(0);
     });
 
     describe(`Loading Spinner`, () => {
@@ -284,7 +284,55 @@ describe(`SidenavComponent`, () => {
         spectator.detectChanges();
       });
 
-      // TODO: mat-nav-list with users data.
+      it(`should have icons corresponding to users' avatars`, async () => {
+        const navListHarness = await loader.getHarness(MatNavListHarness);
+        const listItemHarnesses = await navListHarness.getItems();
+        const iconHarnesses = await parallel(() =>
+          listItemHarnesses.map((h) => h.getHarness(MatIconHarness))
+        );
+        const iconNames = await parallel(() =>
+          iconHarnesses.map((h) => h.getName())
+        );
+
+        for (const [index, iconName] of iconNames.entries()) {
+          const user = USERS_MOCK[index];
+
+          expect(iconName).toBe(user.avatar);
+        }
+      });
+
+      it(`should default to not being activated`, async () => {
+        const navListHarness = await loader.getHarness(MatNavListHarness);
+        const listItemHarnesses = await navListHarness.getItems();
+        const activatedListItems = await parallel(() =>
+          listItemHarnesses.map((li) => li.isActivated())
+        );
+
+        for (const activatedListItem of activatedListItems) {
+          expect(activatedListItem).toBeFalse();
+        }
+      });
+
+      it(`should become activated when anchor is active`, async () => {
+        const navListHarness = await loader.getHarness(MatNavListHarness);
+        const listItemHarnesses = await navListHarness.getItems();
+        const anchors = spectator.queryAll('mat-nav-list mat-list-item a');
+
+        for (const [index, listItemHarness] of listItemHarnesses.entries()) {
+          const anchor = anchors[index];
+          let isActivated = await listItemHarness.isActivated();
+
+          expect(isActivated).toBeFalse();
+
+          spectator.click(anchor);
+          await spectator.fixture.whenStable();
+
+          isActivated = await listItemHarness.isActivated();
+
+          expect(isActivated).toBeTrue();
+        }
+      });
+
       // TODO: mat-list-item is/isn't have "activated" based on route.
       // TODO: clicking mat-list-item redirects to it's user's ID route.
 
@@ -292,7 +340,7 @@ describe(`SidenavComponent`, () => {
         let anchors: HTMLAnchorElement[];
 
         beforeEach(() => {
-          anchors = spectator.queryAll('mat-nav-list mat-nav-list-item a');
+          anchors = spectator.queryAll('mat-nav-list mat-list-item a');
         });
 
         it(`should have user name as text`, () => {
@@ -311,6 +359,8 @@ describe(`SidenavComponent`, () => {
 
         it(`should become active when anchor is clicked`, async () => {
           for (const anchor of anchors) {
+            expect(anchor).not.toHaveClass('active');
+
             spectator.click(anchor);
             await spectator.fixture.whenStable();
 
@@ -318,25 +368,18 @@ describe(`SidenavComponent`, () => {
           }
         });
 
+        it(`should have a route based on the user ID`, () => {
+          const routerLinks = spectator.queryAll(RouterLink);
+
+          for (const [index, routerLink] of routerLinks.entries()) {
+            const user = USERS_MOCK[index];
+
+            expect(routerLink.href).toBe(`/contact-manager/${user.id}`);
+          }
+        });
+
         // TODO: Should become active after navigating to corresponding route.
         // TODO: clicking anchor redirects to it's user's ID route.
-      });
-
-      it(`should have icons corresponding to users' avatars`, async () => {
-        const navListHarness = await loader.getHarness(MatNavListHarness);
-        const navListItemHarnesses = await navListHarness.getItems();
-        const iconHarnesses = await parallel(() =>
-          navListItemHarnesses.map((h) => h.getHarness(MatIconHarness))
-        );
-        const iconNames = await parallel(() =>
-          iconHarnesses.map((h) => h.getName())
-        );
-
-        for (const [index, iconName] of iconNames.entries()) {
-          const user = USERS_MOCK[index];
-
-          expect(iconName).toBe(user.avatar);
-        }
       });
     });
   });
