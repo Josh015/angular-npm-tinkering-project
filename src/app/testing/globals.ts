@@ -19,5 +19,8 @@ export function randomizedSubArray<T>(source: T[], minimumSize = 1): T[] {
     return shuffled;
   }
 
-  return sampleSize(shuffled, random(minimumSize, shuffled.length));
+  return sampleSize(
+    shuffled,
+    random(Math.max(0, minimumSize), shuffled.length)
+  );
 }
