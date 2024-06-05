@@ -3,12 +3,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Chrome against localhost",
+      "name": "Chrome: Launch localhost",
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/",
-      "webRoot": "${workspaceFolder}"
+      "url": "http://localhost:4200/"
     },
     {
       "name": "Jest: Debug File",
