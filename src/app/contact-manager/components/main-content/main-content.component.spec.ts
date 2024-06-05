@@ -11,11 +11,9 @@ import {
 } from '@angular/material/icon/testing';
 import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { ActivatedRoute, Params } from '@angular/router';
 import { TranslocoService } from '@jsverse/transloco';
-import { Spectator, createComponentFactory } from '@ngneat/spectator';
+import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
 import { sample } from 'lodash';
-import { BehaviorSubject } from 'rxjs';
 
 import { MainContentComponent } from './main-content.component';
 import { User } from '../../models';
@@ -26,26 +24,24 @@ import { provideTranslocoTesting } from 'src/app/testing';
 
 describe('MainContentComponent', () => {
   let loader: HarnessLoader;
-  let spectator: Spectator<MainContentComponent>;
+  let spectator: SpectatorRouting<MainContentComponent>;
   let translocoService: TranslocoService;
   const prefix = 'ContactManager.MainContent.';
-  const activatedRouteParams = new BehaviorSubject<Params>({});
   const userServiceData = signal<User[]>([]);
-  const activatedRoute = jasmine.createSpyObj<ActivatedRoute>([], {
-    params: activatedRouteParams
-  });
-  const userService = jasmine.createSpyObj<UserService>([], {
-    data: userServiceData
-  });
-  const createComponent = createComponentFactory({
+  const createComponent = createRoutingFactory({
     component: MainContentComponent,
     declareComponent: false,
+    params: { [MainContentComponent.userIdParam]: '' },
     imports: [MatIconTestingModule],
     providers: [
       provideAnimationsAsync(),
       provideTranslocoTesting(),
-      { provide: ActivatedRoute, useValue: activatedRoute },
-      { provide: UserService, useValue: userService }
+      {
+        provide: UserService,
+        useValue: jasmine.createSpyObj<UserService>([], {
+          data: userServiceData
+        })
+      }
     ]
   });
 
@@ -61,18 +57,18 @@ describe('MainContentComponent', () => {
 
   describe(`Empty Space`, () => {
     it(`should be shown when the route has no user ID`, () => {
-      userServiceData.set([]);
-      activatedRouteParams.next({});
+      userServiceData.set(USERS_MOCK);
+      spectator.setRouteParam(MainContentComponent.userIdParam, '');
     });
 
     it(`should be shown when the route has an invalid user ID`, () => {
       userServiceData.set(USERS_MOCK);
-      activatedRouteParams.next({ [MainContentComponent.userIdParam]: -1 });
+      spectator.setRouteParam(MainContentComponent.userIdParam, '-1');
     });
 
-    it(`should be shown when the route has a user ID but there's no user data`, () => {
+    it(`should be shown when the route has no user data`, () => {
       userServiceData.set([]);
-      activatedRouteParams.next({ [MainContentComponent.userIdParam]: 1 });
+      spectator.setRouteParam(MainContentComponent.userIdParam, '1');
     });
 
     afterEach(() => {
@@ -87,9 +83,7 @@ describe('MainContentComponent', () => {
     beforeEach(() => {
       user = sample(USERS_MOCK)!;
       userServiceData.set(USERS_MOCK);
-      activatedRouteParams.next({
-        [MainContentComponent.userIdParam]: user.id
-      });
+      spectator.setRouteParam(MainContentComponent.userIdParam, `${user.id}`);
       spectator.detectChanges();
     });
 
