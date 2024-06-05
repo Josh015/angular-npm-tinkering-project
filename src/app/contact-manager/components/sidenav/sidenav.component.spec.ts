@@ -26,7 +26,7 @@ import { provideTranslocoTesting, randomizedSubArray } from 'src/app/testing';
 describe(`SidenavComponent`, () => {
   let loader: HarnessLoader;
   let spectator: SpectatorRouting<SidenavComponent>;
-  // let translocoService: TranslocoService;
+  // let translocoService: SpyObject<TranslocoService>;
   const usersData = randomizedSubArray(USERS_MOCK);
   const userServiceLoading = signal(false);
   const userServiceData = signal<User[]>([]);

@@ -7,7 +7,11 @@ import {
 } from '@angular/material/table/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslocoService } from '@jsverse/transloco';
-import { Spectator, createComponentFactory } from '@ngneat/spectator/jest';
+import {
+  Spectator,
+  SpyObject,
+  createComponentFactory
+} from '@ngneat/spectator/jest';
 
 import { NotesComponent } from './notes.component';
 import { Note } from '../../models';
@@ -17,7 +21,7 @@ import { randomizedSubArray, provideTranslocoTesting } from 'src/app/testing';
 describe(`NotesComponent`, () => {
   let loader: HarnessLoader;
   let spectator: Spectator<NotesComponent>;
-  let translocoService: TranslocoService;
+  let translocoService: SpyObject<TranslocoService>;
   const prefix = 'ContactManager.Notes.';
   const usersData = randomizedSubArray(USERS_MOCK);
   const createComponent = createComponentFactory({

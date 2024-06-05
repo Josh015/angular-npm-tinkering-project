@@ -11,7 +11,11 @@ import {
 import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslocoService } from '@jsverse/transloco';
-import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator/jest';
+import {
+  SpectatorRouting,
+  SpyObject,
+  createRoutingFactory
+} from '@ngneat/spectator/jest';
 import { sample } from 'lodash';
 import { MockProvider } from 'ng-mocks';
 
@@ -24,7 +28,7 @@ import { randomizedSubArray, provideTranslocoTesting } from 'src/app/testing';
 describe(`MainContentComponent`, () => {
   let loader: HarnessLoader;
   let spectator: SpectatorRouting<MainContentComponent>;
-  let translocoService: TranslocoService;
+  let translocoService: SpyObject<TranslocoService>;
   const prefix = 'ContactManager.MainContent.';
   const usersData = randomizedSubArray(USERS_MOCK);
   const userServiceData = signal<User[]>([]);
