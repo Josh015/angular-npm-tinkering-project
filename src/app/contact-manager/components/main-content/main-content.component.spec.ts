@@ -34,7 +34,6 @@ describe(`MainContentComponent`, () => {
   const userServiceData = signal<User[]>([]);
   const createComponent = createRoutingFactory({
     component: MainContentComponent,
-    declareComponent: false,
     params: { [USER_ID_PARAM]: '' },
     imports: [MatIconTestingModule],
     providers: [

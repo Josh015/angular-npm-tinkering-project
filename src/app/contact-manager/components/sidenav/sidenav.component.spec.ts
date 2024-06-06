@@ -36,7 +36,6 @@ describe(`SidenavComponent`, () => {
   });
   const createComponent = createRoutingFactory({
     component: SidenavComponent,
-    declareComponent: false,
     params: { [USER_ID_PARAM]: '' },
     stubsEnabled: false,
     routes: [

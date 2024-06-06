@@ -26,7 +26,6 @@ describe(`NotesComponent`, () => {
   const usersData = randomizedSubArray(USERS_MOCK);
   const createComponent = createComponentFactory({
     component: NotesComponent,
-    declareComponent: false,
     providers: [provideTranslocoTesting(), provideAnimationsAsync()]
   });
 
