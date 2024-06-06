@@ -43,10 +43,10 @@ describe(`NotesComponent`, () => {
   it(`should have an empty table when user has no notes`, () => {
     spectator.setInput({ notes: [] });
 
+    const noDataRow = spectator.query('tr td');
     const noDataMessage = translocoService.translate(
       `${prefix}Grid.Empty.NoData`
     );
-    const noDataRow = spectator.query('tr td');
 
     expect(noDataRow).toBeTruthy();
     expect(noDataRow).toHaveText(noDataMessage);

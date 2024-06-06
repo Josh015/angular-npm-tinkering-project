@@ -13,7 +13,7 @@ import { MatSidenavHarness } from '@angular/material/sidenav/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterLink } from '@angular/router';
 import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator/jest';
-import { MockProvider } from 'ng-mocks';
+import { MockComponent, MockProvider } from 'ng-mocks';
 import { BehaviorSubject } from 'rxjs';
 
 import { SidenavComponent } from './sidenav.component';
@@ -60,6 +60,15 @@ describe(`SidenavComponent`, () => {
       MockProvider(BreakpointObserver, {
         observe: () => breakpointState
       })
+    ],
+    overrideComponents: [
+      [
+        SidenavComponent,
+        {
+          remove: { imports: [ToolbarComponent] },
+          add: { imports: [MockComponent(ToolbarComponent)] }
+        }
+      ]
     ]
   });
 

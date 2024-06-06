@@ -44,6 +44,15 @@ describe(`MainContentComponent`, () => {
         data: userServiceData
       })
     ]
+    // overrideComponents: [
+    //   [
+    //     MainContentComponent,
+    //     {
+    //       remove: { imports: [NotesComponent] },
+    //       add: { imports: [MockComponent(NotesComponent)] }
+    //     }
+    //   ]
+    // ]
   });
 
   beforeEach(() => {
