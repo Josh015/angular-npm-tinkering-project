@@ -2,9 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  Input,
+  input,
   viewChild
 } from '@angular/core';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -27,12 +28,13 @@ export class NotesComponent implements AfterViewInit {
   protected readonly dataSource = new MatTableDataSource<Note>();
   protected readonly displayedColumns = ['id', 'title', 'date'];
 
-  @Input()
-  set notes(value: Note[]) {
-    this.dataSource.data = value;
-  }
-  get notes(): Note[] {
-    return this.dataSource.data;
+  readonly notes = input<Note[]>([]);
+  private readonly _notes = toObservable(this.notes);
+
+  constructor() {
+    this._notes.pipe(takeUntilDestroyed()).subscribe((n) => {
+      this.dataSource.data = n;
+    });
   }
 
   ngAfterViewInit(): void {
