@@ -133,7 +133,7 @@ describe(`MainContentComponent`, () => {
       expect(tabContent).toBe(user.bio);
     });
 
-    // FIXME: selectTab() doesn't appear to render contents in headless mode!
+    // FIXME: selectTab() doesn't render child components in either Jest or WTR!
     // // it(`should have a "Notes" tab with the user's notes`, async () => {
     // //   const matTabGroup = await loader.getHarness(MatTabGroupHarness);
     // //   const label = translocoService.translate(`${prefix}Tabs.Notes`);
