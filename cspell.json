@@ -16,7 +16,6 @@
     "node_modules",
     "package-lock.json",
     "project-words.txt",
-    "vscode-extension",
-    "yarn.lock"
+    "vscode-extension"
   ]
 }

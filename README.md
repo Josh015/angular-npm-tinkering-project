@@ -5,8 +5,8 @@ This test project is a heavily-modified version of the code from the Pluralsight
 ## Running the Application
 
 ```shell
-yarn install
-yarn start
+pnpm install
+pnpm start
 ```
 
 ## Packages
@@ -18,11 +18,11 @@ yarn start
 - [Lodash](https://lodash.com/)
 - [messageformat](https://messageformat.github.io/messageformat/)
 - [ng-mocks](https://ng-mocks.sudo.eu/)
+- [pNpM](https://pnpm.io/)
 - [Prettier](https://prettier.io/)
 - [Spectator](https://ngneat.github.io/spectator/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Transloco](https://jsverse.github.io/transloco/)
-- [Yarn](https://yarnpkg.com/)
 
 ## Screenshot
 
