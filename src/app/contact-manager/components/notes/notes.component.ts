@@ -5,7 +5,7 @@ import {
   input,
   viewChild
 } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -32,7 +32,7 @@ export class NotesComponent implements AfterViewInit {
   private readonly notes$ = toObservable(this.notes);
 
   constructor() {
-    this.notes$.pipe(takeUntilDestroyed()).subscribe((n) => {
+    this.notes$.subscribe((n) => {
       this.dataSource.data = n;
     });
   }
