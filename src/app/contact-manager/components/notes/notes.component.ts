@@ -29,10 +29,10 @@ export class NotesComponent implements AfterViewInit {
   protected readonly displayedColumns = ['id', 'title', 'date'];
 
   readonly notes = input<Note[]>([]);
-  private readonly _notes = toObservable(this.notes);
+  private readonly notes$ = toObservable(this.notes);
 
   constructor() {
-    this._notes.pipe(takeUntilDestroyed()).subscribe((n) => {
+    this.notes$.pipe(takeUntilDestroyed()).subscribe((n) => {
       this.dataSource.data = n;
     });
   }
