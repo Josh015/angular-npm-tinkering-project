@@ -36,9 +36,8 @@ describe(`MainContentComponent`, () => {
     component: MainContentComponent,
     params: { [USER_ID_PARAM]: '' },
     imports: [MatIconTestingModule],
-    providers: [
-      provideAnimationsAsync(),
-      provideTranslocoTesting(),
+    providers: [provideAnimationsAsync(), provideTranslocoTesting()],
+    componentProviders: [
       MockProvider(UserService, {
         data: userServiceData
       })

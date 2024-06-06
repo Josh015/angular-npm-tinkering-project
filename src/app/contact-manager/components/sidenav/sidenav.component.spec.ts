@@ -49,9 +49,8 @@ describe(`SidenavComponent`, () => {
       }
     ],
     imports: [MatIconTestingModule],
-    providers: [
-      provideAnimationsAsync(),
-      provideTranslocoTesting(),
+    providers: [provideAnimationsAsync(), provideTranslocoTesting()],
+    componentProviders: [
       MockProvider(UserService, {
         data: userServiceData,
         loading: userServiceLoading
