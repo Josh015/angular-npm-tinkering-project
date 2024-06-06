@@ -26,6 +26,9 @@
     "bradlc.vscode-tailwindcss",
 
     // Consistent editor settings.
-    "editorconfig.editorconfig"
+    "editorconfig.editorconfig",
+
+    // Jest unit-testing UI.
+    "orta.vscode-jest"
   ]
 }
