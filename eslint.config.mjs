@@ -34,9 +34,9 @@ export default ts.config(
       }
     }
   },
-  {
-    extends: [js.configs.recommended, cspellRecommended, prettierRecommended]
-  },
+  js.configs.recommended,
+  cspellRecommended,
+  prettierRecommended,
   {
     files: ['**/*.mjs'],
     rules: {
