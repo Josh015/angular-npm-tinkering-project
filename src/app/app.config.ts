@@ -1,5 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, isDevMode } from '@angular/core';
+import {
+  ApplicationConfig,
+  isDevMode,
+  provideZoneChangeDetection
+} from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
@@ -38,6 +42,7 @@ export const appConfig: ApplicationConfig = {
       },
       loader: TranslocoHttpLoader
     }),
-    provideTranslocoMessageformat() // Must come AFTER provideTransloco()!
+    provideTranslocoMessageformat(), // Must come AFTER provideTransloco()!
+    provideZoneChangeDetection({ eventCoalescing: true })
   ]
 };
