@@ -48,7 +48,11 @@
               }
             ],
             "styles": ["src/material.scss", "src/styles.css"],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "@messageformat/core",
+              "tailwindcss/resolveConfig"
+            ]
           },
           "configurations": {
             "production": {
