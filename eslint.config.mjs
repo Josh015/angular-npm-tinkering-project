@@ -147,13 +147,6 @@ export default ts.config(
       // ],
       // 'rxjs/no-compat': ['error'],
       // 'rxjs/no-exposed-subjects': ['error'],
-      // 'rxjs/no-nested-subscribe': ['off'],
-    }
-  },
-  {
-    files: ['**/*.config.ts'],
-    rules: {
-      '@typescript-eslint/naming-convention': ['off']
     }
   },
   {
