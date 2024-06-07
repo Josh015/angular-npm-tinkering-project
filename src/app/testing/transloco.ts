@@ -6,8 +6,7 @@ import {
   TranslocoTestingOptions
 } from '@jsverse/transloco';
 import { provideTranslocoMessageformat } from '@jsverse/transloco-messageformat';
-
-import en from 'src/assets/i18n/en.json';
+import en from 'public/i18n/en.json';
 
 export function provideTranslocoTesting(options: TranslocoTestingOptions = {}) {
   return [

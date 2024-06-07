@@ -24,7 +24,7 @@ export class ContactManagerComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.iconRegistry.addSvgIconSet(
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/avatars.svg')
+      this.sanitizer.bypassSecurityTrustResourceUrl('avatars.svg')
     );
 
     await this.userService.fetch();

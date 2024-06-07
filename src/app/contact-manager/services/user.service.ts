@@ -8,7 +8,7 @@ import { User } from '../models';
 @Injectable()
 export class UserService {
   static readonly fetchDelayMilliseconds = 600;
-  static readonly usersUrl = '/assets/users.json';
+  static readonly usersUrl = 'users.json';
 
   private readonly http = inject(HttpClient);
 
