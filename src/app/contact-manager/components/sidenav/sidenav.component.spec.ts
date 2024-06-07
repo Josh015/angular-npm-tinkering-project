@@ -12,7 +12,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSidenavHarness } from '@angular/material/sidenav/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterLink } from '@angular/router';
-import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator/jest';
+import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
 import { MockComponent, MockProvider } from 'ng-mocks';
 import { BehaviorSubject } from 'rxjs';
 

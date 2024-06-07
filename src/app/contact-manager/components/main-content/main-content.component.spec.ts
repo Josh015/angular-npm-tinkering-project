@@ -15,7 +15,7 @@ import {
   SpectatorRouting,
   SpyObject,
   createRoutingFactory
-} from '@ngneat/spectator/jest';
+} from '@ngneat/spectator';
 import { sample } from 'lodash';
 import { MockProvider } from 'ng-mocks';
 
@@ -23,6 +23,7 @@ import { MainContentComponent } from './main-content.component';
 import { USER_ID_PARAM, User } from '../../models';
 import { UserService } from '../../services/user.service';
 import { USERS_MOCK } from '../../testing';
+import { NotesComponent } from '../notes/notes.component';
 import { randomizedSubArray, provideTranslocoTesting } from 'src/app/testing';
 
 describe(`MainContentComponent`, () => {
@@ -140,18 +141,17 @@ describe(`MainContentComponent`, () => {
       expect(tabContent).toBe(user.bio);
     });
 
-    // FIXME: selectTab() doesn't render child components in either Jest or WTR!
-    // // it(`should have a "Notes" tab with the user's notes`, async () => {
-    // //   const matTabGroup = await loader.getHarness(MatTabGroupHarness);
-    // //   const label = translocoService.translate(`${prefix}Tabs.Notes`);
+    it(`should have a "Notes" tab with the user's notes`, async () => {
+      const matTabGroup = await loader.getHarness(MatTabGroupHarness);
+      const label = translocoService.translate(`${prefix}Tabs.Notes`);
 
-    // //   await matTabGroup.selectTab({ label });
-    // //   spectator.detectChanges();
+      await matTabGroup.selectTab({ label });
+      spectator.detectChanges();
 
-    // //   const component = spectator.query(NotesComponent);
+      const component = spectator.query(NotesComponent);
 
-    // //   expect(component).toBeTruthy();
-    // //   expect(component?.notes).toEqual(user.notes);
-    // // });
+      expect(component).toBeTruthy();
+      expect(component?.notes()).toEqual(user.notes);
+    });
   });
 });

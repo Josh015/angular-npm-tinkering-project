@@ -28,7 +28,7 @@
     // Consistent editor settings.
     "editorconfig.editorconfig",
 
-    // Jest unit-testing UI.
-    "orta.vscode-jest"
+    // Unit-testing UI.
+    "lucono.karma-test-explorer"
   ]
 }

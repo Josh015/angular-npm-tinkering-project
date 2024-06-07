@@ -24,7 +24,7 @@ export default ts.config(
     languageOptions: {
       globals: {
         ...globals.browser,
-        ...globals.jest,
+        ...globals.jasmine,
         ...globals.jquery,
         ...globals.node
       },

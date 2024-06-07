@@ -11,7 +11,7 @@ import {
   Spectator,
   SpyObject,
   createComponentFactory
-} from '@ngneat/spectator/jest';
+} from '@ngneat/spectator';
 
 import { NotesComponent } from './notes.component';
 import { Note } from '../../models';

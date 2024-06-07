@@ -1,4 +1,4 @@
-import { createComponentFactory } from '@ngneat/spectator/jest';
+import { createComponentFactory } from '@ngneat/spectator';
 
 import { AppComponent } from './app.component';
 

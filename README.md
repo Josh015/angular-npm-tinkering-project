@@ -14,7 +14,6 @@ pnpm start
 - [Angular](https://angular.dev/)
 - [Angular Material](https://material.angular.io/)
 - [ESLint](https://eslint.org/)
-- [Jest](https://jestjs.io/)
 - [Lodash](https://lodash.com/)
 - [messageformat](https://messageformat.github.io/messageformat/)
 - [ng-mocks](https://ng-mocks.sudo.eu/)
