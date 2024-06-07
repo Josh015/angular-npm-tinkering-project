@@ -18,7 +18,7 @@ const compat = new FlatCompat({
 
 export default ts.config(
   {
-    ignores: ['.angular', 'coverage', 'node_modules', '.vscode']
+    ignores: ['.angular', '.vscode', 'coverage', 'dist', 'node_modules']
   },
   {
     languageOptions: {
