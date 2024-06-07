@@ -1,6 +1,7 @@
 <ng-container *transloco="let t; prefix: 'ContactManager.Toolbar'">
   <mat-toolbar color="primary">
     <button
+      data-testid="toolbar-toggle-sidenav"
       class="!flex !items-center !justify-center md:!hidden"
       mat-icon-button
       (click)="toggleSidenav.emit()"
@@ -12,17 +13,33 @@
 
     <span class="flex-auto"></span>
 
-    <button mat-button [matMenuTriggerFor]="menu">
+    <button
+      data-testid="toolbar-open-menu"
+      mat-button
+      [matMenuTriggerFor]="menu"
+    >
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="openAddContactDialog()">
+      <button
+        data-testid="toolbar-new-contact"
+        mat-menu-item
+        (click)="openAddContactDialog()"
+      >
         {{ t('Menu.NewContact') }}
       </button>
-      <button mat-menu-item (click)="toggleTheme.emit()">
+      <button
+        data-testid="toolbar-toggle-theme"
+        mat-menu-item
+        (click)="toggleTheme.emit()"
+      >
         {{ t('Menu.ToggleTheme') }}
       </button>
-      <button mat-menu-item (click)="toggleDir.emit()">
+      <button
+        data-testid="toolbar-toggle-dir"
+        mat-menu-item
+        (click)="toggleDir.emit()"
+      >
         {{ t('Menu.ToggleDir') }}
       </button>
     </mat-menu>

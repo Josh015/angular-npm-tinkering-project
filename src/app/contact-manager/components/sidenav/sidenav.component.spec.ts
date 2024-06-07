@@ -332,7 +332,9 @@ describe(`SidenavComponent`, () => {
         let anchors: HTMLAnchorElement[];
 
         beforeEach(() => {
-          anchors = spectator.queryAll('mat-nav-list mat-list-item a');
+          anchors = spectator.queryAll(
+            '[data-testid="sidenav-list-anchor-user"'
+          );
         });
 
         it(`should have user name as text`, () => {

@@ -19,11 +19,13 @@
       <mat-nav-list>
         @for (user of users(); track user) {
           <mat-list-item
+            data-testid="sidenav-list-item-user"
             [activated]="anchor.classList.contains('active')"
             (click)="anchor.click()"
           >
             <a
               #anchor
+              data-testid="sidenav-list-anchor-user"
               class="block"
               matListItemTitle
               routerLinkActive="active"
