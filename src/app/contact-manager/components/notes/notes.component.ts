@@ -6,20 +6,28 @@ import {
   viewChild
 } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TranslocoDirective } from '@jsverse/transloco';
 
 import { Note } from '../../models';
-import { MaterialModule } from 'src/app/shared';
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MaterialModule, TranslocoDirective]
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    TranslocoDirective
+  ]
 })
 export class NotesComponent implements AfterViewInit {
   private readonly sort = viewChild.required(MatSort);

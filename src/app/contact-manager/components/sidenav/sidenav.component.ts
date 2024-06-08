@@ -8,7 +8,12 @@ import {
   viewChild
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatSidenav } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import {
   Router,
   RouterLink,
@@ -21,7 +26,6 @@ import resolveConfig from 'tailwindcss/resolveConfig';
 
 import { UserService } from '../../services/user.service';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
-import { MaterialModule } from 'src/app/shared';
 
 const fullConfig = resolveConfig(tailwindConfig);
 
@@ -31,7 +35,12 @@ const fullConfig = resolveConfig(tailwindConfig);
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    MaterialModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatToolbarModule,
     RouterLink,
     RouterLinkActive,
     RouterOutlet,

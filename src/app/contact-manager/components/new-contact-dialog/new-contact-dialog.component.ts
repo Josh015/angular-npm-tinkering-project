@@ -6,12 +6,17 @@ import {
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { TranslocoDirective } from '@jsverse/transloco';
 
 import { AVATARS, Avatar, GENDERS, Gender, Note, User } from '../../models';
 import { UserService } from '../../services/user.service';
-import { MaterialModule } from 'src/app/shared';
 import { y2kValidator, year2012Validator } from 'src/app/utils';
 
 @Component({
@@ -21,7 +26,13 @@ import { y2kValidator, year2012Validator } from 'src/app/utils';
   standalone: true,
   imports: [
     FormsModule,
-    MaterialModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
     ReactiveFormsModule,
     TranslocoDirective
   ]

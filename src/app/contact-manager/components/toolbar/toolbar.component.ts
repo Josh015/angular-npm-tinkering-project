@@ -4,25 +4,35 @@ import {
   inject,
   output
 } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import {
   MatSnackBar,
+  MatSnackBarModule,
   MatSnackBarRef,
   SimpleSnackBar
 } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 
 import { User } from '../../models';
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
-import { MaterialModule } from 'src/app/shared';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MaterialModule, TranslocoDirective]
+  imports: [
+    MatDialogModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    TranslocoDirective
+  ]
 })
 export class ToolbarComponent {
   private readonly dialog = inject(MatDialog);

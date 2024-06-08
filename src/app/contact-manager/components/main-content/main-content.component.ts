@@ -5,20 +5,28 @@ import {
   inject
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
 
 import { USER_ID_PARAM } from '../../models';
 import { UserService } from '../../services/user.service';
 import { NotesComponent } from '../notes/notes.component';
-import { MaterialModule } from 'src/app/shared';
 
 @Component({
   selector: 'app-main-content',
   templateUrl: './main-content.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MaterialModule, NotesComponent, TranslocoDirective]
+  imports: [
+    MatCardModule,
+    MatIconModule,
+    MatTabsModule,
+    NotesComponent,
+    TranslocoDirective
+  ]
 })
 export class MainContentComponent {
   private readonly activatedRoute = inject(ActivatedRoute);
