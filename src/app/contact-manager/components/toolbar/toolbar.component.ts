@@ -4,6 +4,7 @@ import {
   inject,
   output
 } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -26,6 +27,7 @@ import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dia
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    MatButtonModule,
     MatDialogModule,
     MatSnackBarModule,
     MatIconModule,
