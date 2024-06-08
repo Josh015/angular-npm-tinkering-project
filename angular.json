@@ -10,18 +10,10 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "none",
-          "standalone": true
-        },
-        "@schematics/angular:directive": {
-          "standalone": true
-        },
-        "@schematics/angular:pipe": {
-          "standalone": true
+          "style": "none"
         },
         "@ngneat/spectator:spectator-component": {
-          "style": "none",
-          "standalone": true
+          "style": "none"
         }
       },
       "root": "",
