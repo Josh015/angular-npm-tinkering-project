@@ -11,22 +11,17 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "none",
-          "skipTests": true
-        },
-        "@schematics/angular:class": {
-          "skipTests": true
+          "standalone": true
         },
         "@schematics/angular:directive": {
-          "skipTests": true
+          "standalone": true
         },
         "@schematics/angular:pipe": {
-          "skipTests": true
-        },
-        "@schematics/angular:service": {
-          "skipTests": true
+          "standalone": true
         },
         "@ngneat/spectator:spectator-component": {
-          "style": "none"
+          "style": "none",
+          "standalone": true
         }
       },
       "root": "",

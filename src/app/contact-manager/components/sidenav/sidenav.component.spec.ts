@@ -172,18 +172,18 @@ describe(`SidenavComponent`, () => {
       //   expect(isOpen).toBe(true);
       // });
 
-      // it(`should switch back to open when toolbar fires two toggleSidenav events`, async () => {
-      //   const appToolbar = spectator.query(ToolbarComponent);
+      it(`should switch back to open when toolbar fires two toggleSidenav events`, async () => {
+        const appToolbar = spectator.query(ToolbarComponent);
 
-      //   appToolbar?.toggleSidenav.emit();
-      //   appToolbar?.toggleSidenav.emit();
-      //   spectator.detectChanges();
+        appToolbar?.toggleSidenav.emit();
+        appToolbar?.toggleSidenav.emit();
+        spectator.detectChanges();
 
-      //   const sidenavHarness = await loader.getHarness(MatSidenavHarness);
-      //   const isOpen = await sidenavHarness.isOpen();
+        const sidenavHarness = await loader.getHarness(MatSidenavHarness);
+        const isOpen = await sidenavHarness.isOpen();
 
-      //   expect(isOpen).toBe(true);
-      // });
+        expect(isOpen).toBe(false);
+      });
 
       // TODO: Should close when screen is small, and router event occurs.
     });
