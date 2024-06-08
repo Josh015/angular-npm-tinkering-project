@@ -3,9 +3,9 @@ import { random, sampleSize, shuffle } from 'lodash';
 /**
  * Takes an array and generates a randomized randomly-sized subset of it.
  *
- * @param {T[]} source Source array to be randomized.
- * @param {number} minimumSize Minimum acceptable size for the randomized array.
- *   Defaults to `1`.
+ * @param {T[]} [source] Source array to be randomized.
+ * @param {number} [minimumSize=1] Minimum acceptable size for the randomized
+ *   array. Default is `1`
  * @returns {T[]} A randomized sub-array of `source`.
  */
 export function randomizedSubArray<T>(source: T[], minimumSize = 1): T[] {
@@ -27,8 +27,8 @@ export function randomizedSubArray<T>(source: T[], minimumSize = 1): T[] {
 /**
  * Generates a random valid date.
  *
- * @param {boolean} withTime Request that time fields be randomized as well.
- *   Defaults to `false`.
+ * @param {boolean} [withTime=false] Request that time fields be randomized as
+ *   well. Default is `false`
  * @returns {Date} Random date between the year 1900 and the end of time.
  */
 export function randomDate(withTime = false): Date {
