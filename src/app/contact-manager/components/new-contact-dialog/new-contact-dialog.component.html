@@ -88,8 +88,7 @@
             rows="10"
             cols="30"
             [formControl]="formGroup.controls.bio"
-          >
-          </textarea>
+          ></textarea>
           @if (formGroup.controls.bio.errors; as errors) {
             @if (errors['maxlength']; as maxLength) {
               <mat-error>

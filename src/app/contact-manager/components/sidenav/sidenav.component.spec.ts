@@ -12,15 +12,15 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSidenavHarness } from '@angular/material/sidenav/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterLink } from '@angular/router';
-import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
+import { createRoutingFactory, SpectatorRouting } from '@ngneat/spectator';
 import { MockComponent, MockProvider } from 'ng-mocks';
 import { BehaviorSubject } from 'rxjs';
 
-import { SidenavComponent } from './sidenav.component';
-import { USER_ID_PARAM, User } from '../../models';
+import { User, USER_ID_PARAM } from '../../models';
 import { UserService } from '../../services/user.service';
 import { USERS_MOCK } from '../../testing';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
+import { SidenavComponent } from './sidenav.component';
 import { provideTranslocoTesting, randomizedSubArray } from 'src/app/testing';
 
 describe(`SidenavComponent`, () => {

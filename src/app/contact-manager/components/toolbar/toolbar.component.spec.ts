@@ -3,7 +3,7 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatMenuHarness } from '@angular/material/menu/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { SpectatorRouting, createRoutingFactory } from '@ngneat/spectator';
+import { createRoutingFactory, SpectatorRouting } from '@ngneat/spectator';
 
 import { ToolbarComponent } from './toolbar.component';
 import { provideTranslocoTesting } from 'src/app/testing';

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { lastValueFrom, of, throwError } from 'rxjs';
 import { catchError, delay, finalize, tap } from 'rxjs/operators';
 

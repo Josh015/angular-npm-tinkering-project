@@ -8,15 +8,15 @@ import {
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslocoService } from '@jsverse/transloco';
 import {
+  createComponentFactory,
   Spectator,
-  SpyObject,
-  createComponentFactory
+  SpyObject
 } from '@ngneat/spectator';
 
-import { NotesComponent } from './notes.component';
 import { Note } from '../../models';
 import { USERS_MOCK } from '../../testing';
-import { randomizedSubArray, provideTranslocoTesting } from 'src/app/testing';
+import { NotesComponent } from './notes.component';
+import { provideTranslocoTesting, randomizedSubArray } from 'src/app/testing';
 
 describe(`NotesComponent`, () => {
   let loader: HarnessLoader;

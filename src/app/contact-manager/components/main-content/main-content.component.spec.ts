@@ -12,19 +12,19 @@ import { MatTabGroupHarness } from '@angular/material/tabs/testing';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslocoService } from '@jsverse/transloco';
 import {
+  createRoutingFactory,
   SpectatorRouting,
-  SpyObject,
-  createRoutingFactory
+  SpyObject
 } from '@ngneat/spectator';
 import { sample } from 'lodash';
 import { MockProvider } from 'ng-mocks';
 
-import { MainContentComponent } from './main-content.component';
-import { USER_ID_PARAM, User } from '../../models';
+import { User, USER_ID_PARAM } from '../../models';
 import { UserService } from '../../services/user.service';
 import { USERS_MOCK } from '../../testing';
 import { NotesComponent } from '../notes/notes.component';
-import { randomizedSubArray, provideTranslocoTesting } from 'src/app/testing';
+import { MainContentComponent } from './main-content.component';
+import { provideTranslocoTesting, randomizedSubArray } from 'src/app/testing';
 
 describe(`MainContentComponent`, () => {
   let loader: HarnessLoader;

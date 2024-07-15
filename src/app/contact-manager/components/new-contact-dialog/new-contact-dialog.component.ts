@@ -15,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TranslocoDirective } from '@jsverse/transloco';
 
-import { AVATARS, Avatar, GENDERS, Gender, Note, User } from '../../models';
+import { Avatar, AVATARS, Gender, GENDERS, Note, User } from '../../models';
 import { UserService } from '../../services/user.service';
 import { y2kValidator, year2012Validator } from 'src/app/utils';
 

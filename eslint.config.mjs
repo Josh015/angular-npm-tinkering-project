@@ -1,20 +1,12 @@
-import { FlatCompat } from '@eslint/eslintrc';
-import angular from 'angular-eslint';
 import cspellRecommended from '@cspell/eslint-plugin/recommended';
-import globals from 'globals';
-import imports from 'eslint-plugin-import';
 import js from '@eslint/js';
+import angular from 'angular-eslint';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 // import rxjs from 'eslint-plugin-rxjs';
+import globals from 'globals';
 import ts from 'typescript-eslint';
 
 const __dirname = import.meta.dirname;
-const compat = new FlatCompat({
-  baseDirectory: __dirname, // optional; default: process.cwd()
-  resolvePluginsRelativeTo: __dirname, // optional
-  recommendedConfig: js.configs.recommended, // optional unless using "eslint:recommended"
-  allConfig: js.configs.all // optional unless using "eslint:all"
-});
 
 export default ts.config(
   {
@@ -38,23 +30,11 @@ export default ts.config(
   cspellRecommended,
   prettierRecommended,
   {
-    files: ['**/*.mjs'],
-    rules: {
-      'sort-imports': 'error'
-    }
-  },
-  {
     files: ['**/*.ts'],
-    settings: {
-      // Manually add "src/" directory to import plugin's "internal" group
-      'import/internal-regex': '^src/'
-    },
     extends: [
       ...ts.configs.strictTypeChecked,
       ...ts.configs.stylisticTypeChecked,
-      ...angular.configs.tsRecommended,
-      ...compat.config(imports.configs.recommended),
-      ...compat.config(imports.configs.typescript)
+      ...angular.configs.tsRecommended
       // ...compat.config(rxjs.configs.recommended),
     ],
     processor: angular.processInlineTemplates,
@@ -69,10 +49,6 @@ export default ts.config(
         { allowWithDecorator: true }
       ],
       '@typescript-eslint/unbound-method': 'off',
-
-      // Tailwind fixes
-      'import/no-named-as-default': 'off',
-      'import/no-named-as-default-member': 'off',
 
       // Preferences
       '@angular-eslint/prefer-on-push-component-change-detection': ['error'],
@@ -89,6 +65,14 @@ export default ts.config(
           trailingUnderscore: 'forbid'
         },
         {
+          selector: 'objectLiteralProperty',
+          format: []
+        },
+        {
+          selector: 'import',
+          format: ['camelCase', 'PascalCase']
+        },
+        {
           selector: 'variable',
           format: ['camelCase', 'UPPER_CASE']
         },
@@ -100,33 +84,9 @@ export default ts.config(
           selector: 'enumMember',
           format: ['PascalCase']
         }
-      ],
-      'import/no-unresolved': 'off',
-      'import/order': [
-        'error',
-        {
-          groups: [
-            // Global
-            ['builtin', 'external'],
-
-            // Project
-            ['internal', 'parent', 'sibling', 'index'],
-
-            // Misc.
-            'type',
-            'object',
-            'unknown'
-          ],
-          'newlines-between': 'always',
-          alphabetize: {
-            order: 'asc',
-            caseInsensitive: true
-          }
-        }
-      ],
+      ]
 
       // RxJS fixes.
-      'import/namespace': 'off'
       // 'rxjs/finnish': [
       //   'error',
       //   {
