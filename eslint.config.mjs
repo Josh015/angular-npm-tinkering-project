@@ -52,6 +52,7 @@ export default ts.config(
 
       // Preferences
       '@angular-eslint/prefer-on-push-component-change-detection': ['error'],
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/restrict-template-expressions': 'off',
       '@typescript-eslint/array-type': 'error',
       '@typescript-eslint/no-explicit-any': 'error',

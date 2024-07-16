@@ -2,7 +2,7 @@ import { Avatar } from './avatar';
 import { Gender } from './gender';
 import { Note } from './note';
 
-export interface User {
+export type User = {
   id: number | null;
   birthDate: Date;
   name: string;
@@ -11,4 +11,4 @@ export interface User {
   gender: Gender;
 
   notes: Note[];
-}
+};
