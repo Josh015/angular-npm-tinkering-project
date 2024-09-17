@@ -48,7 +48,7 @@ export class UserService {
           this._data.set(users);
         }),
         catchError((error: unknown) => {
-          console.log('Failed to fetch users');
+          console.error('Failed to fetch users');
           this.dataStore.users = [];
           this._data.set([]);
           return throwError(() => error);

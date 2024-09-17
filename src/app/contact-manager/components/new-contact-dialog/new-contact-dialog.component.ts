@@ -76,7 +76,7 @@ export class NewContactDialogComponent {
 
         this.dismiss(user);
       } catch (error) {
-        console.log(error);
+        console.error(error);
         this.dismiss();
       }
     }

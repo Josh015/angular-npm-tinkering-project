@@ -66,10 +66,6 @@ export default ts.config(
           trailingUnderscore: 'forbid'
         },
         {
-          selector: 'objectLiteralProperty',
-          format: []
-        },
-        {
           selector: 'import',
           format: ['camelCase', 'PascalCase']
         },
@@ -84,8 +80,28 @@ export default ts.config(
         {
           selector: 'enumMember',
           format: ['PascalCase']
+        },
+        {
+          selector: 'objectLiteralProperty',
+          format: ['camelCase', 'PascalCase']
+        },
+        {
+          selector: [
+            'classProperty',
+            'objectLiteralProperty',
+            'typeProperty',
+            'classMethod',
+            'objectLiteralMethod',
+            'typeMethod',
+            'accessor',
+            'enumMember'
+          ],
+          format: null,
+          modifiers: ['requiresQuotes']
         }
-      ]
+      ],
+      'no-alert': ['error'],
+      'no-console': ['warn', { allow: ['error'] }]
 
       // RxJS fixes.
       // 'rxjs/finnish': [
